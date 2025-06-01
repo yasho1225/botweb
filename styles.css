@@ -84,6 +84,7 @@ body {
   justify-content: center;
   max-width: 1200px;
   padding: 20px;
+  text-align: center;
 }
 
 @media (min-width: 1024px) {
