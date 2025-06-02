@@ -14,26 +14,26 @@
     <div class="container">
       <div class="contact-content">
         <h1>Contact Us</h1>
-        <p>We’d love to hear from you. Let us help you amplify your mission.</p>
-        <form action="https://formspree.io/f/meokqqro" method="POST" class="contact-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="_replyto" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="get-started">Send Message</button>
-        </form>
-        <div class="contact-details">
-          <p><strong>Email:</strong> <a href="mailto:info@botweb.com">info@botweb.com</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
-          <p><strong>Address:</strong> 123 Web St, Tech City, WC 12345</p>
+        <p>We’re here to help you amplify your mission. Let’s connect!</p>
+
+        <!-- Form: Request a Callback -->
+        <div class="form-section">
+          <p class="callback-note">Leave your details, and we’ll get back to you ASAP!</p>
+          <form action="https://formspree.io/f/{form_id}" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="callback-name">Name</label>
+              <input type="text" id="callback-name" name="callback-name" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-email">Email</label>
+              <input type="email" id="callback-email" name="_replyto" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-phone">Phone</label>
+              <input type="tel" id="callback-phone" name="callback-phone" required>
+            </div>
+            <button type="submit" class="get-started">Submit Details</button>
+          </form>
         </div>
       </div>
     </div>
