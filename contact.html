@@ -12,29 +12,74 @@
 
   <section class="contact">
     <div class="container">
-      <h1>Contact Us</h1>
-      <p>Get in touch with us to learn more about our services or to request a quote.</p>
-      <form action="https://formspree.io/f/meokqqro" method="POST" class="contact-form">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
+      <div class="contact-content">
+        <h1>Contact Us</h1>
+        <p>We’d love to hear from you. Let us help you amplify your mission.</p>
+        <form action="https://formspree.io/f/meokqqro" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="_replyto" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="get-started">Send Message</button>
+        </form>
+        <div class="contact-details">
+          <p><strong>Email:</strong> <a href="mailto:info@botweb.com">info@botweb.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
+          <p><strong>Address:</strong> 123 Web St, Tech City, WC 12345</p>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="_replyto" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="get-started">Send Message</button>
-      </form>
-      <div class="contact-details">
-        <p><strong>Email:</strong> info@botweb.com</p>
-        <p><strong>Phone:</strong> (123) 456-7890</p>
-        <p><strong>Address:</strong> 123 Web St, Tech City, WC 12345</p>
       </div>
     </div>
   </section>
+
+  <script>
+    function includeHTML(callback) {
+      var z, i, elmnt, file, xhttp;
+      z = document.getElementsByTagName("*");
+      let includesProcessed = 0;
+      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
+                elmnt.removeAttribute("w3-include-html");
+                includesProcessed++;
+                if (includesProcessed === totalIncludes) {
+                  if (callback) callback();
+                }
+              } else {
+                console.error(`Failed to load ${file}: ${this.status}`);
+              }
+              includeHTML(callback);
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          return;
+        }
+      }
+
+      if (totalIncludes === 0 && callback) callback();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      includeHTML(function() {
+        console.log("Navigation loaded on Contact page");
+      });
+    });
+  </script>
 </body>
 </html>
