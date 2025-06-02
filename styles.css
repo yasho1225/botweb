@@ -258,7 +258,7 @@ p {
   overflow: hidden;
   color: #FFFFFF;
   animation: 
-    typing 3s,
+    typing 5s steps(29),
     cursor .4s step-end infinite alternate;
 }
 
