@@ -35,6 +35,14 @@
       }
     }
     document.addEventListener("DOMContentLoaded", includeHTML);
+
+    // Add redirect for Contact link
+    document.addEventListener("DOMContentLoaded", function() {
+      var contactLink = document.querySelector('a[href="#contact"]');
+      if (contactLink) {
+        contactLink.href = "contact.html"; // Redirect to contact.html
+      }
+    });
   </script>
 </body>
 </html>
