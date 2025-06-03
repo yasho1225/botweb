@@ -282,7 +282,21 @@ p {
     font-size: 1.25rem;
   }
 }
+/* Ensure body allows scrolling */
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-y: auto; /* Ensure vertical scrolling */
+}
 
+/* Contact Section (used for About and Contact) */
+.contact {
+  display: flex;
+  justify-content: center; /* Keep horizontal centering */
+  padding: 100px 20px 20px; /* Increased top padding to 100px to offset navbar (60px) + buffer */
+  background-color: #000000;
+}
 .form-section {
   margin-bottom: 2rem;
 }
