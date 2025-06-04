@@ -1,76 +1,399 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotWeb - We Build Websites. You Build Impact.</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Include Navigation -->
-  <div w3-include-html="nav.html"></div>
-  <!-- Include Hero Section -->
-  <div w3-include-html="hero.html"></div>
+/* Reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+html {
+  scroll-behavior: smooth;
+}
 
-      console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-y: auto;
+}
 
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          console.log("Attempting to load", file, "from path:", window.location.pathname + file);
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log("Successfully loaded", file, "with content length:", this.responseText.length);
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
-                }
-              } else {
-                console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
-              }
-              includeHTML(callback); // Continue processing remaining includes
-            }
-          }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
-        }
-      }
+/* Navigation Bar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-      // If no includes are found, run callback immediately
-      if (totalIncludes === 0) {
-        console.log("No includes found at", new Date().toLocaleTimeString());
-        if (callback) callback();
-      }
-    }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
 
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
-      includeHTML(function() {
-        console.log("Callback executed at", new Date().toLocaleTimeString());
-        // Attempt to find and modify the Contact link
-        var contactLink = document.querySelector('a[href="#contact"]');
-        if (contactLink) {
-          console.log("Contact link found:", contactLink);
-          contactLink.href = "contact.html"; // Redirect to contact.html
-        } else {
-          console.error("Contact link not found!");
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+.logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #D1D5DB;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #2563EB;
+}
+
+.get-started {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.get-started:hover {
+  background-color: #1E40AF;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.text-content {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .text-content {
+    text-align: left;
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  border-right: 5px solid;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+    typing 4s steps(29),
+    cursor .4s step-end infinite alternate;
+}
+
+@keyframes cursor {
+  50% { border-color: transparent }
+}
+
+@keyframes typing {
+  from { width: 0 }
+}  
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+p {
+  font-size: 1.125rem;
+  color: #D1D5DB;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .buttons {
+    justify-content: flex-start;
+  }
+}
+
+.get-started, .learn-more {
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.get-started {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border: none;
+}
+
+.get-started:hover {
+  background-color: #1E40AF;
+}
+
+.learn-more {
+  background-color: transparent;
+  border: 2px solid #2563EB;
+  color: #2563EB;
+}
+
+.learn-more:hover {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+.video-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .video-content {
+    margin-top: 0;
+  }
+}
+
+.placeholder-video {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .placeholder-video {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .placeholder-video {
+    max-width: 100%;
+  }
+}
+
+.video-caption {
+  color: #9CA3AF;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Contact Section */
+.contact {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #000000;
+}
+
+.contact-content {
+  text-align: center;
+  max-width: 1200px;
+}
+
+.contact-content h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  border-right: 5px solid;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #FFFFFF;
+  animation: 
+    typing 5s steps(29),
+    cursor .4s step-end infinite alternate;
+}
+
+@media (min-width: 640px) {
+  .contact-content h1 {
+    font-size: 3rem;
+  }
+}
+
+.contact-content p {
+  font-size: 1.125rem;
+  color: #D1D5DB;
+  margin-bottom: 2rem;
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .contact-content p {
+    font-size: 1.25rem;
+  }
+}
+
+/* Contact Section (used for About and Contact) */
+.contact {
+  display: flex;
+  justify-content: center;
+  padding: 100px 20px 20px;
+  background-color: #000000;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.callback-note {
+  font-size: 1rem;
+  color: #D1D5DB;
+  margin-bottom: 1.5rem;
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #D1D5DB;
+  margin-bottom: 0.25rem;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #4B5563;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #1F2937;
+  color: #FFFFFF;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2563EB;
+}
+
+/* Team Section */
+.team-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2rem;
+}
+
+.team-members {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .team-members {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.team-member {
+  flex: 1;
+  padding: 1rem;
+}
+
+.team-member h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.team-role {
+  font-size: 1rem;
+  color: #2563EB;
+  margin-bottom: 0.5rem;
+}
+
+.team-bio {
+  font-size: 0.875rem;
+  color: #D1D5DB;
+  line-height: 1.5;
+}
