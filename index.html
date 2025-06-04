@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - We Build Websites. You Build Impact.</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" id="stylesheet">
   <style>
     body { background-color: #ff0000; } /* Fallback if styles.css fails */
   </style>
@@ -16,6 +16,15 @@
   <div w3-include-html="hero.html"></div>
 
   <script>
+    // Check if styles.css loaded
+    const stylesheet = document.getElementById('stylesheet');
+    stylesheet.onerror = function() {
+      console.error("Failed to load styles.css at", new Date().toLocaleTimeString());
+    };
+    stylesheet.onload = function() {
+      console.log("Successfully loaded styles.css at", new Date().toLocaleTimeString());
+    };
+
     function includeHTML(callback) {
       var z, i, elmnt, file, xhttp;
       z = document.getElementsByTagName("*");
