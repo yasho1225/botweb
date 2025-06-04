@@ -1,399 +1,456 @@
-/* Reset and global styles */
+/* Reset */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
+/* Base */
 body {
-  background-color: #000000;
-  color: #FFFFFF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Navigation Bar */
+/* Navigation (Charity: Water Inspired) */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
-  background-color: #000000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  left: 0;
+  right: 0;
+  background: #000000;
+  padding: 1.5rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  z-index: 1000;
+  transition: padding 0.5s ease-in-out;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2563EB;
+.navbar.scrolled {
+  background: #000000;
+  padding: 1rem 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-logo .logo-img {
+  height: 50px;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  border-radius: 50%;
+  background: #333333;
+  padding: 5px;
 }
 
 .nav-links {
+  list-style: none;
   display: flex;
-  align-items: center;
-}
-
-.nav-links a {
-  color: #D1D5DB;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #2563EB;
-}
-
-.get-started {
-  background-color: #2563EB;
-  color: #FFFFFF;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.get-started:hover {
-  background-color: #1E40AF;
-}
-
-/* Hero Section */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  padding: 20px;
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .hero-content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
-.text-content {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .text-content {
-    text-align: left;
-    flex: 1;
-    margin-bottom: 0;
-  }
-}
-
-h1 {
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  border-right: 5px solid;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: 
-    typing 4s steps (29),
-    cursor .4s step-end infinite alternate;
-}
-
-@keyframes cursor {
-  50% { border-color: transparent }
-}
-
-@keyframes typing {
-  from { width: 0 }
-}  
-
-@media (min-width: 640px) {
-  h1 {
-    font-size: 3rem;
-  }
-}
-
-p {
-  font-size: 1.125rem;
-  color: #D1D5DB;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  max-width: 20rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 640px) {
-  p {
-    font-size: 1.25rem;
-  }
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-@media (min-width: 1024px) {
-  .buttons {
-    justify-content: flex-start;
-  }
-}
-
-.get-started, .learn-more {
-  padding: 12px 24px;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.get-started {
-  background-color: #2563EB;
-  color: #FFFFFF;
-  border: none;
-}
-
-.get-started:hover {
-  background-color: #1E40AF;
-}
-
-.learn-more {
-  background-color: transparent;
-  border: 2px solid #2563EB;
-  color: #2563EB;
-}
-
-.learn-more:hover {
-  background-color: #2563EB;
-  color: #FFFFFF;
-}
-
-.video-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .video-content {
-    margin-top: 0;
-  }
-}
-
-.placeholder-video {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 1024px) {
-  .placeholder-video {
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 640px) {
-  .placeholder-video {
-    max-width: 100%;
-  }
-}
-
-.video-caption {
-  color: #9CA3AF;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-/* Contact Section */
-.contact {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: #000000;
-}
-
-.contact-content {
-  text-align: center;
-  max-width: 1200px;
-}
-
-.contact-content h1 {
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  border-right: 5px solid;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  color: #FFFFFF;
-  animation: 
-    typing 5s steps(29),
-    cursor .4s step-end infinite alternate;
-}
-
-@media (min-width: 640px) {
-  .contact-content h1 {
-    font-size: 3rem;
-  }
-}
-
-.contact-content p {
-  font-size: 1.125rem;
-  color: #D1D5DB;
-  margin-bottom: 2rem;
-  max-width: 20rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 640px) {
-  .contact-content p {
-    font-size: 1.25rem;
-  }
-}
-/* Ensure body allows scrolling */
-body {
-  background-color: #000000;
-  color: #FFFFFF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  overflow-y: auto; /* Ensure vertical scrolling */
-}
-
-/* Contact Section (used for About and Contact) */
-.contact {
-  display: flex;
-  justify-content: center; /* Keep horizontal centering */
-  padding: 100px 20px 20px; /* Increased top padding to 100px to offset navbar (60px) + buffer */
-  background-color: #000000;
-}
-.form-section {
-  margin-bottom: 2rem;
-}
-
-.callback-note {
-  font-size: 1rem;
-  color: #D1D5DB;
-  margin-bottom: 1.5rem;
-  max-width: 20rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.contact-form {
-  max-width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.form-group label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #D1D5DB;
-  margin-bottom: 0.25rem;
-}
-
-.form-group input {
-  padding: 0.5rem;
-  border: 1px solid #4B5563;
-  border-radius: 4px;
-  font-size: 1rem;
-  background-color: #1F2937;
-  color: #FFFFFF;
-  transition: border-color 0.3s ease;
-}
-
-
-.form-group input:focus {
-  outline: none;
-  border-color: #2563EB;
-}
-/* Team Section */
-.team-section {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.team-section h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 2rem;
-}
-
-.team-members {
-  display: flex;
-  flex-direction: column;
   gap: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
 }
 
-@media (min-width: 768px) {
-  .team-members {
-    flex-direction: row;
-    justify-content: space-between;
+.nav-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a:focus,
+.nav-links li a[aria-current="page"] {
+  background: rgba(80, 80, 80, 0.7);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.nav-donate .donate-btn {
+  background: linear-gradient(45deg, #1a1a1a, #333333);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-donate .donate-btn:hover,
+.nav-donate .donate-btn:focus {
+  background: linear-gradient(45deg, #333333, #1a1a1a);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(100, 100, 100, 0.7);
+}
+
+/* Chatbot Widget */
+.chatbot-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.chatbot-btn {
+  background: linear-gradient(45deg, #1a1a1a, #333333);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chatbot-btn:hover,
+.chatbot-btn:focus {
+  background: linear-gradient(45deg, #333333, #1a1a1a);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(100, 100, 100, 0.7);
+}
+
+/* Sections with Image Backgrounds */
+section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* About Us Section (Charity: Water Style) */
+.about-us {
+  height: 100vh;
+  min-height: 1000px;
+  background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+  margin-top: 80px; /* Offset for fixed navbar */
+}
+
+.section-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 90%;
+}
+
+/* Specific styling for About Us section content (fully transparent background) */
+.about-us .section-content {
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Add text shadow for readability in About Us section */
+.about-us h1,
+.about-us .slogan {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.about-us h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.about-us .slogan {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #cccccc;
+  font-style: italic;
+}
+
+/* Support Our Mission (Donations) Section */
+.donations {
+  padding: 12rem 4rem;
+  min-height: 90vh;
+  background: url('https://images.unsplash.com/photo-1560264356-6b3a1e5e8c78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+}
+
+/* Keep overlay for other sections */
+.donations .section-content,
+.contact-us .section-content {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+}
+
+.donations h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.donations p {
+  font-size: 1.8rem;
+  color: #ffffff;
+  line-height: 2;
+  margin-bottom: 2.5rem;
+  max-width: 1000px;
+}
+
+/* Contact Us Section */
+.contact-us {
+  padding: 12rem 4rem;
+  min-height: 90vh;
+  background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+}
+
+.contact-us h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.contact-us p {
+  font-size: 1.8rem;
+  color: #ffffff;
+  line-height: 2;
+  margin-bottom: 2rem;
+}
+
+.contact-us a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-us a:hover {
+  color: #ffffff;
+}
+
+.btn-group {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #1a1a1a, #333333);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1.5rem 4rem;
+  border-radius: 40px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  box-shadow: 0 0 12px rgba(100, 100, 100, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(45deg, #333333, #1a1a1a);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.7);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #333333;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1.5rem 4rem;
+  border-radius: 40px;
+  font-size: 1.5rem;
+  box-shadow: 0 0 12px rgba(100, 100, 100, 0.3);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: #333333;
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.5);
+}
+
+/* Footer */
+footer {
+  background: #000000;
+  padding: 3rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #cccccc;
+  margin-top: auto;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+footer a {
+  color: #cccccc;
+  text-decoration: none;
+  margin: 0 15px;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 1.2rem 2rem;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .nav-links li a {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .nav-donate .donate-btn {
+    padding: 0.6rem 1.5rem;
+  }
+
+  .about-us {
+    height: 80vh;
+    min-height: 800px;
+  }
+
+  .about-us h1 {
+    font-size: 4rem;
+  }
+
+  .about-us .slogan {
+    font-size: 2rem;
+  }
+
+  .donations,
+  .contact-us {
+    padding: 10rem 2rem;
+    min-height: 80vh;
+  }
+
+  .section-content {
+    padding: 1.5rem;
+  }
+
+  .donations h2,
+  .contact-us h2 {
+    font-size: 3rem;
+  }
+
+  .donations p,
+  .contact-us p {
+    font-size: 1.5rem;
+  }
+
+  .btn-group {
+    gap: 2rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 1.2rem 3rem;
+    font-size: 1.3rem;
   }
 }
 
-.team-member {
-  flex: 1;
-  padding: 1rem;
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navbar.scrolled {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .nav-logo {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .nav-links li a {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .nav-donate {
+    margin-top: 0.5rem;
+  }
+
+  .nav-donate .donate-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .about-us {
+    height: 70vh;
+    min-height: 600px;
+  }
+
+  .about-us h1 {
+    font-size: 3rem;
+  }
+
+  .about-us .slogan {
+    font-size: 1.5rem;
+  }
+
+  .donations,
+  .contact-us {
+    padding: 8rem 1.5rem;
+    min-height: 70vh;
+  }
+
+  .section-content {
+    padding: 1rem;
+  }
+
+  .donations h2,
+  .contact-us h2 {
+    font-size: 2.5rem;
+  }
+
+  .donations p,
+  .contact-us p {
+    font-size: 1.2rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 2.5rem;
+  }
 }
 
-.team-member h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 0.5rem;
+/* AOS Animations */
+[data-aos] {
+  opacity: 0;
+  transition-property: transform, opacity;
 }
 
-.team-role {
-  font-size: 1rem;
-  color: #2563EB;
-  margin-bottom: 0.5rem;
-}
-
-.team-bio {
-  font-size: 0.875rem;
-  color: #D1D5DB;
-  line-height: 1.5;
+[data-aos].aos-animate {
+  opacity: 1;
 }
