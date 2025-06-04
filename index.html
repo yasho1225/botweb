@@ -2,111 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BotWeb - We build websites and You build Impact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotWeb - We Build Websites. You Build Impact.</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 <body>
-  <!-- Floating Navigation Bar (Inspired by Charity: Water) -->
-  <nav class="navbar" data-aos="fade-down">
-    <div class="nav-logo">
-      <a href="index.html" aria-label="BotWeb Home">
-        <img src="logo.png" alt="BotWeb Logo" class="logo-img">
-      </a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html" aria-current="page">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="testimonials.html">Testimonials</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-donate">
-      <a href="#donate" class="donate-btn">Donate Now</a>
-    </div>
-  </nav>
+  <!-- Include Navigation -->
+  <div w3-include-html="nav.html"></div>
+  <!-- Include Hero Section -->
+  <div w3-include-html="hero.html"></div>
 
-  <!-- Main Content -->
-  <main>
-    <!-- About Us Section (Charity: Water Style) -->
-    <section class="about-us" data-aos="fade-up">
-      <div class="section-content">
-        <!-- Video Element -->
-        <div class="video-container">
-          <video class="intro-video" controls muted loop>
-            <source src="my-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <h1>BotWeb</h1>
-        <p class="slogan"><strong>We build websites</strong> and <strong>You build Impact</strong></p>
-        <a href="#book-now" class="btn-primary book-now-btn" data-aos="fade-up" data-aos-delay="100">Book Now</a>
-      </div>
-    </section>
-
-    <!-- Support Our Mission (Donations) Section -->
-    <section class="donations" data-aos="fade-up">
-      <div class="section-content">
-        <h2>Support Our Mission</h2>
-        <p>Your donations help us provide affordable digital solutions to charities and small businesses. Every contribution makes a difference in empowering communities online, enabling access to technology that transforms lives and supports growth.</p>
-        <p>Join hundreds of supporters who have helped us reach new milestones in digital inclusion!</p>
-        <a href="#donate" class="btn-primary" data-aos="fade-up" data-aos-delay="100">Donate Now</a>
-      </div>
-    </section>
-
-    <!-- Contact Us Section -->
-    <section class="contact-us" data-aos="fade-up">
-      <div class="section-content">
-        <h2>Contact Us</h2>
-        <p>Ready to digitize your dream? Reach out to us for a professional consultation. Our team is here to guide you every step of the way, from concept to launch, ensuring your project succeeds.</p>
-        <p>Email: <a href="mailto:contact@botweb.com">contact@botweb.com</a></p>
-        <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-        <p>Follow us on <a href="https://x.com/botweb" target="_blank">X</a> for updates.</p>
-        <a href="contact.html" class="btn-secondary" data-aos="fade-up" data-aos-delay="100">Get in Touch</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Chatbot Widget -->
-  <div class="chatbot-widget" data-aos="fade-up" data-aos-delay="300">
-    <button class="chatbot-btn" aria-label="Open chatbot">
-      <span>Chat with Us</span>
-    </button>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 BotWeb — Professional Website & Chatbot Solutions</p>
-    <p>
-      <a href="https://github.com/yasho1225" target="_blank">GitHub</a> |
-      <a href="mailto:contact@botweb.com">Email Us</a> |
-      <a href="https://x.com/botweb" target="_blank">X</a>
-    </p>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 800 });
+    function includeHTML(callback) {
+      var z, i, elmnt, file, xhttp;
+      z = document.getElementsByTagName("*");
+      let includesProcessed = 0;
+      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-    // Navbar background change on scroll (Charity: Water style)
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
+                elmnt.removeAttribute("w3-include-html");
+                includesProcessed++;
+                if (includesProcessed === totalIncludes) {
+                  // All includes are done, run callback
+                  if (callback) callback();
+                }
+              } else {
+                console.error(`Failed to load ${file}: ${this.status}`);
+              }
+              includeHTML(callback); // Continue processing remaining includes
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          return;
+        }
       }
-    });
 
-    // Autoplay video on page load (optional)
-    document.addEventListener('DOMContentLoaded', function() {
-      const video = document.querySelector('.intro-video');
-      if (video) {
-        video.play();
-      }
+      // If no includes are found, run callback immediately
+      if (totalIncludes === 0 && callback) callback();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      includeHTML(function() {
+        // This runs after all includes are loaded
+        var contactLink = document.querySelector('a[href="#contact"]');
+        if (contactLink) {
+          console.log("Contact link found:", contactLink);
+          contactLink.href = "contact.html"; // Redirect to contact.html
+        } else {
+          console.error("Contact link not found!");
+        }
+      });
     });
   </script>
 </body>
