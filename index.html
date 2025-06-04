@@ -19,23 +19,27 @@
       let includesProcessed = 0;
       const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
+      console.log("Starting to process", totalIncludes, "includes");
+
       for (i = 0; i < z.length; i++) {
         elmnt = z[i];
         file = elmnt.getAttribute("w3-include-html");
         if (file) {
+          console.log("Attempting to load", file);
           xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
               if (this.status == 200) {
+                console.log("Successfully loaded", file);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
                 includesProcessed++;
                 if (includesProcessed === totalIncludes) {
-                  // All includes are done, run callback
+                  console.log("All includes processed");
                   if (callback) callback();
                 }
               } else {
-                console.error(`Failed to load ${file}: ${this.status}`);
+                console.error("Failed to load", file, "Status:", this.status, this.statusText);
               }
               includeHTML(callback); // Continue processing remaining includes
             }
@@ -47,12 +51,17 @@
       }
 
       // If no includes are found, run callback immediately
-      if (totalIncludes === 0 && callback) callback();
+      if (totalIncludes === 0) {
+        console.log("No includes found");
+        if (callback) callback();
+      }
     }
 
     document.addEventListener("DOMContentLoaded", function() {
+      console.log("DOM fully loaded, starting includeHTML");
       includeHTML(function() {
-        // This runs after all includes are loaded
+        console.log("Callback executed after includes");
+        // Attempt to find and modify the Contact link
         var contactLink = document.querySelector('a[href="#contact"]');
         if (contactLink) {
           console.log("Contact link found:", contactLink);
