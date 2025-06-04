@@ -3,14 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotWeb - We Build Websites. You Build Impact.</title>
+  <title>BotWeb - Contact Us</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Include Navigation -->
   <div w3-include-html="nav.html"></div>
-  <!-- Include Hero Section -->
-  <div w3-include-html="hero.html"></div>
+  <section class="contact">
+    <div class="container">
+      <div class="contact-content">
+        <h1>Contact Us</h1>
+        <p>We’re here to help you amplify your mission. Let’s connect!</p>
+
+        <div class="form-section">
+          <p class="callback-note">Leave your details, and we’ll get back to you ASAP!</p>
+          <form action="https://formspree.io/f/meokqqro" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="callback-name">Name</label>
+              <input type="text" id="callback-name" name="callback-name" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-email">Email</label>
+              <input type="email" id="callback-email" name="_replyto" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-phone">Phone</label>
+              <input type="tel" id="callback-phone" name="callback-phone" required>
+            </div>
+            <button type="submit" class="get-started">Submit Details</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     function includeHTML(callback) {
@@ -31,13 +56,12 @@
                 elmnt.removeAttribute("w3-include-html");
                 includesProcessed++;
                 if (includesProcessed === totalIncludes) {
-                  // All includes are done, run callback
                   if (callback) callback();
                 }
               } else {
                 console.error(`Failed to load ${file}: ${this.status}`);
               }
-              includeHTML(callback); // Continue processing remaining includes
+              includeHTML(callback);
             }
           }
           xhttp.open("GET", file, true);
@@ -46,22 +70,13 @@
         }
       }
 
-      // If no includes are found, run callback immediately
       if (totalIncludes === 0 && callback) callback();
     }
 
     document.addEventListener("DOMContentLoaded", function() {
       includeHTML(function() {
-        // This runs after all includes are loaded
-        var contactLink = document.querySelector('a[href="#contact"]');
-        if (contactLink) {
-          console.log("Contact link found:", contactLink);
-          contactLink.href = "contact.html"; // Redirect to contact.html
-        } else {
-          console.error("Contact link not found!");
-        }
+        console.log("Navigation loaded on Contact page");
       });
     });
   </script>
-</body>
 </html>
