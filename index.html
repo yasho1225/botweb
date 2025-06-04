@@ -44,7 +44,7 @@
     }
 
     .logo {
-      color: #0061FF; /* Bold blue text */
+      color: #0061FF;
       font-size: 24px;
       font-weight: 700;
       text-decoration: none;
@@ -52,7 +52,7 @@
     }
 
     .logo:hover {
-      color: #004ECC; /* Darker blue on hover */
+      color: #004ECC;
     }
 
     .nav-links {
@@ -107,13 +107,13 @@
       max-width: 1280px;
       padding: 40px 20px;
       text-align: center;
-      gap: 40px;
+      gap: 20px; /* Reduced gap between text and video */
     }
 
     @media (min-width: 1024px) {
       .hero-content {
         flex-direction: row;
-        gap: 60px;
+        gap: 40px; /* Adjusted gap for desktop */
       }
     }
 
@@ -125,8 +125,8 @@
     h1 {
       font-size: 2.5rem;
       font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      line-height: 1.2; /* Adjusted line height to reduce gap */
+      margin-bottom: 1rem;
       color: #FFFFFF;
     }
 
@@ -144,7 +144,7 @@
       font-size: 1.25rem;
       color: #D1D5DB;
       line-height: 1.6;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -201,7 +201,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 2rem;
+      margin-top: 0; /* Removed top margin for tighter layout */
     }
 
     @media (min-width: 1024px) {
