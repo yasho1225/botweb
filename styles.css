@@ -21,7 +21,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: linear-gradient(to bottom, #1a1a1a, #000000);
+  background: #000000; /* Changed to solid black */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
   transition: height 0.3s ease; /* Smooth transition for height changes */
@@ -249,15 +249,14 @@ p {
   text-align: center;
 }
 
-/* Contact Section */
+/* Contact Section (used for About and Contact) */
 .contact {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 100px 20px 20px; /* Consolidated padding, with top padding to clear nav bar */
   background-color: #000000;
-  padding-top: 80px; /* Added to account for sticky nav bar */
 }
 
 .contact-content {
@@ -270,14 +269,13 @@ p {
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1rem;
-  border-right: 5px solid;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
   color: #FFFFFF;
-  animation: 
-    typing 5s steps(29),
-    cursor .4s step-end infinite alternate;
+  /* Removed animation for better visibility */
+  border-right: none;
+  width: auto;
+  white-space: normal;
+  overflow: visible;
+  animation: none;
 }
 
 @media (min-width: 640px) {
@@ -299,14 +297,6 @@ p {
   .contact-content p {
     font-size: 1.25rem;
   }
-}
-
-/* Contact Section (used for About and Contact) */
-.contact {
-  display: flex;
-  justify-content: center;
-  padding: 100px 20px 20px;
-  background-color: #000000;
 }
 
 .form-section {
@@ -360,7 +350,7 @@ p {
 
 /* Team Section */
 .team-section {
-  margin-top: 2rem; /* Reduced from 3rem for tighter layout */
+  margin-top: 2rem;
   text-align: center;
 }
 
@@ -368,13 +358,13 @@ p {
   font-size: 1.5rem;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 1.5rem; /* Reduced from 2rem */
+  margin-bottom: 1.5rem;
 }
 
 .team-members {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Reduced from 2rem */
+  gap: 1.5rem;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -383,7 +373,7 @@ p {
   .team-members {
     flex-direction: row;
     justify-content: space-between;
-    gap: 1rem; /* Reduced from 1.5rem */
+    gap: 1rem;
   }
 }
 
