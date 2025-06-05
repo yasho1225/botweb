@@ -21,11 +21,11 @@ body {
   position: sticky; /* Makes the navbar float at the top */
   top: 0;
   z-index: 50; /* Ensures it stays above other content */
-  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Gradient background from index.html */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Gradient background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
   padding: 10px 0;
-  height: 70px; /* Default height as per your preference */
-  transition: height 0.3s ease; /* Smooth transition for expansion */
+  height: 70px; /* Default height */
+  transition: height 0.3s ease; /* Smooth height transition */
 }
 
 .container {
@@ -36,11 +36,11 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 70px; /* Matches navbar default height */
-  transition: height 0.3s ease; /* Smooth transition for expansion */
+  transition: height 0.3s ease; /* Smooth height transition */
 }
 
 .logo {
-  color: #0061FF; /* Blue color from index.html */
+  color: #0061FF; /* Blue color for brand consistency */
   font-size: 24px;
   font-weight: 700;
   text-decoration: none;
@@ -57,7 +57,7 @@ body {
 }
 
 .nav-links a {
-  color: #E5E7EB; /* Light gray from index.html */
+  color: #E5E7EB; /* Light gray for links */
   text-decoration: none;
   margin-left: 30px;
   font-size: 16px;
@@ -70,7 +70,7 @@ body {
 }
 
 .get-started {
-  background-color: #0061FF; /* Blue button background */
+  background-color: #0061FF; /* Blue button */
   color: #FFFFFF;
   border: none;
   padding: 10px 24px;
@@ -84,6 +84,11 @@ body {
 
 .get-started:hover {
   background-color: #004ECC; /* Darker blue on hover */
+}
+
+/* Ensure content clears the navbar */
+.hero, .contact {
+  padding-top: 100px; /* Adjust based on max height (90px + buffer) */
 }
 /* Hero Section */
 .hero {
