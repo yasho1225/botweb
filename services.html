@@ -3,8 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BotWeb - Services</title>
+  <title>BotWeb - Our Services</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 3rem;
+      }
+    }
+
+    .service-card {
+      background-color: #111827;
+      border: 1px solid #1F2937;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-image {
+      background-color: #374151;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9CA3AF;
+      font-size: 1.25rem;
+    }
+
+    .service-text {
+      padding: 1.5rem;
+      color: #D1D5DB;
+    }
+
+    .service-text h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #FFFFFF;
+    }
+
+    .service-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
 
@@ -13,22 +73,51 @@
 
   <!-- Services Section -->
   <section class="contact">
-    <div class="container">
-      <div class="contact-content">
-        <h1>Our Services</h1>
-        <p>Explore the solutions we offer to help amplify your mission online.</p>
+    <div class="contact-content">
+      <h1>Our Services</h1>
+      <p>Explore the digital solutions we offer to empower your mission.</p>
+    </div>
 
-        <div class="form-section">
-          <p class="callback-note"><strong>Custom Website Design:</strong> Tailored, responsive websites built to match your vision and engage your audience.</p>
-          <p class="callback-note"><strong>AI Chatbot Integration:</strong> Smart, conversational bots that provide 24/7 support to visitors and increase conversions.</p>
-          <p class="callback-note"><strong>Hosting & Maintenance:</strong> Reliable performance, updates, and security for peace of mind.</p>
-          <p class="callback-note"><strong>Donation Integration:</strong> Seamless payment and donation features designed for nonprofits and fundraising.</p>
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-image">[Image Placeholder]</div>
+        <div class="service-text">
+          <h2>Custom Website Design</h2>
+          <p>Modern, mobile-friendly websites tailored to reflect your mission and captivate your audience.</p>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-image">[Chatbot Graphic]</div>
+        <div class="service-text">
+          <h2>AI Chatbot Integration</h2>
+          <p>Conversational bots that enhance user interaction and automate responses to boost engagement.</p>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-image">[Hosting Graphic]</div>
+        <div class="service-text">
+          <h2>Hosting & Maintenance</h2>
+          <p>We handle performance, security, and updates, so your site stays online and optimized 24/7.</p>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <div class="service-image">[Consulting Graphic]</div>
+        <div class="service-text">
+          <h2>Digital Strategy Consulting</h2>
+          <p>We’ll guide you from planning to launch with expert advice that maximizes your impact online.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Script for includes and scroll behavior -->
+  <!-- Include Script for nav.html -->
   <script>
     function includeHTML(callback) {
       var z, i, elmnt, file, xhttp;
@@ -65,28 +154,28 @@
       if (totalIncludes === 0 && callback) callback();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      includeHTML(function() {
+    document.addEventListener("DOMContentLoaded", function () {
+      includeHTML(function () {
         console.log("Navigation loaded on Services page");
+      });
 
-        // Scroll behavior script
-        let lastScroll = 0;
-        const navbar = document.querySelector('.navbar');
-        const container = document.querySelector('.navbar .container');
+      // Scroll shrink effect
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
 
-        window.addEventListener('scroll', () => {
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-          if (currentScroll > lastScroll && currentScroll > 70) {
-            navbar.style.height = '70px';
-            container.style.height = '70px';
-          } else if (currentScroll < lastScroll) {
-            navbar.style.height = '90px';
-            container.style.height = '90px';
-          }
+        if (currentScroll > lastScroll && currentScroll > 70) {
+          navbar.style.height = '70px';
+          container.style.height = '70px';
+        } else if (currentScroll < lastScroll) {
+          navbar.style.height = '90px';
+          container.style.height = '90px';
+        }
 
-          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        });
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
       });
     });
   </script>
