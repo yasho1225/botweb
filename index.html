@@ -463,6 +463,23 @@
         }
       });
     });
+  let lastScroll = 0;
+  const navbar = document.querySelector('.navbar');
+  const container = document.querySelector('.container');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScroll && currentScroll > 70) {
+      navbar.style.height = '70px';
+      container.style.height = '70px';
+    } else if (currentScroll < lastScroll) {
+      navbar.style.height = '90px';
+      container.style.height = '90px';
+    }
+
+    lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+  });
   </script>
 </body>
 </html>
