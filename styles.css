@@ -28,6 +28,7 @@ body {
   transition: height 0.3s ease; /* Smooth height transition */
 }
 
+/* Remove .navbar styles since they're now inline in nav.html */
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -35,12 +36,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px; /* Matches navbar default height */
-  transition: height 0.3s ease; /* Smooth height transition */
+  height: 70px;
+  transition: height 0.3s ease;
 }
 
 .logo {
-  color: #0061FF; /* Blue color for brand consistency */
+  color: #0061FF;
   font-size: 24px;
   font-weight: 700;
   text-decoration: none;
@@ -48,7 +49,7 @@ body {
 }
 
 .logo:hover {
-  color: #004ECC; /* Darker blue on hover */
+  color: #004ECC;
 }
 
 .nav-links {
@@ -57,7 +58,7 @@ body {
 }
 
 .nav-links a {
-  color: #E5E7EB; /* Light gray for links */
+  color: #E5E7EB;
   text-decoration: none;
   margin-left: 30px;
   font-size: 16px;
@@ -66,11 +67,11 @@ body {
 }
 
 .nav-links a:hover {
-  color: #0061FF; /* Blue on hover */
+  color: #0061FF;
 }
 
 .get-started {
-  background-color: #0061FF; /* Blue button */
+  background-color: #0061FF;
   color: #FFFFFF;
   border: none;
   padding: 10px 24px;
@@ -83,13 +84,9 @@ body {
 }
 
 .get-started:hover {
-  background-color: #004ECC; /* Darker blue on hover */
+  background-color: #004ECC;
 }
 
-/* Ensure content clears the navbar */
-.hero, .contact {
-  padding-top: 100px; /* Adjust based on max height (90px + buffer) */
-}
 /* Hero Section */
 .hero {
   min-height: 100vh;
