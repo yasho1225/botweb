@@ -18,13 +18,14 @@ body {
 
 /* Navigation Bar */
 .navbar {
-  position: sticky; /* Keeps navbar floating at the top */
+  position: sticky; /* Makes the navbar float at the top */
   top: 0;
-  z-index: 50; /* Ensures navbar stays above other content */
-  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Gradient background */
+  z-index: 50; /* Ensures it stays above other content */
+  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Gradient background from index.html */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   padding: 10px 0;
-  transition: height 0.3s ease; /* Smooth height transition */
+  height: 70px; /* Default height as per your preference */
+  transition: height 0.3s ease; /* Smooth transition for expansion */
 }
 
 .container {
@@ -34,13 +35,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px; /* Default height */
-  transition: height 0.3s ease; /* Smooth height transition */
+  height: 70px; /* Matches navbar default height */
+  transition: height 0.3s ease; /* Smooth transition for expansion */
 }
 
-/* Logo Styles */
 .logo {
-  color: #0061FF; /* Blue color */
+  color: #0061FF; /* Blue color from index.html */
   font-size: 24px;
   font-weight: 700;
   text-decoration: none;
@@ -51,14 +51,13 @@ body {
   color: #004ECC; /* Darker blue on hover */
 }
 
-/* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
 }
 
 .nav-links a {
-  color: #E5E7EB; /* Light gray */
+  color: #E5E7EB; /* Light gray from index.html */
   text-decoration: none;
   margin-left: 30px;
   font-size: 16px;
@@ -70,9 +69,8 @@ body {
   color: #0061FF; /* Blue on hover */
 }
 
-/* Get Started Button */
 .get-started {
-  background-color: #0061FF;
+  background-color: #0061FF; /* Blue button background */
   color: #FFFFFF;
   border: none;
   padding: 10px 24px;
