@@ -37,63 +37,67 @@
     </div>
   </section>
 
-  <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+ <script>
+  function includeHTML(callback) {
+    var z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    let includesProcessed = 0;
+    const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  if (callback) callback();
-                }
-              } else {
-                console.error(`Failed to load ${file}: ${this.status}`);
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              elmnt.innerHTML = this.responseText;
+              elmnt.removeAttribute("w3-include-html");
+              includesProcessed++;
+              if (includesProcessed === totalIncludes && callback) {
+                callback();
               }
-              includeHTML(callback);
+            } else {
+              console.error(`Failed to load ${file}: ${this.status}`);
             }
+            includeHTML(callback);
           }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
         }
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        return;
       }
-
-      if (totalIncludes === 0 && callback) callback();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      includeHTML(function() {
-        console.log("Navigation loaded on Contact page");
+    if (totalIncludes === 0 && callback) callback();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    includeHTML(function() {
+      console.log("Navigation loaded on Contact page");
+
+      // Scroll script integrated here
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScroll && currentScroll > 70) {
+          // Scrolling down, shrink to 70px
+          navbar.style.height = '70px';
+          container.style.height = '70px';
+        } else if (currentScroll < lastScroll) {
+          // Scrolling up, expand to 90px
+          navbar.style.height = '90px';
+          container.style.height = '90px';
+        }
+
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
       });
     });
-  let lastScroll = 0;
-  const navbar = document.querySelector('.navbar');
-  const container = document.querySelector('.container');
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScroll && currentScroll > 70) {
-      navbar.style.height = '70px';
-      container.style.height = '70px';
-    } else if (currentScroll < lastScroll) {
-      navbar.style.height = '90px';
-      container.style.height = '90px';
-    }
-
-    lastScroll = currentScroll <= 0 ? 0 : currentScroll;
   });
 </script>
 </body>
