@@ -12,85 +12,90 @@
   <!-- Include Hero Section -->
   <div w3-include-html="hero.html"></div>
 
-  <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+  <script><script>
+  function includeHTML(callback) {
+    var z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    let includesProcessed = 0;
+    const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-      console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
+    console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
 
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          console.log("Attempting to load", file, "from path:", window.location.pathname + file);
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log("Successfully loaded", file, "with content length:", this.responseText.length);
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
-                }
-              } else {
-                console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        console.log("Attempting to load", file, "from path:", window.location.pathname + file);
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              console.log("Successfully loaded", file, "with content length:", this.responseText.length);
+              elmnt.innerHTML = this.responseText;
+              elmnt.removeAttribute("w3-include-html");
+              includesProcessed++;
+              if (includesProcessed === totalIncludes) {
+                console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                if (callback) callback();
               }
-              includeHTML(callback);
+            } else {
+              console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
             }
+            includeHTML(callback);
           }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
         }
-      }
-
-      if (totalIncludes === 0) {
-        console.log("No includes found at", new Date().toLocaleTimeString());
-        if (callback) callback();
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        return;
       }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
-      includeHTML(function() {
-        console.log("Callback executed at", new Date().toLocaleTimeString());
-        const video = document.querySelector('.placeholder-video');
-        if (video) {
-          video.addEventListener('error', () => {
-            console.error("Failed to load placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-          video.addEventListener('loadeddata', () => {
-            console.log("Successfully loaded placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-        } else {
-          console.error("Video element not found at", new Date().toLocaleTimeString());
-        }
-      });
-    });
+    if (totalIncludes === 0) {
+      console.log("No includes found at", new Date().toLocaleTimeString());
+      if (callback) callback();
+    }
+  }
 
-    let lastScroll = 0;
-    const navbar = document.querySelector('.navbar');
-    const container = document.querySelector('.container');
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (currentScroll > lastScroll && currentScroll > 70) {
-        navbar.style.height = '70px';
-        container.style.height = '70px';
-      } else if (currentScroll < lastScroll) {
-        navbar.style.height = '90px';
-        container.style.height = '90px';
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
+    includeHTML(function() {
+      console.log("Callback executed at", new Date().toLocaleTimeString());
+      const video = document.querySelector('.placeholder-video');
+      if (video) {
+        video.addEventListener('error', () => {
+          console.error("Failed to load placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
+        });
+        video.addEventListener('loadeddata', () => {
+          console.log("Successfully loaded placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
+        });
+      } else {
+        console.error("Video element not found at", new Date().toLocaleTimeString());
       }
 
-      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+      // Scroll event listener for floating navbar
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
+
+      if (navbar && container) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+          if (currentScroll > lastScroll && currentScroll > 70) {
+            navbar.style.height = '70px';
+            container.style.height = '70px';
+          } else if (currentScroll < lastScroll) {
+            navbar.style.height = '90px';
+            container.style.height = '90px';
+          }
+
+          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        });
+      } else {
+        console.error("Navbar or container not found after includes loaded");
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
