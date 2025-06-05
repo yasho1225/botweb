@@ -21,7 +21,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Restored gradient from index.html */
+  background: linear-gradient(to bottom, #1a1a1a, #000000);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
   transition: height 0.3s ease; /* Smooth transition for height changes */
@@ -39,7 +39,7 @@ body {
 }
 
 .logo {
-  color: #0061FF; /* Matches index.html blue */
+  color: #2563EB;
   font-size: 24px;
   font-weight: 700;
   text-decoration: none;
@@ -47,7 +47,7 @@ body {
 }
 
 .logo:hover {
-  color: #004ECC; /* Matches index.html hover */
+  color: #1E40AF;
 }
 
 .nav-links {
@@ -56,7 +56,7 @@ body {
 }
 
 .nav-links a {
-  color: #E5E7EB; /* Matches index.html light gray */
+  color: #E5E7EB;
   text-decoration: none;
   margin-left: 30px;
   font-size: 16px;
@@ -65,11 +65,11 @@ body {
 }
 
 .nav-links a:hover {
-  color: #0061FF; /* Matches index.html hover */
+  color: #2563EB;
 }
 
 .get-started {
-  background-color: #0061FF; /* Matches index.html blue */
+  background-color: #2563EB;
   color: #FFFFFF;
   border: none;
   padding: 10px 24px;
@@ -82,8 +82,9 @@ body {
 }
 
 .get-started:hover {
-  background-color: #004ECC; /* Matches index.html hover */
+  background-color: #1E40AF;
 }
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
@@ -153,7 +154,7 @@ p {
   font-size: 1.125rem;
   color: #D1D5DB;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   max-width: 20rem;
   margin-left: auto;
   margin-right: auto;
@@ -256,6 +257,7 @@ p {
   justify-content: center;
   padding: 20px;
   background-color: #000000;
+  padding-top: 80px; /* Added to account for sticky nav bar */
 }
 
 .contact-content {
@@ -287,7 +289,7 @@ p {
 .contact-content p {
   font-size: 1.125rem;
   color: #D1D5DB;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   max-width: 20rem;
   margin-left: auto;
   margin-right: auto;
@@ -314,7 +316,7 @@ p {
 .callback-note {
   font-size: 1rem;
   color: #D1D5DB;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   max-width: 20rem;
   margin-left: auto;
   margin-right: auto;
@@ -358,7 +360,7 @@ p {
 
 /* Team Section */
 .team-section {
-  margin-top: 3rem;
+  margin-top: 2rem; /* Reduced from 3rem for tighter layout */
   text-align: center;
 }
 
@@ -366,13 +368,13 @@ p {
   font-size: 1.5rem;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
 }
 
 .team-members {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem; /* Reduced from 2rem */
   max-width: 800px;
   margin: 0 auto;
 }
@@ -381,12 +383,21 @@ p {
   .team-members {
     flex-direction: row;
     justify-content: space-between;
+    gap: 1rem; /* Reduced from 1.5rem */
   }
 }
 
 .team-member {
   flex: 1;
   padding: 1rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
 }
 
 .team-member h3 {
