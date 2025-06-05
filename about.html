@@ -54,60 +54,84 @@
     </div>
   </section>
 
-  <!-- Script for includeHTML -->
-  <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+ <script>
+  function includeHTML(callback) {
+    var z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    let includesProcessed = 0;
+    const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-      console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
+    console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
 
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          console.log("Attempting to load", file, "from path:", window.location.pathname + file);
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log("Successfully loaded", file, "with content length:", this.responseText.length);
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                includesProcessed++;
-                if (includesProcessed === totalIncludes && callback) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  callback();
-                }
-              } else {
-                console.error("Failed to load", file, ": Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        console.log("Attempting to load", file, "from path:", window.location.pathname + file);
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              console.log("Successfully loaded", file, "with content length:", this.responseText.length);
+              elmnt.innerHTML = this.responseText;
+              elmnt.removeAttribute("w3-include-html");
+              includesProcessed++;
+              if (includesProcessed === totalIncludes && callback) {
+                console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                callback();
               }
-              includeHTML(callback);
+            } else {
+              console.error("Failed to load", file, ": Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
             }
+            includeHTML(callback);
           }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
         }
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        return;
       }
-
-      if (totalIncludes === 0 && callback) callback();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
-      includeHTML(function() {
-        console.log("Navigation loaded on About page at", new Date().toLocaleTimeString());
-        const heading = document.querySelector('.contact-content h1');
-        if (heading) {
-          console.log("Heading 'About Us' found with text:", heading.textContent);
-        } else {
-          console.error("Heading 'About Us' not found in .contact-content");
-        }
-      });
+    if (totalIncludes === 0 && callback) callback();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
+    includeHTML(function() {
+      console.log("Navigation loaded on About page at", new Date().toLocaleTimeString());
+      const heading = document.querySelector('.contact-content h1');
+      if (heading) {
+        console.log("Heading 'About Us' found with text:", heading.textContent);
+      } else {
+        console.error("Heading 'About Us' not found in .contact-content");
+      }
+
+      // Add scroll behavior for navbar
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
+
+      if (navbar && container) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+          if (currentScroll > lastScroll && currentScroll > 70) {
+            // Scrolling down: shrink to 70px
+            navbar.style.height = '70px';
+            container.style.height = '70px';
+          } else if (currentScroll < lastScroll) {
+            // Scrolling up: expand to 90px
+            navbar.style.height = '90px';
+            container.style.height = '90px';
+          }
+
+          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        });
+      } else {
+        console.error("Navbar or container not found after includes loaded");
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
