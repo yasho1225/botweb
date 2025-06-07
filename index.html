@@ -18,6 +18,14 @@
       top: 0 !important;
       z-index: 50;
     }
+    /* Ensure video container supports transform */
+    .video-content {
+      position: relative;
+      overflow: hidden;
+    }
+    .placeholder-video {
+      transition: transform 0.1s ease-out; /* Smooth transition for motion */
+    }
   </style>
 </head>
 <body>
@@ -47,7 +55,7 @@
                 console.log("Successfully loaded", file, "with content length:", this.responseText.length);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
-                // Enforce stickiness after loading
+                // Enforce stickiness after loading nav.html
                 if (file === "nav.html") {
                   const navbar = elmnt.querySelector('.navbar');
                   if (navbar) {
@@ -132,6 +140,7 @@
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
           console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
 
+          // Navbar scroll behavior
           if (currentScroll > lastScroll) { // Shrink when scrolling down
             console.log("Shrinking nav bar at", currentScroll, "px");
             navbar.style.height = '70px';
@@ -148,6 +157,12 @@
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
             container.querySelector('.get-started').style.fontSize = '16px';
             container.querySelector('.get-started').style.padding = '10px 24px';
+          }
+
+          // Video motion effect (inspired by Dropbox)
+          if (video) {
+            const scrollFactor = currentScroll * 0.3; // Adjusts speed of movement (0.3 for subtle effect)
+            video.style.transform = `translateY(-${scrollFactor}px)`; // Moves video up as you scroll down
           }
 
           lastScroll = currentScroll <= 0 ? 0 : currentScroll;
