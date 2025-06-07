@@ -65,11 +65,28 @@
       line-height: 1.6;
     }
   </style>
+  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .navbar {
+      position: fixed !important;
+      top: 0 !important;
+      z-index: 50;
+      width: 100%;
+    }
+    .contact {
+      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Include Navigation -->
-  <div w3-include-html="nav.html"></div>
+  <!-- Include Navigation with Fallback Fixed Positioning -->
+  <div w3-include-html="nav.html" id="nav-placeholder"></div>
 
   <!-- Services Section -->
   <section class="contact">
@@ -118,70 +135,100 @@
   </section>
 
   <script>
-  function includeHTML(callback) {
-    var z, i, elmnt, file, xhttp;
-    z = document.getElementsByTagName("*");
-    let includesProcessed = 0;
-    const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+    function includeHTML(callback) {
+      var z, i, elmnt, file, xhttp;
+      z = document.getElementsByTagName("*");
+      let includesProcessed = 0;
+      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-    for (i = 0; i < z.length; i++) {
-      elmnt = z[i];
-      file = elmnt.getAttribute("w3-include-html");
-      if (file) {
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.status == 200) {
-              elmnt.innerHTML = this.responseText;
-              elmnt.removeAttribute("w3-include-html");
-              includesProcessed++;
-              if (includesProcessed === totalIncludes && callback) {
-                callback();
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
+                elmnt.removeAttribute("w3-include-html");
+                // Enforce fixed positioning after loading nav.html
+                if (file === "nav.html") {
+                  const navbar = elmnt.querySelector('.navbar');
+                  if (navbar) {
+                    navbar.style.position = 'fixed';
+                    navbar.style.top = '0';
+                    navbar.style.zIndex = '50';
+                    navbar.style.width = '100%';
+                  }
+                }
+                includesProcessed++;
+                if (includesProcessed === totalIncludes && callback) {
+                  callback();
+                }
+              } else {
+                console.error(`Failed to load ${file}: ${this.status}`);
+                // Fallback navbar with fixed behavior
+                if (file === "nav.html") {
+                  elmnt.innerHTML = `
+                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
+                      <div class="container">
+                        <a href="index.html" class="logo">BotWeb</a>
+                        <div class="nav-links">
+                          <a href="index.html">Home</a>
+                          <a href="about.html">About</a>
+                          <a href="services.html">Services</a>
+                          <a href="contact.html">Contact</a>
+                          <button class="get-started">Donate Now</button>
+                        </div>
+                      </div>
+                    </nav>
+                  `;
+                }
+                includesProcessed++;
+                if (includesProcessed === totalIncludes && callback) {
+                  callback();
+                }
               }
-            } else {
-              console.error(`Failed to load ${file}: ${this.status}`);
+              includeHTML(callback);
             }
-            includeHTML(callback);
           }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          return;
         }
-        xhttp.open("GET", file, true);
-        xhttp.send();
-        return;
       }
+
+      if (totalIncludes === 0 && callback) callback();
     }
 
-    if (totalIncludes === 0 && callback) callback();
-  }
+    document.addEventListener("DOMContentLoaded", function() {
+      includeHTML(function() {
+        console.log("Navigation loaded on Services page");
 
-  document.addEventListener("DOMContentLoaded", function() {
-    includeHTML(function() {
-      console.log("Navigation loaded on Services page");
+        // Scroll script moved inside the callback
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+        const container = document.querySelector('.container');
 
-      // Scroll script moved inside the callback
-      let lastScroll = 0;
-      const navbar = document.querySelector('.navbar');
-      const container = document.querySelector('.container');
+        if (navbar && container) {
+          window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (navbar && container) {
-        window.addEventListener('scroll', () => {
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll > lastScroll && currentScroll > 70) {
+              navbar.style.height = '70px';
+              container.style.height = '70px';
+            } else if (currentScroll < lastScroll) {
+              navbar.style.height = '90px';
+              container.style.height = '90px';
+            }
 
-          if (currentScroll > lastScroll && currentScroll > 70) {
-            navbar.style.height = '70px';
-            container.style.height = '70px';
-          } else if (currentScroll < lastScroll) {
-            navbar.style.height = '90px';
-            container.style.height = '90px';
-          }
-
-          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        });
-      } else {
-        console.error("Navbar or container not found after includes loaded");
-      }
+            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+          });
+        } else {
+          console.error("Navbar or container not found after includes loaded");
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
