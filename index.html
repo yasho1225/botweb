@@ -237,6 +237,20 @@
         }, { passive: true });
       });
     });
+    const carouselItems = document.querySelectorAll('.carousel-item');
+let currentIndex = 0;
+
+function showNextSlide() {
+  carouselItems[currentIndex].classList.remove('active');
+  currentIndex = (currentIndex + 1) % carouselItems.length;
+  carouselItems[currentIndex].classList.add('active');
+}
+
+// Auto transition every 5 seconds
+setInterval(showNextSlide, 5000);
+
+// Ensure the first slide is visible on load
+carouselItems[0].classList.add('active');
   </script>
   <!-- Why Us Section -->
 <section class="why-us">
