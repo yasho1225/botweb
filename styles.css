@@ -238,12 +238,13 @@ p {
 
 /* Contact Section */
 .contact {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
+  padding: 120px 20px 40px; /* Increased to start below navbar (100px to match 90px max height + buffer) */
   background-color: #000000;
+  overflow-y: auto; /* Allow scrolling for full content */
+  height: auto; /* Remove min-height constraint */
 }
 
 .contact-content {
@@ -257,6 +258,12 @@ p {
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: #FFFFFF;
+  opacity: 1;
+  position: relative;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.9); /* Ensure visibility against navbar */
+  padding: 15px;
+  margin-top: 0; /* Remove any default margin pushing it down */
 }
 
 @media (min-width: 640px) {
