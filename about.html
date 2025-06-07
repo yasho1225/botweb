@@ -20,7 +20,7 @@
       width: 100%;
     }
     .contact {
-      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
+      padding-top: 200px; /* Increased to clear the fixed navbar and ensure all text is visible */
     }
   </style>
 </head>
@@ -152,11 +152,13 @@
         const heading = document.querySelector('.contact-content h1');
         if (heading) {
           console.log("Heading 'About Us' found with text:", heading.textContent);
+          heading.style.color = '#FFFFFF'; // Ensure visibility
+          heading.style.opacity = '1'; // Ensure not hidden
         } else {
           console.error("Heading 'About Us' not found in .contact-content");
         }
 
-        // Scroll behavior for navbar (expanded from index.html)
+        // Scroll behavior for navbar
         let lastScroll = 0;
         const navbar = document.querySelector('.navbar');
         const container = document.querySelector('.container');
