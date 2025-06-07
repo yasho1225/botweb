@@ -5,10 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - We Build Websites. You Build Impact.</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Fallback style to ensure stickiness if styles.css fails -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .navbar {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50;
+    }
+  </style>
 </head>
 <body>
-  <!-- Include Navigation -->
-  <div w3-include-html="nav.html"></div>
+  <!-- Include Navigation with Fallback Stickiness -->
+  <div w3-include-html="nav.html" id="nav-placeholder"></div>
   <!-- Include Hero Section -->
   <div w3-include-html="hero.html"></div>
 
@@ -33,6 +47,15 @@
                 console.log("Successfully loaded", file, "with content length:", this.responseText.length);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
+                // Enforce stickiness after loading
+                if (file === "nav.html") {
+                  const navbar = elmnt.querySelector('.navbar');
+                  if (navbar) {
+                    navbar.style.position = 'sticky';
+                    navbar.style.top = '0';
+                    navbar.style.zIndex = '50';
+                  }
+                }
                 includesProcessed++;
                 if (includesProcessed === totalIncludes) {
                   console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
@@ -40,6 +63,28 @@
                 }
               } else {
                 console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+                // Fallback navbar with sticky behavior
+                if (file === "nav.html") {
+                  elmnt.innerHTML = `
+                    <nav class="navbar" style="position: sticky; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease;">
+                      <div class="container">
+                        <a href="index.html" class="logo">BotWeb</a>
+                        <div class="nav-links">
+                          <a href="index.html">Home</a>
+                          <a href="about.html">About</a>
+                          <a href="services.html">Services</a>
+                          <a href="contact.html">Contact</a>
+                          <button class="get-started">Donate Now</button>
+                        </div>
+                      </div>
+                    </nav>
+                  `;
+                }
+                includesProcessed++;
+                if (includesProcessed === totalIncludes) {
+                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                  if (callback) callback();
+                }
               }
               includeHTML(callback);
             }
@@ -72,7 +117,7 @@
           console.error("Video element not found at", new Date().toLocaleTimeString());
         }
 
-        // Scroll behavior for shrinking nav bar
+        // Scroll behavior for shrinking/expanding nav bar
         let lastScroll = 0;
         let navbar = document.querySelector('.navbar');
         let container = document.querySelector('.container');
@@ -91,7 +136,7 @@
             console.log("Shrinking nav bar at", currentScroll, "px");
             navbar.style.height = '70px';
             container.style.height = '70px';
-            container.querySelector('.logo').style.fontSize = '20px'; // Adjusted for text logo
+            container.querySelector('.logo').style.fontSize = '20px';
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
             container.querySelector('.get-started').style.fontSize = '14px';
             container.querySelector('.get-started').style.padding = '8px 20px';
@@ -99,14 +144,14 @@
             console.log("Expanding nav bar at", currentScroll, "px");
             navbar.style.height = '90px';
             container.style.height = '90px';
-            container.querySelector('.logo').style.fontSize = '24px'; // Adjusted for text logo
+            container.querySelector('.logo').style.fontSize = '24px';
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
             container.querySelector('.get-started').style.fontSize = '16px';
             container.querySelector('.get-started').style.padding = '10px 24px';
           }
 
           lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        }, { passive: true }); // Passive event for better performance
+        }, { passive: true });
       });
     });
   </script>
