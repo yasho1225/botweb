@@ -19,7 +19,7 @@
       width: 100%;
     }
     .contact {
-      padding-top: 300px; /* Increased to clear the navbar (90px max height + buffer) */
+      padding-top: 300px; /* Increased to ensure all text clears the navbar */
     }
   </style>
 </head>
@@ -28,7 +28,7 @@
   <div w3-include-html="nav.html" id="nav-placeholder"></div>
 
   <!-- About Section -->
-  <section >
+  <section class="contact">
     <div class="container">
       <div class="contact-content">
         <h1 style="color: #FFFFFF; opacity: 1; position: relative; z-index: 10; background: rgba(0, 0, 0, 0.9); padding: 15px;">About Us</h1>
@@ -152,13 +152,16 @@
         } else {
           console.error("Heading 'About Us' not found in .contact-content");
         }
+      });
 
-        // Scroll behavior for navbar
-        let lastScroll = 0;
+      // Scroll behavior for navbar with immediate and delayed setup
+      let lastScroll = 0;
+      const setupNavbarScroll = () => {
         const navbar = document.querySelector('.navbar');
         const container = document.querySelector('.container');
 
         if (navbar && container) {
+          console.log("Navbar and container found, setting up scroll listener at", new Date().toLocaleTimeString());
           window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
@@ -184,9 +187,12 @@
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
           }, { passive: true });
         } else {
-          console.error("Navbar or container not found after includes loaded");
+          console.error("Navbar or container not found at", new Date().toLocaleTimeString());
         }
-      });
+      };
+
+      setupNavbarScroll();
+      setTimeout(setupNavbarScroll, 2000); // Extended delay to ensure DOM is ready
     });
   </script>
 </body>
