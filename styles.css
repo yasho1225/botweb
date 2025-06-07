@@ -14,7 +14,7 @@ body {
   color: #FFFFFF;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow-y: auto;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Subtle gradient for depth */
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Subtle black gradient */
 }
 
 /* Navigation Bar */
@@ -88,70 +88,14 @@ body {
   box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
-/* Contact Section */
-.contact {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 150px 20px 60px; /* Increased top padding to clear navbar, added bottom padding */
-  background-color: #000000;
-  overflow-y: auto; /* Ensure all content is scrollable */
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Matching body gradient */
-}
-
-.contact-content {
-  text-align: center;
-  max-width: 1280px;
-  width: 100%;
-  padding: 40px;
-  background: rgba(26, 26, 26, 0.95); /* Slightly transparent for elegance */
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-  position: relative;
-  z-index: 10; /* Ensure it’s above any background overlays */
-}
-
-.contact-content h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 2rem;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
-}
-
-@media (min-width: 640px) {
-  .contact-content h1 {
-    font-size: 4rem;
-  }
-}
-
-.contact-content p {
-  font-size: 1.25rem;
-  color: #D1D5DB;
-  margin-bottom: 1.5rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.8;
-}
-
-@media (min-width: 640px) {
-  .contact-content p {
-    font-size: 1.5rem;
-  }
-}
-
 /* About Page Styles */
 .contact {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 150px 20px 60px; /* Increased top padding to clear navbar, added bottom padding */
+  padding: 120px 20px 40px; /* Reduced top padding to 120px to match navbar height, adjusted bottom padding */
   background-color: #000000;
-  overflow-y: auto; /* Ensure all content is scrollable */
+  overflow-y: auto;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Consistent black gradient */
 }
 
@@ -159,85 +103,85 @@ body {
   text-align: center;
   max-width: 1280px;
   width: 100%;
-  padding: 40px;
-  background: rgba(26, 26, 26, 0.95); /* Semi-transparent black for contrast */
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  padding: 30px; /* Reduced padding for cleaner look */
+  background: rgba(26, 26, 26, 0.9); /* Slightly less transparent for better contrast */
+  border-radius: 10px; /* Reduced border radius for subtlety */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Softer shadow, no borders */
   position: relative;
-  z-index: 10; /* Ensure it’s above any background overlays */
+  z-index: 10;
 }
 
 .contact-content h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 2rem;
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
   color: #FFFFFF;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 @media (min-width: 640px) {
   .contact-content h1 {
-    font-size: 4rem;
+    font-size: 3.5rem; /* Slightly reduced for balance */
   }
 }
 
 .contact-content p {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: #D1D5DB;
-  margin-bottom: 1.5rem;
-  max-width: 700px;
+  margin-bottom: 1.2rem;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.8;
+  line-height: 1.7; /* Increased for readability */
 }
 
 @media (min-width: 640px) {
   .contact-content p {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 
 /* Form Section */
 .form-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem; /* Reduced margin for tighter layout */
 }
 
 .callback-note {
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   color: #A3A3A3;
-  margin-bottom: 1.5rem;
-  max-width: 700px;
+  margin-bottom: 1.2rem;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 12px; /* Reduced padding */
+  background: rgba(255, 255, 255, 0.03); /* Lighter background for subtlety */
+  border-radius: 8px; /* Reduced border radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Softer shadow, no borders */
 }
 
 /* Team Section */
 .team-section {
-  margin-top: 4rem;
+  margin-top: 3rem; /* Reduced margin for flow */
   text-align: center;
 }
 
 .team-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 2.5rem;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .team-members {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  max-width: 1100px;
+  gap: 2rem; /* Reduced gap for cleaner spacing */
+  max-width: 1000px; /* Reduced max-width for balance */
   margin: 0 auto;
 }
 
@@ -250,184 +194,34 @@ body {
 
 .team-member {
   flex: 1;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  padding: 20px; /* Reduced padding */
+  background: rgba(255, 255, 255, 0.08); /* Lighter background for subtlety */
+  border-radius: 8px; /* Reduced border radius */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Softer shadow, no borders */
 }
 
 .team-member:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 97, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 97, 255, 0.2); /* Reduced hover shadow intensity */
 }
 
 .team-member h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #FFFFFF;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .team-role {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: #0061FF;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   text-transform: uppercase;
 }
 
 .team-bio {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #D1D5DB;
   line-height: 1.6;
-}
-/* Hero Section (unchanged, included for completeness) */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 20px 20px;
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 1280px;
-  padding: 40px 20px;
-  text-align: center;
-  gap: 20px;
-}
-
-@media (min-width: 1024px) {
-  .hero-content {
-    flex-direction: row;
-    gap: 40px;
-  }
-}
-
-.text-content {
-  text-align: center;
-  max-width: 600px;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 1rem;
-  color: #FFFFFF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-h1 span {
-  display: block;
-}
-
-@media (min-width: 640px) {
-  h1 {
-    font-size: 4rem;
-  }
-}
-
-p {
-  font-size: 1.25rem;
-  color: #D1D5DB;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 640px) {
-  p {
-    font-size: 1.5rem;
-  }
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.get-started, .learn-more {
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.get-started {
-  background-color: #0061FF;
-  color: #FFFFFF;
-  border: none;
-}
-
-.get-started:hover {
-  background-color: #004ECC;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
-.learn-more {
-  background-color: transparent;
-  border: 2px solid #0061FF;
-  color: #0061FF;
-}
-
-.learn-more:hover {
-  background-color: #0061FF;
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
-.video-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0;
-}
-
-@media (min-width: 1024px) {
-  .video-content {
-    margin-top: 0;
-  }
-}
-
-.placeholder-video {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  object-fit: cover;
-}
-
-@media (max-width: 1024px) {
-  .placeholder-video {
-    max-width: 600px;
-  }
-}
-
-@media (max-width: 640px) {
-  .placeholder-video {
-    max-width: 100%;
-  }
-}
-
-.video-caption {
-  color: #A3A3A3;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 1rem;
-  text-align: center;
 }
