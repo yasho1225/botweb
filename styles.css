@@ -17,17 +17,14 @@ body {
 }
 
 /* Navigation Bar */
-/
-/* Navigation Bar */
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 50;
   background: linear-gradient(to bottom, #1a1a1a, #000000);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
   transition: height 0.3s ease;
-  width: 100%;
 }
 
 .container {
@@ -88,122 +85,6 @@ body {
   background-color: #004ECC;
 }
 
-/* Contact/About Section */
-.contact {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 300px 20px 40px; /* Increased to ensure all text is visible */
-  background-color: #000000;
-  overflow-y: auto; /* Allow scrolling for full content */
-  height: auto; /* Remove min-height constraint */
-}
-
-.contact-content {
-  text-align: center;
-  max-width: 1280px;
-  width: 100%;
-}
-
-.contact-content h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: #FFFFFF;
-  opacity: 1;
-  position: relative;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.9); /* Ensure visibility against navbar */
-  padding: 15px; /* Increased padding for clarity */
-}
-
-@media (min-width: 640px) {
-  .contact-content h1 {
-    font-size: 4rem;
-  }
-}
-
-.contact-content p {
-  font-size: 1.25rem;
-  color: #D1D5DB;
-  margin-bottom: 2.5rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 640px) {
-  .contact-content p {
-    font-size: 1.5rem;
-  }
-}
-
-/* Form Section */
-.form-section {
-  margin-bottom: 2.5rem;
-}
-
-.callback-note {
-  font-size: 1.125rem;
-  color: #D1D5DB;
-  margin-bottom: 2rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Team Section */
-.team-section {
-  margin-top: 4rem;
-  text-align: center;
-}
-
-.team-section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 3rem;
-}
-
-.team-members {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .team-members {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
-.team-member {
-  flex: 1;
-  padding: 1.5rem;
-}
-
-.team-member h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 0.75rem;
-}
-
-.team-role {
-  font-size: 1.125rem;
-  color: #0061FF;
-  margin-bottom: 0.75rem;
-}
-
-.team-bio {
-  font-size: 1rem;
-  color: #D1D5DB;
-  line-height: 1.6;
-}
 /* Hero Section */
 .hero {
   min-height: 100vh;
