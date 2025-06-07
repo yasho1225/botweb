@@ -144,6 +144,62 @@ body {
   }
 }
 
+/* About Page Styles */
+.contact {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 150px 20px 60px; /* Increased top padding to clear navbar, added bottom padding */
+  background-color: #000000;
+  overflow-y: auto; /* Ensure all content is scrollable */
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Consistent black gradient */
+}
+
+.contact-content {
+  text-align: center;
+  max-width: 1280px;
+  width: 100%;
+  padding: 40px;
+  background: rgba(26, 26, 26, 0.95); /* Semi-transparent black for contrast */
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 10; /* Ensure it’s above any background overlays */
+}
+
+.contact-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 640px) {
+  .contact-content h1 {
+    font-size: 4rem;
+  }
+}
+
+.contact-content p {
+  font-size: 1.25rem;
+  color: #D1D5DB;
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+@media (min-width: 640px) {
+  .contact-content p {
+    font-size: 1.5rem;
+  }
+}
+
 /* Form Section */
 .form-section {
   margin-bottom: 3rem;
@@ -224,7 +280,6 @@ body {
   color: #D1D5DB;
   line-height: 1.6;
 }
-
 /* Hero Section (unchanged, included for completeness) */
 .hero {
   min-height: 100vh;
