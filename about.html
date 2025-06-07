@@ -1,87 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotWeb - About Us</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BotWeb - Our Services</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 3rem;
+      }
+    }
+
+    .service-card {
+      background-color: #111827;
+      border: 1px solid #1F2937;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-image {
+      background-color: #374151;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9CA3AF;
+      font-size: 1.25rem;
+    }
+
+    .service-text {
+      padding: 1.5rem;
+      color: #D1D5DB;
+    }
+
+    .service-text h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #FFFFFF;
+    }
+
+    .service-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
+
   <!-- Include Navigation -->
   <div w3-include-html="nav.html"></div>
 
-  <!-- About Section -->
+  <!-- Services Section -->
   <section class="contact">
-    <div class="container">
-      <div class="contact-content">
-        <h1>About Us</h1>
-        <p>At BotWeb, we’re passionate about helping small businesses and charities succeed online.</p>
+    <div class="contact-content">
+      <h1>Our Services</h1>
+      <p>Explore the digital solutions we offer to empower your mission.</p>
+    </div>
 
-        <div class="form-section">
-          <p class="callback-note">
-            Our team combines creativity and technology to deliver custom websites and AI-powered chatbot solutions that help organizations grow and engage meaningfully.
-          </p>
-          <p class="callback-note">
-            Whether you're starting from scratch or looking to upgrade, we’ll help you make an impact — with ease, clarity, and support every step of the way.
-          </p>
-          <p class="callback-note">
-            Founded with a mission to democratize powerful web tools, BotWeb proudly serves changemakers with purpose-driven solutions.
-          </p>
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-image">[Image Placeholder]</div>
+        <div class="service-text">
+          <h2>Custom Website Design</h2>
+          <p>Modern, mobile-friendly websites tailored to reflect your mission and captivate your audience.</p>
         </div>
+      </div>
 
-        <!-- Team Section -->
-        <div class="team-section">
-          <h2>Meet Our Team</h2>
-          <div class="team-members">
-            <div class="team-member">
-              <h3>Aarush</h3>
-              <p class="team-role">Co-founder & AI Specialist</p>
-              <p class="team-bio">Aarush is the visionary behind BotWeb, with a passion for coding and building impactful web solutions. With over 2 years of experience, Aarush ensures every project runs smoothly.</p>
-            </div>
-            <div class="team-member">
-              <h3>Anish</h3>
-              <p class="team-role">Creative Director</p>
-              <p class="team-bio">Anish brings creativity to life, designing stunning visuals and user experiences that make BotWeb’s projects stand out. Anish loves turning ideas into reality.</p>
-            </div>
-            <div class="team-member">
-              <h3>Yashovardhan</h3>
-              <p class="team-role">Co-founder & Lead Developer</p>
-              <p class="team-bio">Yashovardhan is the lead developer, crafting intelligent solutions that enhance user engagement. Yashovardhan’s innovative ideas keep BotWeb at the forefront of technology.</p>
-            </div>
-          </div>
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-image">[Chatbot Graphic]</div>
+        <div class="service-text">
+          <h2>AI Chatbot Integration</h2>
+          <p>Conversational bots that enhance user interaction and automate responses to boost engagement.</p>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-image">[Hosting Graphic]</div>
+        <div class="service-text">
+          <h2>Hosting & Maintenance</h2>
+          <p>We handle performance, security, and updates, so your site stays online and optimized 24/7.</p>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <div class="service-image">[Consulting Graphic]</div>
+        <div class="service-text">
+          <h2>Digital Strategy Consulting</h2>
+          <p>We’ll guide you from planning to launch with expert advice that maximizes your impact online.</p>
         </div>
       </div>
     </div>
   </section>
 
- <script>
+  <script>
   function includeHTML(callback) {
     var z, i, elmnt, file, xhttp;
     z = document.getElementsByTagName("*");
     let includesProcessed = 0;
     const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-    console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
-
     for (i = 0; i < z.length; i++) {
       elmnt = z[i];
       file = elmnt.getAttribute("w3-include-html");
       if (file) {
-        console.log("Attempting to load", file, "from path:", window.location.pathname + file);
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4) {
             if (this.status == 200) {
-              console.log("Successfully loaded", file, "with content length:", this.responseText.length);
               elmnt.innerHTML = this.responseText;
               elmnt.removeAttribute("w3-include-html");
               includesProcessed++;
               if (includesProcessed === totalIncludes && callback) {
-                console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
                 callback();
               }
             } else {
-              console.error("Failed to load", file, ": Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+              console.error(`Failed to load ${file}: ${this.status}`);
             }
             includeHTML(callback);
           }
@@ -96,17 +154,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
     includeHTML(function() {
-      console.log("Navigation loaded on About page at", new Date().toLocaleTimeString());
-      const heading = document.querySelector('.contact-content h1');
-      if (heading) {
-        console.log("Heading 'About Us' found with text:", heading.textContent);
-      } else {
-        console.error("Heading 'About Us' not found in .contact-content");
-      }
+      console.log("Navigation loaded on Services page");
 
-      // Add scroll behavior for navbar
+      // Scroll script moved inside the callback
       let lastScroll = 0;
       const navbar = document.querySelector('.navbar');
       const container = document.querySelector('.container');
@@ -116,11 +167,9 @@
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
           if (currentScroll > lastScroll && currentScroll > 70) {
-            // Scrolling down: shrink to 70px
             navbar.style.height = '70px';
             container.style.height = '70px';
           } else if (currentScroll < lastScroll) {
-            // Scrolling up: expand to 90px
             navbar.style.height = '90px';
             container.style.height = '90px';
           }
@@ -133,5 +182,6 @@
     });
   });
 </script>
+
 </body>
 </html>
