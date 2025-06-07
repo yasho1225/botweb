@@ -74,38 +74,39 @@
 
         // Scroll behavior for shrinking nav bar
         let lastScroll = 0;
-        const navbar = document.querySelector('.navbar');
-        const container = document.querySelector('.container');
+        let navbar = document.querySelector('.navbar');
+        let container = document.querySelector('.container');
 
         if (!navbar || !container) {
-          console.error("Navbar or container not found at", new Date().toLocaleTimeString());
+          console.error("Navbar or container not found at", new Date().toLocaleTimeString(), "Navbar:", navbar, "Container:", container);
           return;
         }
 
+        console.log("Setting up scroll listener at", new Date().toLocaleTimeString());
         window.addEventListener('scroll', () => {
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-          console.log("Scrolling at", currentScroll, "px, lastScroll:", lastScroll);
+          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
 
-          if (currentScroll > lastScroll && currentScroll > 10) { // Reduced threshold to 10px
+          if (currentScroll > lastScroll) { // Shrink when scrolling down
             console.log("Shrinking nav bar at", currentScroll, "px");
             navbar.style.height = '70px';
             container.style.height = '70px';
-            container.querySelector('.logo img').style.height = '30px';
+            container.querySelector('.logo').style.fontSize = '20px'; // Adjusted for text logo
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
             container.querySelector('.get-started').style.fontSize = '14px';
             container.querySelector('.get-started').style.padding = '8px 20px';
-          } else if (currentScroll < lastScroll) {
+          } else if (currentScroll < lastScroll) { // Expand when scrolling up
             console.log("Expanding nav bar at", currentScroll, "px");
             navbar.style.height = '90px';
             container.style.height = '90px';
-            container.querySelector('.logo img').style.height = '40px';
+            container.querySelector('.logo').style.fontSize = '24px'; // Adjusted for text logo
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
             container.querySelector('.get-started').style.fontSize = '16px';
             container.querySelector('.get-started').style.padding = '10px 24px';
           }
 
           lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        });
+        }, { passive: true }); // Passive event for better performance
       });
     });
   </script>
