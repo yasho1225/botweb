@@ -7,6 +7,77 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
+    .why-us {
+  padding: 60px 20px;
+  background-color: #111827; /* Dark background for professionalism */
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.why-us h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.carousel {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 300px; /* Adjust based on content height */
+}
+
+.carousel-inner {
+  position: relative;
+  height: 100%;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Smooth fade effect */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.carousel-item.active {
+  opacity: 1; /* Visible when active */
+}
+
+.carousel-item h3 {
+  font-size: 1.8rem;
+  color: #0061FF; /* Vibrant accent color */
+  margin-bottom: 1rem;
+}
+
+.carousel-item p, .carousel-item ul {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #D1D5DB; /* Light gray for readability */
+}
+
+.carousel-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.carousel-item ul li {
+  margin-bottom: 10px;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .carousel {
+    max-width: 100%;
+  }
+  .carousel-item {
+    padding: 10px;
+  }
+}
     body {
       margin: 0;
       padding: 0;
