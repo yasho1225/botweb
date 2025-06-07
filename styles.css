@@ -18,13 +18,12 @@ body {
 
 /* Navigation Bar */
 .navbar {
-  position: fixed; /* Changed from sticky to fixed for floating effect */
+  position: sticky;
   top: 0;
   z-index: 50;
   background: linear-gradient(to bottom, #1a1a1a, #000000);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
-  width: 100%; /* Ensure it spans the viewport */
   transition: height 0.3s ease;
 }
 
@@ -35,13 +34,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90px; /* Default height */
-  transition: height 0.3s ease;
+  height: 70px;
+  transition: height 0.3s ease, font-size 0.3s ease;
 }
 
-.logo img {
-  height: 40px; /* Adjust logo size for visibility */
-  transition: height 0.3s ease;
+.logo {
+  color: #0061FF;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+.logo:hover {
+  color: #004ECC;
 }
 
 .nav-links {
@@ -55,7 +61,7 @@ body {
   margin-left: 30px;
   font-size: 16px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, font-size 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -72,12 +78,11 @@ body {
   margin-left: 30px;
   font-size: 16px;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, font-size 0.3s ease;
 }
 
 .get-started:hover {
   background-color: #004ECC;
-  transform: translateY(-2px);
 }
 
 /* Hero Section */
@@ -86,7 +91,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 20px; /* Adjusted to account for fixed nav bar */
+  padding: 100px 20px 20px; /* Increased padding-top to clear nav bar */
 }
 
 .hero-content {
@@ -115,7 +120,7 @@ body {
 h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1; /* Tightened line height to eliminate gap */
   margin-bottom: 1rem;
   color: #FFFFFF;
   display: flex;
@@ -124,7 +129,7 @@ h1 {
 }
 
 h1 span {
-  display: block;
+  display: block; /* Ensure each line stacks naturally */
 }
 
 @media (min-width: 640px) {
@@ -237,7 +242,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 40px;
+  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
   background-color: #000000;
 }
 
