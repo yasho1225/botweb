@@ -153,13 +153,12 @@
           console.error("Heading 'About Us' not found in .contact-content");
         }
 
-        // Scroll behavior for navbar, only attach if elements exist
+        // Scroll behavior for navbar
+        let lastScroll = 0;
         const navbar = document.querySelector('.navbar');
         const container = document.querySelector('.container');
-        if (navbar && container) {
-          console.log("Navbar and container found, attaching scroll listener");
-          let lastScroll = 0;
 
+        if (navbar && container) {
           window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
@@ -185,42 +184,7 @@
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
           }, { passive: true });
         } else {
-          console.error("Navbar or container not found after includes loaded, retrying in 500ms");
-          setTimeout(() => {
-            const retryNavbar = document.querySelector('.navbar');
-            const retryContainer = document.querySelector('.container');
-            if (retryNavbar && retryContainer) {
-              console.log("Navbar and container found on retry, attaching scroll listener");
-              let lastScroll = 0;
-
-              window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-                console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
-
-                if (currentScroll > lastScroll && currentScroll > 70) {
-                  console.log("Shrinking nav bar at", currentScroll, "px");
-                  retryNavbar.style.height = '70px';
-                  retryContainer.style.height = '70px';
-                  retryContainer.querySelector('.logo').style.fontSize = '20px';
-                  retryContainer.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-                  retryContainer.querySelector('.get-started').style.fontSize = '14px';
-                  retryContainer.querySelector('.get-started').style.padding = '8px 20px';
-                } else if (currentScroll < lastScroll) {
-                  console.log("Expanding nav bar at", currentScroll, "px");
-                  retryNavbar.style.height = '90px';
-                  retryContainer.style.height = '90px';
-                  retryContainer.querySelector('.logo').style.fontSize = '24px';
-                  retryContainer.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
-                  retryContainer.querySelector('.get-started').style.fontSize = '16px';
-                  retryContainer.querySelector('.get-started').style.padding = '10px 24px';
-                }
-
-                lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-              }, { passive: true });
-            } else {
-              console.error("Navbar or container still not found after retry");
-            }
-          }, 500);
+          console.error("Navbar or container not found after includes loaded");
         }
       });
     });
