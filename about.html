@@ -14,7 +14,7 @@
       overflow-x: hidden;
     }
     .contact {
-      padding-top: 120px; /* Increased to ensure title clears navbar (90px max height + buffer) */
+      padding-top: 150px; /* Increased to move heading down and clear navbar (90px max height + extra buffer) */
     }
   </style>
 </head>
@@ -124,42 +124,42 @@
         } else {
           console.error("Heading 'About Us' not found in .contact-content");
         }
-
-        // Scroll behavior for navbar
-        let lastScroll = 0;
-        const navbar = document.querySelector('.navbar');
-        const container = document.querySelector('.container');
-
-        if (navbar && container) {
-          console.log("Navbar and container found, setting up scroll listener");
-          window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
-
-            if (currentScroll > lastScroll) {
-              console.log("Shrinking nav bar at", currentScroll, "px");
-              navbar.style.height = '70px';
-              container.style.height = '70px';
-              container.querySelector('.logo').style.fontSize = '20px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-              container.querySelector('.get-started').style.fontSize = '14px';
-              container.querySelector('.get-started').style.padding = '8px 20px';
-            } else if (currentScroll < lastScroll) {
-              console.log("Expanding nav bar at", currentScroll, "px");
-              navbar.style.height = '90px';
-              container.style.height = '90px';
-              container.querySelector('.logo').style.fontSize = '24px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
-              container.querySelector('.get-started').style.fontSize = '16px';
-              container.querySelector('.get-started').style.padding = '10px 24px';
-            }
-
-            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-          }, { passive: true });
-        } else {
-          console.error("Navbar or container not found after includes loaded");
-        }
       });
+
+      // Scroll behavior for navbar (moved outside include callback)
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
+
+      if (navbar && container) {
+        console.log("Navbar and container found, setting up scroll listener");
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
+
+          if (currentScroll > lastScroll) {
+            console.log("Shrinking nav bar at", currentScroll, "px");
+            navbar.style.height = '70px';
+            container.style.height = '70px';
+            container.querySelector('.logo').style.fontSize = '20px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
+            container.querySelector('.get-started').style.fontSize = '14px';
+            container.querySelector('.get-started').style.padding = '8px 20px';
+          } else if (currentScroll < lastScroll) {
+            console.log("Expanding nav bar at", currentScroll, "px");
+            navbar.style.height = '90px';
+            container.style.height = '90px';
+            container.querySelector('.logo').style.fontSize = '24px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
+            container.querySelector('.get-started').style.fontSize = '16px';
+            container.querySelector('.get-started').style.padding = '10px 24px';
+          }
+
+          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        }, { passive: true });
+      } else {
+        console.error("Navbar or container not found after DOM load");
+      }
     });
   </script>
 </body>
