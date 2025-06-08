@@ -14,7 +14,6 @@ body {
   color: #FFFFFF;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow-y: auto;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Subtle black gradient */
 }
 
 /* Navigation Bar */
@@ -79,13 +78,11 @@ body {
   margin-left: 30px;
   font-size: 16px;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Fixed transition */
+  transition: background-color 0.3s ease, font-size 0.3s ease;
 }
 
 .get-started:hover {
   background-color: #004ECC;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
 /* Hero Section */
@@ -94,7 +91,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 20px;
+  padding: 100px 20px 20px; /* Increased padding-top to clear nav bar */
 }
 
 .hero-content {
@@ -123,7 +120,7 @@ body {
 h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1; /* Tightened line height to eliminate gap */
   margin-bottom: 1rem;
   color: #FFFFFF;
   display: flex;
@@ -132,7 +129,7 @@ h1 {
 }
 
 h1 span {
-  display: block;
+  display: block; /* Ensure each line stacks naturally */
 }
 
 @media (min-width: 640px) {
@@ -170,6 +167,18 @@ p {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.get-started {
+  background-color: #0061FF;
+  color: #FFFFFF;
+  border: none;
+}
+
+.get-started:hover {
+  background-color: #004ECC;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
 .learn-more {
@@ -227,59 +236,47 @@ p {
   text-align: center;
 }
 
-/* About Page Styles */
+/* Contact Section */
 .contact {
+  min-height: 100vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 120px 20px 40px; /* Adjusted to clear nav bar */
   background-color: #000000;
-  overflow-y: auto;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Consistent black gradient */
 }
 
 .contact-content {
   text-align: center;
   max-width: 1280px;
-  width: 100%;
-  padding: 30px;
-  background: rgba(26, 26, 26, 0.9); /* Semi-transparent for contrast */
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Softer shadow */
-  position: relative;
-  z-index: 10;
 }
 
 .contact-content h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.1;
   margin-bottom: 1.5rem;
   color: #FFFFFF;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 @media (min-width: 640px) {
   .contact-content h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
 }
 
 .contact-content p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #D1D5DB;
-  margin-bottom: 1.2rem;
-  max-width: 650px;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
 }
 
 @media (min-width: 640px) {
   .contact-content p {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -289,37 +286,68 @@ p {
 }
 
 .callback-note {
-  font-size: 1.1rem;
-  color: #A3A3A3;
-  margin-bottom: 1.2rem;
-  max-width: 650px;
+  font-size: 1.125rem;
+  color: #D1D5DB;
+  margin-bottom: 2rem;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.03);
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #D1D5DB;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid #4B5563;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 1.125rem;
+  background-color: #1F2937;
+  color: #FFFFFF;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0061FF;
+  box-shadow: 0 0 0 3px rgba(0, 97, 255, 0.1);
 }
 
 /* Team Section */
 .team-section {
-  margin-top: 3rem;
+  margin-top: 4rem;
   text-align: center;
 }
 
 .team-section h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  margin-bottom: 3rem;
 }
 
 .team-members {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -327,169 +355,30 @@ p {
 @media (min-width: 768px) {
   .team-members {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 }
 
 .team-member {
   flex: 1;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.team-member:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 97, 255, 0.2);
+  padding: 1.5rem;
 }
 
 .team-member h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #FFFFFF;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
 .team-role {
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: #0061FF;
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
 
 .team-bio {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #D1D5DB;
   line-height: 1.6;
-}
-/* Additional About Page Styles */
-.contact {
-  padding: 80px 20px 20px; /* Minimal top padding to clear navbar */
-  background: transparent; /* Remove black wall by making background transparent */
-}
-
-.contact-content {
-  padding: 20px; /* Minimal padding */
-  background: rgba(26, 26, 26, 0.85); /* Subtle background */
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.contact-content h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
-}
-
-@media (min-width: 640px) {
-  .contact-content h1 {
-    font-size: 3rem;
-  }
-}
-
-.contact-content p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  line-height: 1.6;
-}
-
-@media (min-width: 640px) {
-  .contact-content p {
-    font-size: 1.2rem;
-  }
-}
-
-/* Additional Form Section */
-.form-section {
-  margin-bottom: 1.5rem;
-}
-
-.callback-note {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  line-height: 1.5;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Additional Team Section */
-.team-section {
-  margin-top: 2rem;
-}
-
-.team-section h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-
-.team-members {
-  gap: 1.5rem;
-  max-width: 900px;
-}
-
-@media (min-width: 768px) {
-  .team-members {
-    flex-direction: row;
-    justify-content: space-around;
-  }
-}
-
-.team-member {
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.team-member:hover {
-  transform: translateY(-2px);
-}
-
-.team-member h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.team-role {
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
-}
-
-.team-bio {
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Navbar Adjustments */
-.navbar {
-  height: 60px; /* Reduced base height */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-}
-
-.container {
-  height: 60px; /* Reduced base height */
-}
-
-.get-started {
-  padding: 8px 20px;
-  border-radius: 25px;
-  font-size: 15px;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Fixed transition */
-}
-
-.get-started:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 97, 255, 0.2);
 }
