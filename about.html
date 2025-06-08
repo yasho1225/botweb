@@ -191,6 +191,45 @@
           }
         };
         checkNavbar();
+        // Scroll behavior for navbar
+const checkNavbar = () => {
+  const navbar = document.querySelector('.navbar');
+  const container = document.querySelector('.container');
+  if (navbar && container) {
+    console.log("Navbar and container found, attaching scroll listener");
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
+
+      if (currentScroll > lastScroll && currentScroll > 60) {
+        console.log("Shrinking nav bar at", currentScroll, "px");
+        navbar.style.height = '50px';
+        container.style.height = '50px';
+        container.querySelector('.logo').style.fontSize = '18px';
+        container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '13px');
+        container.querySelector('.get-started').style.fontSize = '13px';
+        container.querySelector('.get-started').style.padding = '6px 16px';
+      } else if (currentScroll < lastScroll) {
+        console.log("Expanding nav bar at", currentScroll, "px");
+        navbar.style.height = '60px';
+        container.style.height = '60px';
+        container.querySelector('.logo').style.fontSize = '22px';
+        container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '15px');
+        container.querySelector('.get-started').style.fontSize = '15px';
+        container.querySelector('.get-started').style.padding = '8px 20px';
+      }
+
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
+  } else {
+    console.error("Navbar or container not found, retrying in 500ms");
+    setTimeout(checkNavbar, 500);
+  }
+};
+checkNavbar();
+
       });
     });
   </script>
