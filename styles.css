@@ -364,3 +364,132 @@ p {
   color: #D1D5DB;
   line-height: 1.6;
 }
+/* Additional About Page Styles */
+.contact {
+  padding: 80px 20px 20px; /* Minimal top padding to clear navbar */
+  background: transparent; /* Remove black wall by making background transparent */
+}
+
+.contact-content {
+  padding: 20px; /* Minimal padding */
+  background: rgba(26, 26, 26, 0.85); /* Subtle background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.contact-content h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 640px) {
+  .contact-content h1 {
+    font-size: 3rem;
+  }
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .contact-content p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Additional Form Section */
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.callback-note {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  line-height: 1.5;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional Team Section */
+.team-section {
+  margin-top: 2rem;
+}
+
+.team-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.team-members {
+  gap: 1.5rem;
+  max-width: 900px;
+}
+
+@media (min-width: 768px) {
+  .team-members {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.team-member {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-2px);
+}
+
+.team-member h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.team-role {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.team-bio {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Navbar Adjustments */
+.navbar {
+  height: 60px; /* Reduced base height */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+.container {
+  height: 60px; /* Reduced base height */
+}
+
+.get-started {
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Fixed transition */
+}
+
+.get-started:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 97, 255, 0.2);
+}
