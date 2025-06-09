@@ -5,26 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - About Us</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <!-- Fallback style to ensure sticky positioning if styles.css fails -->
+  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
     body {
       margin: 0;
       padding: 0;
+      min-height: 100vh;
       overflow-x: hidden;
     }
     .navbar {
-      position: sticky !important;
+      position: fixed !important;
       top: 0 !important;
       z-index: 50;
       width: 100%;
     }
     .contact {
-      padding-top: 150px; /* Increased to clear navbar (90px max height + buffer) */
+      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
     }
   </style>
 </head>
 <body>
-  <!-- Include Navigation with Fallback Sticky Positioning -->
+  <!-- Include Navigation with Fallback Fixed Positioning -->
   <div w3-include-html="nav.html" id="nav-placeholder"></div>
 
   <!-- About Section -->
@@ -92,10 +93,11 @@
                 console.log("Successfully loaded", file, "with content length:", this.responseText.length);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
+                // Enforce fixed positioning after loading nav.html
                 if (file === "nav.html") {
                   const navbar = elmnt.querySelector('.navbar');
                   if (navbar) {
-                    navbar.style.position = 'sticky';
+                    navbar.style.position = 'fixed';
                     navbar.style.top = '0';
                     navbar.style.zIndex = '50';
                     navbar.style.width = '100%';
@@ -108,9 +110,10 @@
                 }
               } else {
                 console.error("Failed to load", file, ": Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+                // Fallback navbar with fixed behavior
                 if (file === "nav.html") {
                   elmnt.innerHTML = `
-                    <nav class="navbar" style="position: sticky; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
+                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
                       <div class="container">
                         <a href="index.html" class="logo">BotWeb</a>
                         <div class="nav-links">
@@ -126,7 +129,7 @@
                 }
                 includesProcessed++;
                 if (includesProcessed === totalIncludes && callback) {
-                  console.log("All", totalIncludes, "includes processed with fallback at", new Date().toLocaleTimeString());
+                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
                   callback();
                 }
               }
@@ -148,12 +151,12 @@
         console.log("Navigation loaded on About page at", new Date().toLocaleTimeString());
         const heading = document.querySelector('.contact-content h1');
         if (heading) {
-          console.log("Heading 'About Us' found with text:", heading.textContent, "and styles:", window.getComputedStyle(heading));
+          console.log("Heading 'About Us' found with text:", heading.textContent);
         } else {
           console.error("Heading 'About Us' not found in .contact-content");
         }
 
-        // Scroll behavior for navbar
+        // Scroll behavior for navbar (expanded from index.html)
         let lastScroll = 0;
         const navbar = document.querySelector('.navbar');
         const container = document.querySelector('.container');
