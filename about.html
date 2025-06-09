@@ -129,7 +129,7 @@
                 }
                 includesProcessed++;
                 if (includesProcessed === totalIncludes && callback) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                  console.log("All", totalIncludes, "includes processed with fallback at", new Date().toLocaleTimeString());
                   callback();
                 }
               }
@@ -156,7 +156,7 @@
           console.error("Heading 'About Us' not found in .contact-content");
         }
 
-        // Scroll behavior for navbar (expanded from index.html)
+        // Scroll behavior for navbar
         let lastScroll = 0;
         const navbar = document.querySelector('.navbar');
         const container = document.querySelector('.container');
