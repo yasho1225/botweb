@@ -4,409 +4,141 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - We Build Websites. You Build Impact.</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
-    /* Reset and global styles */
-    * {
+  .why-us {
+  padding: 60px 20px;
+  background-color: #111827; /* Dark gray background */
+  color: #FFFFFF; /* White text */
+  text-align: center;
+}
+
+.why-us h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.catalog {
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px; /* Limits width for larger screens */
+  margin: 0 auto;
+}
+
+.scrolling-container {
+  white-space: nowrap; /* Keeps items in a single line */
+  animation: scroll 40s linear infinite; /* Smooth scroll, 40s duration */
+}
+
+.catalog-item {
+  display: inline-block;
+  width: 300px; /* Fixed width for each reason */
+  margin-right: 30px; /* Space between items */
+  vertical-align: top; /* Aligns items at the top */
+  background-color: #1F2937; /* Slightly lighter gray for cards */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.catalog-item h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #0061FF; /* Blue accent for headings */
+}
+
+.catalog-item p, .catalog-item ul {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #D1D5DB; /* Light gray text */
+}
+
+.catalog-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.catalog-item ul li {
+  margin-bottom: 10px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0); /* Start at initial position */
+  }
+  100% {
+    transform: translateX(-50%); /* Move half the container width */
+  }
+}
+
+.catalog:hover .scrolling-container {
+  animation-play-state: paused; /* Pause on hover */
+}
+
+/* Fade effects for a polished look */
+.catalog::before, .catalog::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Width of fade effect */
+  z-index: 1;
+}
+
+.catalog::before {
+  left: 0;
+  background: linear-gradient(to right, #111827, transparent); /* Fade from left */
+}
+
+.catalog::after {
+  right: 0;
+  background: linear-gradient(to left, #111827, transparent); /* Fade from right */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .scrolling-container {
+    white-space: normal; /* Allow wrapping */
+    animation: none; /* Disable animation */
+  }
+  .catalog-item {
+    display: block;
+    width: 100%; /* Full width on mobile */
+    margin: 15px 0; /* Vertical spacing */
+  }
+}
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .carousel {
+    max-width: 100%;
+  }
+  .carousel-item {
+    padding: 10px;
+  }
+}
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #000000;
-      color: #FFFFFF;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      overflow-y: auto;
-    }
-
-    /* Navigation Bar */
     .navbar {
-      position: sticky;
-      top: 0;
+      position: fixed !important;
+      top: 0 !important;
       z-index: 50;
-      background: linear-gradient(to bottom, #1a1a1a, #000000); /* Subtle gradient for depth */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      padding: 10px 0;
+      width: 100%;
     }
-
-    .container {
-      max-width: 1280px; /* Wider container like Dropbox */
-      margin: 0 auto;
-      padding: 0 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px; /* Taller navbar for a premium feel */
-    }
-
-    .logo img {
-      height: 50px; /* Larger logo */
-      width: auto;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: #E5E7EB;
-      text-decoration: none;
-      margin-left: 30px; /* More spacing between links */
-      font-size: 16px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #0061FF; /* Dropbox blue */
-    }
-
-    .get-started {
-      background-color: #0061FF; /* Dropbox blue */
-      color: #FFFFFF;
-      border: none;
-      padding: 10px 24px; /* Larger button */
-      border-radius: 50px; /* Rounded like Dropbox */
-      cursor: pointer;
-      margin-left: 30px;
-      font-size: 16px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-
-    .get-started:hover {
-      background-color: #004ECC; /* Darker blue on hover */
-    }
-
-    /* Hero Section */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 1280px;
-      padding: 40px 20px;
-      text-align: center;
-      gap: 40px; /* More spacing between text and video */
-    }
-
-    @media (min-width: 1024px) {
-      .hero-content {
-        flex-direction: row;
-        gap: 60px;
-      }
-    }
-
-    .text-content {
-      text-align: center; /* Always centered */
-      max-width: 600px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      border-right: 5px solid #FFFFFF;
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: 
-        typing 4s steps(29),
-        cursor .4s step-end infinite alternate;
-    }
-
-    @keyframes cursor {
-      50% { border-color: transparent }
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-    }  
-
-    @media (min-width: 640px) {
-      h1 {
-        font-size: 4rem; /* Larger heading like Dropbox */
-      }
-    }
-
-    p {
-      font-size: 1.25rem;
-      color: #D1D5DB;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (min-width: 640px) {
-      p {
-        font-size: 1.5rem; /* Larger subheading */
-      }
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .get-started, .learn-more {
-      padding: 14px 32px; /* Larger buttons like Dropbox */
-      border-radius: 50px; /* Rounded */
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .get-started {
-      background-color: #0061FF;
-      color: #FFFFFF;
-      border: none;
-    }
-
-    .get-started:hover {
-      background-color: #004ECC;
-      transform: translateY(-2px); /* Subtle lift on hover */
-      box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-    }
-
-    .learn-more {
-      background-color: transparent;
-      border: 2px solid #0061FF;
-      color: #0061FF;
-    }
-
-    .learn-more:hover {
-      background-color: #0061FF;
-      color: #FFFFFF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-    }
-
-    .video-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
-    @media (min-width: 1024px) {
-      .video-content {
-        margin-top: 0;
-      }
-    }
-
-    .placeholder-video {
-      width: 100%;
-      max-width: 600px; /* Increased video size */
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow for professionalism */
-      object-fit: cover;
-    }
-
-    @media (max-width: 1024px) {
-      .placeholder-video {
-        max-width: 500px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .placeholder-video {
-        max-width: 100%;
-      }
-    }
-
-    .video-caption {
-      color: #A3A3A3; /* Softer gray for caption */
-      font-size: 1rem;
-      font-weight: 400;
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    /* Contact Section */
-    .contact {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background-color: #000000;
-    }
-
-    .contact-content {
-      text-align: center;
-      max-width: 1280px;
-    }
-
-    .contact-content h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      border-right: 5px solid #FFFFFF;
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      color: #FFFFFF;
-      animation: 
-        typing 5s steps(29),
-        cursor .4s step-end infinite alternate;
-    }
-
-    @media (min-width: 640px) {
-      .contact-content h1 {
-        font-size: 4rem;
-      }
-    }
-
-    .contact-content p {
-      font-size: 1.25rem;
-      color: #D1D5DB;
-      margin-bottom: 2.5rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (min-width: 640px) {
-      .contact-content p {
-        font-size: 1.5rem;
-      }
-    }
-
-    /* Contact Section (used for About and Contact) */
-    .contact {
-      display: flex;
-      justify-content: center;
-      padding: 120px 20px 40px;
-      background-color: #000000;
-    }
-
-    .form-section {
-      margin-bottom: 2.5rem;
-    }
-
-    .callback-note {
-      font-size: 1.125rem;
-      color: #D1D5DB;
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .form-group label {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #D1D5DB;
-      margin-bottom: 0.5rem;
-    }
-
-    .form-group input {
-      padding: 0.75rem;
-      border: 1px solid #4B5563;
-      border-radius: 8px;
-      font-size: 1.125rem;
-      background-color: #1F2937;
-      color: #FFFFFF;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #0061FF;
-      box-shadow: 0 0 0 3px rgba(0, 97, 255, 0.1);
-    }
-
-    /* Team Section */
-    .team-section {
-      margin-top: 4rem;
-      text-align: center;
-    }
-
-    .team-section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 3rem;
-    }
-
-    .team-members {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-      .team-members {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-
-    .team-member {
-      flex: 1;
-      padding: 1.5rem;
-    }
-
-    .team-member h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      margin-bottom: 0.75rem;
-    }
-
-    .team-role {
-      font-size: 1.125rem;
-      color: #0061FF;
-      margin-bottom: 0.75rem;
-    }
-
-    .team-bio {
-      font-size: 1rem;
-      color: #D1D5DB;
-      line-height: 1.6;
+      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
     }
   </style>
 </head>
 <body>
-  <!-- Include Navigation -->
-  <div w3-include-html="nav.html"></div>
+  <!-- Include Navigation with Fallback Fixed Positioning -->
+  <div w3-include-html="nav.html" id="nav-placeholder"></div>
   <!-- Include Hero Section -->
   <div w3-include-html="hero.html"></div>
 
@@ -431,6 +163,16 @@
                 console.log("Successfully loaded", file, "with content length:", this.responseText.length);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
+                // Enforce fixed positioning after loading nav.html
+                if (file === "nav.html") {
+                  const navbar = elmnt.querySelector('.navbar');
+                  if (navbar) {
+                    navbar.style.position = 'fixed';
+                    navbar.style.top = '0';
+                    navbar.style.zIndex = '50';
+                    navbar.style.width = '100%';
+                  }
+                }
                 includesProcessed++;
                 if (includesProcessed === totalIncludes) {
                   console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
@@ -438,6 +180,28 @@
                 }
               } else {
                 console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
+                // Fallback navbar with fixed behavior
+                if (file === "nav.html") {
+                  elmnt.innerHTML = `
+                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
+                      <div class="container">
+                        <a href="index.html" class="logo">BotWeb</a>
+                        <div class="nav-links">
+                          <a href="index.html">Home</a>
+                          <a href="about.html">About</a>
+                          <a href="services.html">Services</a>
+                          <a href="contact.html">Contact</a>
+                          <button class="get-started">Donate Now</button>
+                        </div>
+                      </div>
+                    </nav>
+                  `;
+                }
+                includesProcessed++;
+                if (includesProcessed === totalIncludes) {
+                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                  if (callback) callback();
+                }
               }
               includeHTML(callback);
             }
@@ -469,8 +233,107 @@
         } else {
           console.error("Video element not found at", new Date().toLocaleTimeString());
         }
+
+        // Scroll behavior for shrinking/expanding nav bar
+        let lastScroll = 0;
+        let navbar = document.querySelector('.navbar');
+        let container = document.querySelector('.container');
+
+        if (!navbar || !container) {
+          console.error("Navbar or container not found at", new Date().toLocaleTimeString(), "Navbar:", navbar, "Container:", container);
+          return;
+        }
+
+        console.log("Setting up scroll listener at", new Date().toLocaleTimeString());
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
+
+          // Navbar scroll behavior
+          if (currentScroll > lastScroll) { // Shrink when scrolling down
+            console.log("Shrinking nav bar at", currentScroll, "px");
+            navbar.style.height = '70px';
+            container.style.height = '70px';
+            container.querySelector('.logo').style.fontSize = '20px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
+            container.querySelector('.get-started').style.fontSize = '14px';
+            container.querySelector('.get-started').style.padding = '8px 20px';
+          } else if (currentScroll < lastScroll) { // Expand when scrolling up
+            console.log("Expanding nav bar at", currentScroll, "px");
+            navbar.style.height = '90px';
+            container.style.height = '90px';
+            container.querySelector('.logo').style.fontSize = '24px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
+            container.querySelector('.get-started').style.fontSize = '16px';
+            container.querySelector('.get-started').style.padding = '10px 24px';
+          }
+
+          // Video motion effect (inspired by Dropbox)
+          if (video) {
+            const scrollFactor = currentScroll * 0.3; // Subtle upward movement
+            video.style.transform = `translateY(-${scrollFactor}px)`;
+          }
+
+          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        }, { passive: true });
       });
     });
+    const carouselItems = document.querySelectorAll('.carousel-item');
+let currentIndex = 0;
+
+function showNextSlide() {
+  carouselItems[currentIndex].classList.remove('active');
+  currentIndex = (currentIndex + 1) % carouselItems.length;
+  carouselItems[currentIndex].classList.add('active');
+}
+
+// Auto transition every 5 seconds
+setInterval(showNextSlide, 5000);
+
+// Ensure the first slide is visible on load
+carouselItems[0].classList.add('active');
+    document.addEventListener("DOMContentLoaded", function() {
+  // Assuming includeHTML exists; if not, remove this wrapper
+  includeHTML(function() {
+    const scrollingContainer = document.querySelector('.scrolling-container');
+    if (scrollingContainer) {
+      scrollingContainer.innerHTML += scrollingContainer.innerHTML; // Duplicate content
+    }
+  });
+});
   </script>
+  <!-- Why Us Section -->
+<section class="why-us">
+  <h2>Why Choose Us?</h2>
+  <div class="catalog">
+    <div class="scrolling-container">
+      <!-- Reason 1 -->
+      <div class="catalog-item">
+        <h3>Affordable Professional Solutions</h3>
+        <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
+        <ul>
+          <li>Modern, responsive websites</li>
+          <li>Custom AI chatbots</li>
+          <li>Personalized support</li>
+        </ul>
+      </div>
+      <!-- Reason 2 -->
+      <div class="catalog-item">
+        <h3>AI-Ready Digital Platforms</h3>
+        <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, automations). You’ll be ahead of the curve, ready to plug into the growing ecosystem of AI-driven marketing, customer service, and e-commerce. While others are scrambling to catch up, you’ll already be connected to the future.</p>
+      </div>
+      <!-- Reason 3 -->
+      <div class="catalog-item">
+        <h3>Personalized Attention</h3>
+        <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
+      </div>
+      <!-- Reason 4 -->
+      <div class="catalog-item">
+        <h3>Limited Clientele for Deeper Focus</h3>
+        <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster response times, and deeper collaboration. You’re not just a project in a queue — you’re a partner. We grow with you, not just around you.</p>
+      </div>
+    </div>
+  </div>
+</section>  
 </body>
 </html>
