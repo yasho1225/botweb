@@ -1,5 +1,5 @@
 /* Reset and global styles */
-* {
+{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -22,14 +22,15 @@ body {
   top: 0;
   z-index: 50;
   background: linear-gradient(to bottom, #1a1a1a, #000000);
-  padding: 0px 0;
-  transition: height 0.1s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  transition: height 0.3s ease;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 0px;
+  padding: 0 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,6 +84,7 @@ body {
 .get-started:hover {
   background-color: #004ECC;
 }
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
