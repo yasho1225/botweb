@@ -292,6 +292,15 @@ setInterval(showNextSlide, 5000);
 
 // Ensure the first slide is visible on load
 carouselItems[0].classList.add('active');
+    document.addEventListener("DOMContentLoaded", function() {
+  // Assuming includeHTML exists; if not, remove this wrapper
+  includeHTML(function() {
+    const scrollingContainer = document.querySelector('.scrolling-container');
+    if (scrollingContainer) {
+      scrollingContainer.innerHTML += scrollingContainer.innerHTML; // Duplicate content
+    }
+  });
+});
   </script>
   <!-- Why Us Section -->
 <section class="why-us">
