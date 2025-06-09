@@ -242,7 +242,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
+  padding: 60px 20px 20px; /* Adjusted to clear nav bar */
   background-color: #000000;
 }
 
