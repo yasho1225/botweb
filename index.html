@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
-    .why-us {
+  .why-us {
   padding: 60px 20px;
-  background-color: #111827; /* Dark background for professionalism */
-  color: #FFFFFF;
+  background-color: #111827; /* Dark gray background */
+  color: #FFFFFF; /* White text */
   text-align: center;
 }
 
@@ -20,55 +20,96 @@
   margin-bottom: 2rem;
 }
 
-.carousel {
+.catalog {
   position: relative;
-  max-width: 800px;
+  overflow: hidden;
+  max-width: 1200px; /* Limits width for larger screens */
   margin: 0 auto;
-  height: 300px; /* Adjust based on content height */
 }
 
-.carousel-inner {
-  position: relative;
-  height: 100%;
+.scrolling-container {
+  white-space: nowrap; /* Keeps items in a single line */
+  animation: scroll 40s linear infinite; /* Smooth scroll, 40s duration */
 }
 
-.carousel-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease; /* Smooth fade effect */
+.catalog-item {
+  display: inline-block;
+  width: 300px; /* Fixed width for each reason */
+  margin-right: 30px; /* Space between items */
+  vertical-align: top; /* Aligns items at the top */
+  background-color: #1F2937; /* Slightly lighter gray for cards */
   padding: 20px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
-.carousel-item.active {
-  opacity: 1; /* Visible when active */
-}
-
-.carousel-item h3 {
-  font-size: 1.8rem;
-  color: #0061FF; /* Vibrant accent color */
+.catalog-item h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 1rem;
+  color: #0061FF; /* Blue accent for headings */
 }
 
-.carousel-item p, .carousel-item ul {
+.catalog-item p, .catalog-item ul {
   font-size: 1rem;
   line-height: 1.6;
-  color: #D1D5DB; /* Light gray for readability */
+  color: #D1D5DB; /* Light gray text */
 }
 
-.carousel-item ul {
+.catalog-item ul {
   list-style: none;
   padding: 0;
 }
 
-.carousel-item ul li {
+.catalog-item ul li {
   margin-bottom: 10px;
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0); /* Start at initial position */
+  }
+  100% {
+    transform: translateX(-50%); /* Move half the container width */
+  }
+}
+
+.catalog:hover .scrolling-container {
+  animation-play-state: paused; /* Pause on hover */
+}
+
+/* Fade effects for a polished look */
+.catalog::before, .catalog::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Width of fade effect */
+  z-index: 1;
+}
+
+.catalog::before {
+  left: 0;
+  background: linear-gradient(to right, #111827, transparent); /* Fade from left */
+}
+
+.catalog::after {
+  right: 0;
+  background: linear-gradient(to left, #111827, transparent); /* Fade from right */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .scrolling-container {
+    white-space: normal; /* Allow wrapping */
+    animation: none; /* Disable animation */
+  }
+  .catalog-item {
+    display: block;
+    width: 100%; /* Full width on mobile */
+    margin: 15px 0; /* Vertical spacing */
+  }
+}
 /* Responsive design for mobile */
 @media (max-width: 768px) {
   .carousel {
@@ -255,9 +296,10 @@ carouselItems[0].classList.add('active');
   <!-- Why Us Section -->
 <section class="why-us">
   <h2>Why Choose Us?</h2>
-  <div class="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
+  <div class="catalog">
+    <div class="scrolling-container">
+      <!-- Reason 1 -->
+      <div class="catalog-item">
         <h3>Affordable Professional Solutions</h3>
         <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
         <ul>
@@ -266,20 +308,23 @@ carouselItems[0].classList.add('active');
           <li>Personalized support</li>
         </ul>
       </div>
-      <div class="carousel-item">
+      <!-- Reason 2 -->
+      <div class="catalog-item">
         <h3>AI-Ready Digital Platforms</h3>
         <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, automations). You’ll be ahead of the curve, ready to plug into the growing ecosystem of AI-driven marketing, customer service, and e-commerce. While others are scrambling to catch up, you’ll already be connected to the future.</p>
       </div>
-      <div class="carousel-item">
+      <!-- Reason 3 -->
+      <div class="catalog-item">
         <h3>Personalized Attention</h3>
         <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
       </div>
-      <div class="carousel-item">
+      <!-- Reason 4 -->
+      <div class="catalog-item">
         <h3>Limited Clientele for Deeper Focus</h3>
         <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster response times, and deeper collaboration. You’re not just a project in a queue — you’re a partner. We grow with you, not just around you.</p>
       </div>
     </div>
   </div>
-</section>
+</section>  
 </body>
 </html>
