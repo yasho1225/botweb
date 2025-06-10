@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
-  .why-us {
+ .why-us {
   padding: 60px 20px;
-  background-color: #111827; /* Dark gray background */
-  color: #FFFFFF; /* White text */
+  background-color: #111827;
+  color: #FFFFFF;
   text-align: center;
 }
 
@@ -22,38 +22,38 @@
 
 .catalog {
   position: relative;
-  overflow: hidden;
-  max-width: 1200px; /* Limits width for larger screens */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .scrolling-container {
-  white-space: nowrap; /* Keeps items in a single line */
-  animation: scroll 40s linear infinite; /* Smooth scroll, 40s duration */
+  white-space: nowrap;
 }
 
 .catalog-item {
   display: inline-block;
-  width: 300px; /* Fixed width for each reason */
-  margin-right: 30px; /* Space between items */
-  vertical-align: top; /* Aligns items at the top */
-  background-color: #1F2937; /* Slightly lighter gray for cards */
-  padding: 20px;
+  width: 400px;
+  margin-right: 40px;
+  padding: 30px;
+  vertical-align: top;
+  background-color: #1F2937;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .catalog-item h3 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #0061FF; /* Blue accent for headings */
+  color: #0061FF;
 }
 
 .catalog-item p, .catalog-item ul {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: #D1D5DB; /* Light gray text */
+  color: #D1D5DB;
 }
 
 .catalog-item ul {
@@ -65,37 +65,38 @@
   margin-bottom: 10px;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0); /* Start at initial position */
-  }
-  100% {
-    transform: translateX(-50%); /* Move half the container width */
-  }
-}
-
-.catalog:hover .scrolling-container {
-  animation-play-state: paused; /* Pause on hover */
-}
-
-/* Fade effects for a polished look */
-.catalog::before, .catalog::after {
-  content: '';
+.scroll-left, .scroll-right {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50px; /* Width of fade effect */
-  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #FFFFFF;
+  cursor: pointer;
+  z-index: 2;
 }
 
-.catalog::before {
-  left: 0;
-  background: linear-gradient(to right, #111827, transparent); /* Fade from left */
+.scroll-left {
+  left: 10px;
 }
 
-.catalog::after {
-  right: 0;
-  background: linear-gradient(to left, #111827, transparent); /* Fade from right */
+.scroll-right {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .scrolling-container {
+    white-space: normal;
+  }
+  .catalog-item {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+  }
+  .scroll-left, .scroll-right {
+    display: none;
+  }
 }
 
 /* Mobile adjustments */
@@ -302,10 +303,11 @@ carouselItems[0].classList.add('active');
   });
 });
   </script>
-  <!-- Why Us Section -->
+  // Why us section 
 <section class="why-us">
   <h2>Why Choose Us?</h2>
   <div class="catalog">
+    <button class="scroll-left">&lt;</button>
     <div class="scrolling-container">
       <!-- Reason 1 -->
       <div class="catalog-item">
@@ -333,7 +335,8 @@ carouselItems[0].classList.add('active');
         <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster response times, and deeper collaboration. You’re not just a project in a queue — you’re a partner. We grow with you, not just around you.</p>
       </div>
     </div>
+    <button class="scroll-right">&gt;</button>
   </div>
-</section>  
+</section>
 </body>
 </html>
