@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
-  .why-us {
+    .why-us {
   padding: 60px 20px;
-  background-color: #111827; /* Dark gray background */
-  color: #FFFFFF; /* White text */
+  background-color: #111827;
+  color: #FFFFFF;
   text-align: center;
 }
 
@@ -23,37 +23,38 @@
 .catalog {
   position: relative;
   overflow: hidden;
-  max-width: 1200px; /* Limits width for larger screens */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .scrolling-container {
-  white-space: nowrap; /* Keeps items in a single line */
-  animation: scroll 40s linear infinite; /* Smooth scroll, 40s duration */
+  animation: scroll 60s linear infinite; /* Slower scroll duration */
 }
 
 .catalog-item {
   display: inline-block;
-  width: 300px; /* Fixed width for each reason */
-  margin-right: 30px; /* Space between items */
-  vertical-align: top; /* Aligns items at the top */
-  background-color: #1F2937; /* Slightly lighter gray for cards */
+  width: 300px;
+  margin-right: 30px;
+  vertical-align: top;
+  background-color: #1F2937;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Contains text */
+  overflow-wrap: break-word; /* Breaks long words to fit */
 }
 
 .catalog-item h3 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #0061FF; /* Blue accent for headings */
+  color: #0061FF;
 }
 
 .catalog-item p, .catalog-item ul {
   font-size: 1rem;
   line-height: 1.6;
-  color: #D1D5DB; /* Light gray text */
+  color: #D1D5DB;
 }
 
 .catalog-item ul {
@@ -67,15 +68,15 @@
 
 @keyframes scroll {
   0% {
-    transform: translateX(0); /* Start at initial position */
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* Move half the container width */
+    transform: translateX(-50%);
   }
 }
 
 .catalog:hover .scrolling-container {
-  animation-play-state: paused; /* Pause on hover */
+  animation-play-state: paused;
 }
 
 /* Fade effects for a polished look */
@@ -84,56 +85,32 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50px; /* Width of fade effect */
+  width: 50px;
   z-index: 1;
 }
 
 .catalog::before {
   left: 0;
-  background: linear-gradient(to right, #111827, transparent); /* Fade from left */
+  background: linear-gradient(to right, #111827, transparent);
 }
 
 .catalog::after {
   right: 0;
-  background: linear-gradient(to left, #111827, transparent); /* Fade from right */
+  background: linear-gradient(to left, #111827, transparent);
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .scrolling-container {
-    white-space: normal; /* Allow wrapping */
-    animation: none; /* Disable animation */
+    white-space: normal;
+    animation: none;
   }
   .catalog-item {
     display: block;
-    width: 100%; /* Full width on mobile */
-    margin: 15px 0; /* Vertical spacing */
+    width: 100%;
+    margin: 15px 0;
   }
 }
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .carousel {
-    max-width: 100%;
-  }
-  .carousel-item {
-    padding: 10px;
-  }
-}
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .navbar {
-      position: fixed !important;
-      top: 0 !important;
-      z-index: 50;
-      width: 100%;
-    }
-    .hero {
-      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
-    }
   </style>
 </head>
 <body>
