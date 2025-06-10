@@ -144,123 +144,80 @@
   <div w3-include-html="hero.html"></div>
 
   <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
+  function includeHTML(callback) {
+    var z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    let includesProcessed = 0;
+    const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
 
-      console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
-
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          console.log("Attempting to load", file, "from path:", window.location.pathname + file);
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log("Successfully loaded", file, "with content length:", this.responseText.length);
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                // Enforce fixed positioning after loading nav.html
-                if (file === "nav.html") {
-                  const navbar = elmnt.querySelector('.navbar');
-                  if (navbar) {
-                    navbar.style.position = 'fixed';
-                    navbar.style.top = '0';
-                    navbar.style.zIndex = '50';
-                    navbar.style.width = '100%';
-                  }
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
-                }
-              } else {
-                console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
-                // Fallback navbar with fixed behavior
-                if (file === "nav.html") {
-                  elmnt.innerHTML = `
-                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
-                      <div class="container">
-                        <a href="index.html" class="logo">BotWeb</a>
-                        <div class="nav-links">
-                          <a href="index.html">Home</a>
-                          <a href="about.html">About</a>
-                          <a href="services.html">Services</a>
-                          <a href="contact.html">Contact</a>
-                          <button class="get-started">Donate Now</button>
-                        </div>
-                      </div>
-                    </nav>
-                  `;
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              elmnt.innerHTML = this.responseText;
+              elmnt.removeAttribute("w3-include-html");
+              if (file === "nav.html") {
+                const navbar = elmnt.querySelector('.navbar');
+                if (navbar) {
+                  navbar.style.position = 'fixed';
+                  navbar.style.top = '0';
+                  navbar.style.zIndex = '50';
+                  navbar.style.width = '100%';
                 }
               }
-              includeHTML(callback);
+              includesProcessed++;
+              if (includesProcessed === totalIncludes && callback) callback();
+            } else {
+              if (file === "nav.html") {
+                elmnt.innerHTML = `
+                  <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
+                    <div class="container">
+                      <a href="index.html" class="logo">BotWeb</a>
+                      <div class="nav-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        <a href="services.html">Services</a>
+                        <a href="contact.html">Contact</a>
+                        <button class="get-started">Donate Now</button>
+                      </div>
+                    </div>
+                  </nav>
+                `;
+              }
+              includesProcessed++;
+              if (includesProcessed === totalIncludes && callback) callback();
             }
           }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
-        }
-      }
-
-      if (totalIncludes === 0) {
-        console.log("No includes found at", new Date().toLocaleTimeString());
-        if (callback) callback();
+        };
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        return;
       }
     }
+    if (totalIncludes === 0 && callback) callback();
+  }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
-      includeHTML(function() {
-        console.log("Callback executed at", new Date().toLocaleTimeString());
-        const video = document.querySelector('.placeholder-video');
-        if (video) {
-          video.addEventListener('error', () => {
-            console.error("Failed to load placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-          video.addEventListener('loadeddata', () => {
-            console.log("Successfully loaded placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-        } else {
-          console.error("Video element not found at", new Date().toLocaleTimeString());
-        }
-
-        // Scroll behavior for shrinking/expanding nav bar
-        let lastScroll = 0;
-        let navbar = document.querySelector('.navbar');
-        let container = document.querySelector('.container');
-
-        if (!navbar || !container) {
-          console.error("Navbar or container not found at", new Date().toLocaleTimeString(), "Navbar:", navbar, "Container:", container);
-          return;
-        }
-
-        console.log("Setting up scroll listener at", new Date().toLocaleTimeString());
+  document.addEventListener("DOMContentLoaded", function() {
+    includeHTML(function() {
+      // Navbar scroll behavior
+      let lastScroll = 0;
+      let navbar = document.querySelector('.navbar');
+      let container = document.querySelector('.container');
+      if (navbar && container) {
         window.addEventListener('scroll', () => {
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
-
-          // Navbar scroll behavior
-          if (currentScroll > lastScroll) { // Shrink when scrolling down
-            console.log("Shrinking nav bar at", currentScroll, "px");
+          if (currentScroll > lastScroll) {
             navbar.style.height = '70px';
             container.style.height = '70px';
             container.querySelector('.logo').style.fontSize = '20px';
             container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
             container.querySelector('.get-started').style.fontSize = '14px';
             container.querySelector('.get-started').style.padding = '8px 20px';
-          } else if (currentScroll < lastScroll) { // Expand when scrolling up
-            console.log("Expanding nav bar at", currentScroll, "px");
+          } else if (currentScroll < lastScroll) {
             navbar.style.height = '90px';
             container.style.height = '90px';
             container.querySelector('.logo').style.fontSize = '24px';
@@ -268,41 +225,87 @@
             container.querySelector('.get-started').style.fontSize = '16px';
             container.querySelector('.get-started').style.padding = '10px 24px';
           }
-
-          // Video motion effect (inspired by Dropbox)
-          if (video) {
-            const scrollFactor = currentScroll * 0.3; // Subtle upward movement
-            video.style.transform = `translateY(-${scrollFactor}px)`;
-          }
-
           lastScroll = currentScroll <= 0 ? 0 : currentScroll;
         }, { passive: true });
-      });
+      }
+
+      // Scroll arrow functionality for "Why Us?" section
+      const catalog = document.querySelector('.catalog');
+      const item = document.querySelector('.catalog-item');
+      if (catalog && item) {
+        const itemWidth = item.offsetWidth + parseInt(window.getComputedStyle(item).marginRight);
+        document.querySelector('.scroll-right').addEventListener('click', () => {
+          catalog.scrollTo({
+            left: catalog.scrollLeft + itemWidth,
+            behavior: 'smooth'
+          });
+        });
+        document.querySelector('.scroll-left').addEventListener('click', () => {
+          catalog.scrollTo({
+            left: catalog.scrollLeft - itemWidth,
+            behavior: 'smooth'
+          });
+        });
+
+        // Touchpad and swipe navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        catalog.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        catalog.addEventListener('touchmove', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+        });
+
+        catalog.addEventListener('touchend', () => {
+          const deltaX = touchStartX - touchEndX;
+          if (Math.abs(deltaX) > 50) { // Threshold to detect a swipe
+            if (deltaX > 0) {
+              // Swipe left, scroll right
+              catalog.scrollTo({
+                left: catalog.scrollLeft + itemWidth,
+                behavior: 'smooth'
+              });
+            } else {
+              // Swipe right, scroll left
+              catalog.scrollTo({
+                left: catalog.scrollLeft - itemWidth,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+
+        // Mouse drag support for desktop/touchpad
+        let isDragging = false;
+        let startX = 0;
+
+        catalog.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startX = e.pageX - catalog.scrollLeft;
+          e.preventDefault(); // Prevent text selection
+        });
+
+        catalog.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            const x = e.pageX - startX;
+            catalog.scrollLeft = -x;
+          }
+        });
+
+        catalog.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+
+        catalog.addEventListener('mouseleave', () => {
+          isDragging = false;
+        });
+      }
     });
-    const carouselItems = document.querySelectorAll('.carousel-item');
-let currentIndex = 0;
-
-function showNextSlide() {
-  carouselItems[currentIndex].classList.remove('active');
-  currentIndex = (currentIndex + 1) % carouselItems.length;
-  carouselItems[currentIndex].classList.add('active');
-}
-
-// Auto transition every 5 seconds
-setInterval(showNextSlide, 5000);
-
-// Ensure the first slide is visible on load
-carouselItems[0].classList.add('active');
-    document.addEventListener("DOMContentLoaded", function() {
-  // Assuming includeHTML exists; if not, remove this wrapper
-  includeHTML(function() {
-    const scrollingContainer = document.querySelector('.scrolling-container');
-    if (scrollingContainer) {
-      scrollingContainer.innerHTML += scrollingContainer.innerHTML; // Duplicate content
-    }
   });
-});
-  </script>
+</script>
   // Why us section 
 <section class="why-us">
   <h2>Why Choose Us?</h2>
