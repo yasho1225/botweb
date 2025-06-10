@@ -382,3 +382,16 @@ p {
   color: #D1D5DB;
   line-height: 1.6;
 }
+.learn-more {
+  padding: 12px 24px;
+  background-color: #0061FF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.learn-more:hover {
+  background-color: #0047AB;
+}
