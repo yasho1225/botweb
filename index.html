@@ -154,44 +154,28 @@
     </div>
   </section>
 
-  <!-- Why Us Section -->
-  <section class="why-us">
-    <h2>Why Choose Us?</h2>
-    <div class="catalog">
-      <div class="carousel-wrapper">
-        <button class="carousel-btn left">&#8592;</button>
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="catalog-item">
-              <h3>Affordable Professional Solutions</h3>
-              <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
-              <ul>
-                <li>Modern, responsive websites</li>
-                <li>Custom AI chatbots</li>
-                <li>Personalized support</li>
-              </ul>
-            </div>
-            <div class="catalog-item">
-              <h3>AI-Ready Digital Platforms</h3>
-              <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, and more).</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Personalized Attention</h3>
-              <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Limited Clientele for Deeper Focus</h3>
-              <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn right">&#8594;</button>
-      </div>
-    </div>
-  </section>
+  <section class="why-us-scroll" onmouseenter="pauseWhyUs()" onmouseleave="playWhyUs()">
+  <div class="scroll-content" id="why-us-content">
+    <div class="why-us-item">Fast Delivery</div>
+    <div class="why-us-item">Affordable Pricing</div>
+    <div class="why-us-item">24/7 Support</div>
+    <div class="why-us-item">Custom Solutions</div>
+    <!-- Duplicated for seamless loop -->
+    <div class="why-us-item">Fast Delivery</div>
+    <div class="why-us-item">Affordable Pricing</div>
+    <div class="why-us-item">24/7 Support</div>
+    <div class="why-us-item">Custom Solutions</div>
+  </div>
+</section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
+<script>
+function pauseWhyUs() {
+  document.getElementById('why-us-content').style.animationPlayState = 'paused';
+}
+function playWhyUs() {
+  document.getElementById('why-us-content').style.animationPlayState = 'running';
+}
+   document.addEventListener("DOMContentLoaded", function () {
       let lastScroll = 0;
       let navbar = document.querySelector(".navbar");
       let container = document.querySelector(".container");
