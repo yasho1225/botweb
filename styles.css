@@ -78,7 +78,8 @@ body {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, font-size 0.3s ease;
+  transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
 }
 
 .get-started:hover {
@@ -88,7 +89,7 @@ body {
 }
 
 .learn-more {
-  background-color: #000;
+  background: #000;
   border: 2px solid #0061FF;
   color: #0061FF;
   padding: 14px 32px;
@@ -96,17 +97,31 @@ body {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
   box-sizing: border-box;
+  margin-left: 16px;
 }
 
 .learn-more:hover,
 .learn-more:focus {
-  background-color: #111827;
+  background: #111827;
   color: #0061FF;
-  border-color: #0061FF;
+  border: 2px solid #0061FF;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.get-started, .learn-more {
+  outline: none;
+  appearance: none;
+  box-shadow: none;
 }
 
 /* Hero Section */
@@ -115,7 +130,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 20px; /* Increased padding-top to clear nav bar */
+  padding: 100px 20px 20px;
 }
 
 .hero-content {
@@ -144,7 +159,7 @@ body {
 h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1; /* Tightened line height to eliminate gap */
+  line-height: 1;
   margin-bottom: 1rem;
   color: #FFFFFF;
   display: flex;
@@ -153,7 +168,7 @@ h1 {
 }
 
 h1 span {
-  display: block; /* Ensure each line stacks naturally */
+  display: block;
 }
 
 @media (min-width: 640px) {
@@ -176,19 +191,6 @@ p {
   p {
     font-size: 1.5rem;
   }
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-/* Ensures both buttons follow consistent base styling */
-.get-started, .learn-more {
-  outline: none;
-  appearance: none;
-  box-shadow: none;
 }
 
 /* Video Section */
@@ -240,7 +242,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
+  padding: 120px 20px 40px;
   background-color: #000000;
 }
 
