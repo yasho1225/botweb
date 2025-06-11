@@ -5,20 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - About Us</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-<style>
-  .navbar {
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 50;
-    width: 100%;
-  }
-</style>
+  <style>
+    .navbar {
+      position: fixed !important;
+      top: 0 !important;
+      z-index: 50;
+      width: 100%;
+    }
+    .about-section {
+      padding-top: 400px; /* Ensures content is visible below navbar */
+    }
+  </style>
 </head>
 <body>
+   <div class="about-section">
   <!-- Include Navigation with Enhanced Fallback -->
   <div w3-include-html="nav.html" id="nav-placeholder"></div>
   <!-- About Section -->
     <div w3-include-html="aboutus.html"></div>
+     </div>
 
   <script>
     function includeHTML(callback) {
