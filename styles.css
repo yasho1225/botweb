@@ -1,5 +1,5 @@
 /* Reset and global styles */
-{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -68,21 +68,45 @@ body {
   color: #0061FF;
 }
 
+/* Buttons */
 .get-started {
   background-color: #0061FF;
   color: #FFFFFF;
   border: none;
-  padding: 10px 24px;
+  padding: 14px 32px;
   border-radius: 50px;
-  cursor: pointer;
-  margin-left: 30px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
   transition: background-color 0.3s ease, font-size 0.3s ease;
 }
 
 .get-started:hover {
   background-color: #004ECC;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
+}
+
+.learn-more {
+  background-color: #000;
+  border: 2px solid #0061FF;
+  color: #0061FF;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.learn-more:hover,
+.learn-more:focus {
+  background-color: #111827;
+  color: #0061FF;
+  border-color: #0061FF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
 /* Hero Section */
@@ -160,47 +184,14 @@ p {
   gap: 1.5rem;
 }
 
-.get-started, .learn-more {
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+/* Ensures both buttons follow consistent base styling */
 .get-started, .learn-more {
   outline: none;
-  box-shadow: none;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  box-shadow: none;
 }
 
-.get-started {
-  background-color: #0061FF;
-  color: #FFFFFF;
-  border: none;
-}
-
-.get-started:hover {
-  background-color: #004ECC;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
-.learn-more {
-  background-color: transparent;
-  border: 2px solid #0061FF;
-  color: #0061FF;
-}
-
-.learn-more:hover {
-  background-color: #0061FF;
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
+/* Video Section */
 .video-content {
   flex: 1;
   display: flex;
@@ -249,7 +240,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px 20px; /* Adjusted to clear nav bar */
+  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
   background-color: #000000;
 }
 
@@ -388,17 +379,4 @@ p {
   font-size: 1rem;
   color: #D1D5DB;
   line-height: 1.6;
-}
-.learn-more {
-  padding: 12px 24px;
-  background-color: #0061FF;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.learn-more:hover {
-  background-color: #0047AB;
 }
