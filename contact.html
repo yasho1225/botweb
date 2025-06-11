@@ -142,8 +142,10 @@
               container.style.height = '70px';
               container.querySelector('.logo').style.fontSize = '20px';
               container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-              container.querySelector('.get-started').style.fontSize = '14px';
-              container.querySelector('.get-started').style.padding = '8px 20px';
+              container.querySelectorAll('.get-started, .learn-more').forEach(btn => {
+              btn.style.fontSize = '14px';
+              btn.style.padding = '8px 20px';
+            });
             } else if (currentScroll < lastScroll) {
               console.log("Expanding nav bar at", currentScroll, "px");
               navbar.style.height = '90px';
