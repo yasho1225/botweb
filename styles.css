@@ -403,3 +403,37 @@ p {
   color: #D1D5DB;
   line-height: 1.6;
 }
+.why-us-scroll {
+  width: 100%;
+  overflow: hidden;
+  background: #101010;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.scroll-content {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+  /* Will be paused/played via JS */
+}
+
+.why-us-item {
+  color: #fff;
+  background: #0061FF;
+  margin: 0 1rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
