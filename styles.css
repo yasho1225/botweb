@@ -68,60 +68,24 @@ body {
   color: #0061FF;
 }
 
-/* Buttons */
-.get-started {
+/* NAVBAR Donate Now button only */
+.nav-links .get-started {
   background-color: #0061FF;
   color: #FFFFFF;
   border: none;
-  padding: 14px 32px;
+  padding: 10px 24px;
   border-radius: 50px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  margin-left: 30px;
   transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
   box-sizing: border-box;
 }
 
-.get-started:hover {
+.nav-links .get-started:hover {
   background-color: #004ECC;
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
-.learn-more {
-  background: #000;
-  border: 2px solid #0061FF;
-  color: #0061FF;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
-  box-sizing: border-box;
-  margin-left: 16px;
-}
-
-.learn-more:hover,
-.learn-more:focus {
-  background: #111827;
-  color: #0061FF;
-  border: 2px solid #0061FF;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.get-started, .learn-more {
-  outline: none;
-  appearance: none;
-  box-shadow: none;
 }
 
 /* Hero Section */
@@ -191,6 +155,63 @@ p {
   p {
     font-size: 1.5rem;
   }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Hero Donate Now button -- ONLY in .hero section */
+.hero .get-started {
+  background-color: #0061FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+}
+
+.hero .get-started:hover {
+  background-color: #004ECC;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
+}
+
+/* Hero Learn More button */
+.learn-more {
+  background: #000;
+  border: 2px solid #0061FF;
+  color: #0061FF;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+  margin-left: 0;
+}
+
+.learn-more:hover,
+.learn-more:focus {
+  background: #111827;
+  color: #0061FF;
+  border: 2px solid #0061FF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
 /* Video Section */
