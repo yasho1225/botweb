@@ -1,375 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BotWeb - We Build Websites. You Build Impact.</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
-  <style>
-  .why-us {
-  padding: 60px 20px;
-  background-color: #111827; /* Dark gray background */
-  color: #FFFFFF; /* White text */
-  text-align: center;
-}
-
-.why-us h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-}
-
-.catalog {
-  position: relative;
-  overflow: hidden;
-  max-width: 1200px; /* Limits width for larger screens */
-  margin: 0 auto;
-}
-
-.scrolling-container {
-  white-space: nowrap; /* Keeps items in a single line */
-  animation: scroll 40s linear infinite; /* Smooth scroll, 40s duration */
-}
-
-.catalog-item {
-  display: inline-block;
-  width: 300px; /* Fixed width for each reason */
-  margin-right: 30px; /* Space between items */
-  vertical-align: top; /* Aligns items at the top */
-  background-color: #1F2937; /* Slightly lighter gray for cards */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-}
-
-.catalog-item h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #0061FF; /* Blue accent for headings */
-}
-
-.catalog-item p, .catalog-item ul {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #D1D5DB; /* Light gray text */
-}
-
-.catalog-item ul {
-  list-style: none;
-  padding: 0;
-}
-
-.catalog-item ul li {
-  margin-bottom: 10px;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0); /* Start at initial position */
-  }
-  100% {
-    transform: translateX(-50%); /* Move half the container width */
-  }
-}
-
-.catalog:hover .scrolling-container {
-  animation-play-state: paused; /* Pause on hover */
-}
-
-/* Fade effects for a polished look */
-.catalog::before, .catalog::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50px; /* Width of fade effect */
-  z-index: 1;
-}
-
-.catalog::before {
-  left: 0;
-  background: linear-gradient(to right, #111827, transparent); /* Fade from left */
-}
-
-.catalog::after {
-  right: 0;
-  background: linear-gradient(to left, #111827, transparent); /* Fade from right */
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .scrolling-container {
-    white-space: normal; /* Allow wrapping */
-    animation: none; /* Disable animation */
-  }
-  .catalog-item {
-    display: block;
-    width: 100%; /* Full width on mobile */
-    margin: 15px 0; /* Vertical spacing */
-  }
-}
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .carousel {
-    max-width: 100%;
-  }
-  .carousel-item {
-    padding: 10px;
-  }
-}
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .navbar {
-      position: fixed !important;
-      top: 0 !important;
-      z-index: 50;
-      width: 100%;
-    }
-    .hero {
-      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Include Navigation with Fallback Fixed Positioning -->
-  <div w3-include-html="nav.html" id="nav-placeholder"></div>
-  <!-- Include Hero Section -->
-  <div w3-include-html="hero.html"></div>
-
-  <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
-
-      console.log("Starting to process", totalIncludes, "includes at", new Date().toLocaleTimeString());
-
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          console.log("Attempting to load", file, "from path:", window.location.pathname + file);
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log("Successfully loaded", file, "with content length:", this.responseText.length);
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                // Enforce fixed positioning after loading nav.html
-                if (file === "nav.html") {
-                  const navbar = elmnt.querySelector('.navbar');
-                  if (navbar) {
-                    navbar.style.position = 'fixed';
-                    navbar.style.top = '0';
-                    navbar.style.zIndex = '50';
-                    navbar.style.width = '100%';
-                  }
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
-                }
-              } else {
-                console.error("Failed to load", file, "Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
-                // Fallback navbar with fixed behavior
-                if (file === "nav.html") {
-                  elmnt.innerHTML = `
-                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0;">
-                      <div class="container">
-                        <a href="index.html" class="logo">BotWeb</a>
-                        <div class="nav-links">
-                          <a href="index.html">Home</a>
-                          <a href="about.html">About</a>
-                          <a href="services.html">Services</a>
-                          <a href="contact.html">Contact</a>
-                          <button class="get-started">Donate Now</button>
-                        </div>
-                      </div>
-                    </nav>
-                  `;
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
-                  if (callback) callback();
-                }
-              }
-              includeHTML(callback);
-            }
-          }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
-        }
-      }
-
-      if (totalIncludes === 0) {
-        console.log("No includes found at", new Date().toLocaleTimeString());
-        if (callback) callback();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
-      includeHTML(function() {
-        console.log("Callback executed at", new Date().toLocaleTimeString());
-        const video = document.querySelector('.placeholder-video');
-        if (video) {
-          video.addEventListener('error', () => {
-            console.error("Failed to load placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-          video.addEventListener('loadeddata', () => {
-            console.log("Successfully loaded placeholder-video.mp4 at", new Date().toLocaleTimeString(), "Source:", video.src);
-          });
-        } else {
-          console.error("Video element not found at", new Date().toLocaleTimeString());
-        }
-
-        // Scroll behavior for shrinking/expanding nav bar
-        let lastScroll = 0;
-        let navbar = document.querySelector('.navbar');
-        let container = document.querySelector('.container');
-
-        if (!navbar || !container) {
-          console.error("Navbar or container not found at", new Date().toLocaleTimeString(), "Navbar:", navbar, "Container:", container);
-          return;
-        }
-
-        console.log("Setting up scroll listener at", new Date().toLocaleTimeString());
-        window.addEventListener('scroll', () => {
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
-
-          // Navbar scroll behavior
-          if (currentScroll > lastScroll) { // Shrink when scrolling down
-            console.log("Shrinking nav bar at", currentScroll, "px");
-            navbar.style.height = '70px';
-            container.style.height = '70px';
-            container.querySelector('.logo').style.fontSize = '20px';
-            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-            container.querySelector('.get-started').style.fontSize = '14px';
-            container.querySelector('.get-started').style.padding = '8px 20px';
-          } else if (currentScroll < lastScroll) { // Expand when scrolling up
-            console.log("Expanding nav bar at", currentScroll, "px");
-            navbar.style.height = '90px';
-            container.style.height = '90px';
-            container.querySelector('.logo').style.fontSize = '24px';
-            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
-            container.querySelector('.get-started').style.fontSize = '16px';
-            container.querySelector('.get-started').style.padding = '10px 24px';
-          }
-
-          // Video motion effect (inspired by Dropbox)
-          if (video) {
-            const scrollFactor = currentScroll * 0.3; // Subtle upward movement
-            video.style.transform = `translateY(-${scrollFactor}px)`;
-          }
-
-          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        }, { passive: true });
-      });
-    });
-    const carouselItems = document.querySelectorAll('.carousel-item');
-let currentIndex = 0;
-
-function showNextSlide() {
-  carouselItems[currentIndex].classList.remove('active');
-  currentIndex = (currentIndex + 1) % carouselItems.length;
-  carouselItems[currentIndex].classList.add('active');
-}
-
-// Auto transition every 5 seconds
-setInterval(showNextSlide, 5000);
-
-// Ensure the first slide is visible on load
-carouselItems[0].classList.add('active');
-    document.addEventListener("DOMContentLoaded", function() {
-  // Assuming includeHTML exists; if not, remove this wrapper
-  includeHTML(function() {
-    const scrollingContainer = document.querySelector('.scrolling-container');
-    if (scrollingContainer) {
-      scrollingContainer.innerHTML += scrollingContainer.innerHTML; // Duplicate content
-    }
-  });
-});
-  </script>
-  
-  <!-- Why Us Section -->
-<section class="why-us">
-  <h2>Why Choose Us?</h2>
-  <div class="catalog">
-    <div class="scrolling-container">
-      <!-- Reason 1 -->
-      <div class="catalog-item">
-        <h3>Affordable Professional Solutions</h3>
-        <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
-        <ul>
-          <li>Modern, responsive websites</li>
-          <li>Custom AI chatbots</li>
-          <li>Personalized support</li>
-        </ul>
-      </div>
-      <!-- Reason 2 -->
-      <div class="catalog-item">
-        <h3>AI-Ready Digital Platforms</h3>
-        <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, etc.).</p>
-      </div>
-      <!-- Reason 3 -->
-      <div class="catalog-item">
-        <h3>Personalized Attention</h3>
-        <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
-      </div>
-      <!-- Reason 4 -->
-      <div class="catalog-item">
-        <h3>Limited Clientele for Deeper Focus</h3>
-        <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster response times, and a partnership you can count on.</p>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">BotWeb</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <button class="get-started" onclick="window.location.href='contact.html'">Get Started</button>
       </div>
     </div>
-  </div>
-</section> 
-  <!-- Why Us Section -->
-  <section class="why-us">
-    <h2>Why Choose Us?</h2>
-    <div class="catalog">
-      <div class="carousel-wrapper">
-        <button class="carousel-btn left">&#8592;</button>
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="catalog-item">
-              <h3>Affordable Professional Solutions</h3>
-              <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
-              <ul>
-                <li>Modern, responsive websites</li>
-                <li>Custom AI chatbots</li>
-                <li>Personalized support</li>
-              </ul>
-            </div>
-            <div class="catalog-item">
-              <h3>AI-Ready Digital Platforms</h3>
-              <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, etc.).</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Personalized Attention</h3>
-              <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Limited Clientele for Deeper Focus</h3>
-              <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster response times, and a partnership you can count on.</p>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="text-content">
+            <h1>
+              <span>We Build Websites</span>
+              <span>You Build Impact</span>
+            </h1>
+            <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
+            <div class="buttons">
+              <button class="get-started" onclick="window.location.href='contact.html'">Get Started</button>
+              <button class="learn-more" onclick="window.location.href='about.html'">Learn More</button>
             </div>
           </div>
+          <div class="video-content">
+            <video class="placeholder-video" controls>
+              <source src="placeholder-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="video-caption">BotWeb promotional video</p>
+          </div>
         </div>
-        <button class="carousel-btn right">&#8594;</button>
+      </div>
+    </section>
+
+    <!-- Scrolling Banner -->
+    <section class="why-us-scroll" onmouseenter="pauseWhyUs()" onmouseleave="playWhyUs()">
+      <div class="scroll-content" id="why-us-content">
+        <div class="scroll-item">Fast Delivery</div>
+        <div class="scroll-item">Affordable Pricing</div>
+        <div class="scroll-item">24/7 Support</div>
+        <div class="scroll-item">Custom Solutions</div>
+        <!-- Duplicated for seamless loop -->
+        <div class="scroll-item">Fast Delivery</div>
+        <div class="scroll-item">Affordable Pricing</div>
+        <div class="scroll-item">24/7 Support</div>
+        <div class="scroll-item">Custom Solutions</div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us-section">
+      <div class="why-us-content">
+        <h2>Why Choose Us?</h2>
+        <div class="why-us-grid">
+          <div class="why-us-item">
+            <h3>Affordable Professional Solutions</h3>
+            <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we're mission-driven, not profit-driven.</p>
+            <ul>
+              <li>Modern, responsive websites</li>
+              <li>Custom AI chatbots</li>
+              <li>Personalized support</li>
+            </ul>
+          </div>
+          <div class="why-us-item">
+            <h3>AI-Ready Digital Platforms</h3>
+            <p>We don't just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, and more).</p>
+          </div>
+          <div class="why-us-item">
+            <h3>Personalized Attention</h3>
+            <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
+          </div>
+          <div class="why-us-item">
+            <h3>Limited Clientele for Deeper Focus</h3>
+            <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>BotWeb</h3>
+          <p>We Build Websites. You Build Impact.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Website Design</a></li>
+            <li><a href="services.html">AI Chatbots</a></li>
+            <li><a href="services.html">Hosting & Maintenance</a></li>
+            <li><a href="services.html">Digital Strategy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>📧 hello@botweb.com</p>
+          <p>📞 +1 (555) 123-4567</p>
+          <p>📍 San Francisco, CA</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BotWeb. All rights reserved.</p>
       </div>
     </div>
-  </section>
+  </footer>
+  <script>
+    // Pause and play marquee animation on hover
+    function pauseWhyUs() {
+      document.getElementById('why-us-content').style.animationPlayState = 'paused';
+    }
+    function playWhyUs() {
+      document.getElementById('why-us-content').style.animationPlayState = 'running';
+    }
+  </script>
 </body>
 </html>
