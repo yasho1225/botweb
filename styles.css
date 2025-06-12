@@ -367,5 +367,115 @@ ul {
     font-size: 1rem;
   }
 }
+/* Donations Section */
+.donations {
+  background: linear-gradient(to top, #111 85%, #000 100%);
+  padding: 60px 0 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border-top: 1px solid #232323;
+}
+
+.donations-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.donations h2 {
+  color: #fff;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.donation-description {
+  color: #D1D5DB;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.donation-form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.donation-form input[type="text"],
+.donation-form input[type="number"] {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #1F2937;
+  color: #fff;
+  font-size: 1rem;
+  width: 46%;
+  min-width: 120px;
+}
+.donation-form button {
+  background: #0061FF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.donation-form button:hover,
+.donation-form button:focus {
+  background: #004ECC;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.recent-donors {
+  margin-top: 1.5rem;
+  background: rgba(36,41,46,0.5);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+}
+
+.recent-donors h3 {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+#donorsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#donorsList li {
+  color: #D1D5DB;
+  font-size: 1rem;
+  padding: 5px 0;
+  border-bottom: 1px dashed #444;
+}
+#donorsList li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive for Donations */
+@media (max-width: 700px) {
+  .donations-container {
+    max-width: 97vw;
+  }
+  .donation-form input[type="text"],
+  .donation-form input[type="number"] {
+    width: 100%;
+  }
+  .donation-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 
 /* Pause marquee on hover (handled by JS) */
