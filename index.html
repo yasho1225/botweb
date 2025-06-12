@@ -148,5 +148,42 @@
       document.getElementById('why-us-content').style.animationPlayState = 'running';
     }
   </script>
+  <section class="donations" id="donations">
+  <div class="donations-container">
+    <h2>Support Our Mission</h2>
+    <p class="donation-description">
+      Every contribution helps us build smarter web tools for small businesses and charities. Thank you for your support!
+    </p>
+    <form class="donation-form" id="donationForm">
+      <input type="text" placeholder="Your Name" name="donorName" required>
+      <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
+      <button type="submit">Donate</button>
+    </form>
+    <div class="recent-donors">
+      <h3>Recent Donors</h3>
+      <ul id="donorsList">
+        <!-- Recent donors will appear here -->
+      </ul>
+    </div>
+  </div>
+</section>
+  <script>
+document.getElementById('donationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nameInput = this.donorName.value.trim();
+  const amountInput = this.donationAmount.value.trim();
+  if (nameInput && amountInput) {
+    const donorsList = document.getElementById('donorsList');
+    const newItem = document.createElement('li');
+    newItem.textContent = `${nameInput} donated $${amountInput}`;
+    donorsList.insertBefore(newItem, donorsList.firstChild);
+    // Optionally limit to last 5 donors
+    while (donorsList.children.length > 5) {
+      donorsList.removeChild(donorsList.lastChild);
+    }
+    this.reset();
+  }
+});
+</script>
 </body>
 </html>
