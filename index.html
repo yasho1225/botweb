@@ -263,25 +263,64 @@
     </p>
   </div>
     <script>
-      document.getElementById('donationForm').addEventListener('submit', function(e) {
+// Utility to sanitize user input (prevent XSS)
+function sanitize(str) {
+  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Load donors from localStorage (or empty array)
+function loadDonors() {
+  try {
+    return JSON.parse(localStorage.getItem('recentDonors')) || [];
+  } catch {
+    return [];
+  }
+}
+
+// Save donors to localStorage
+function saveDonors(donors) {
+  localStorage.setItem('recentDonors', JSON.stringify(donors));
+}
+
+// Render donors in the UI
+function renderDonors() {
+  const donorsList = document.getElementById('donorsList');
+  donorsList.innerHTML = '';
+  const donors = loadDonors();
+  donors.forEach(({name, amount, message}) => {
+    const li = document.createElement('li');
+    let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
+    li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
+    donorsList.appendChild(li);
+  });
+}
+
+// On page load, render donors
+document.addEventListener('DOMContentLoaded', renderDonors);
+
+// On donation form submit
+document.getElementById('donationForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const nameInput = this.donorName.value.trim();
   const amountInput = this.donationAmount.value.trim();
   const messageInput = this.donorMessage.value.trim();
   if (nameInput && amountInput) {
-    const donorsList = document.getElementById('donorsList');
-    const newItem = document.createElement('li');
-    let msg = messageInput ? ` — <em>“${messageInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}”</em>` : '';
-    newItem.innerHTML = `<span>${nameInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span> gave <strong>$${amountInput}</strong>${msg}`;
-    donorsList.insertBefore(newItem, donorsList.firstChild);
-    while (donorsList.children.length > 5) {
-      donorsList.removeChild(donorsList.lastChild);
-    }
-    // Show a thank you message
+    let donors = loadDonors();
+    donors.unshift({
+      name: nameInput,
+      amount: amountInput,
+      message: messageInput
+    });
+    donors = donors.slice(0, 5); // Keep only 5 most recent
+    saveDonors(donors);
+    renderDonors();
+
+    // Show thank you message
     const thx = document.getElementById('donationMessage');
     thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
     thx.style.display = 'block';
     setTimeout(() => { thx.style.display = 'none'; }, 4000);
+
     this.reset();
   }
 });
