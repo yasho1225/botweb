@@ -231,92 +231,62 @@
         }, 5000);
       });
     });
+    
   </script>
-<section class="donate-hero" id="donate">
-  <div class="donate-card">
-    <div class="donate-header">
-      <img src="https://cdn.charitywater.org/assets/logos/charity-water-drop.svg" alt="Water Drop" class="donate-logo" />
-      <h2>Make an Impact Today</h2>
-      <p>100% of your donation brings technology and opportunity to those who need it most.</p>
+  <section class="donations" id="donations">
+  <div class="donations-container">
+    <h2 class="donate-headline">Give the Gift of Growth</h2>
+    <p class="donate-lead">
+      Your support helps us empower small businesses and charities with world-class web and AI tools.<br>
+      <strong>100% of your donation</strong> fuels projects that change lives.
+    </p>
+    <div class="donate-impact">
+      <span>✨ Just <strong>$10</strong> can help launch a chatbot for a local charity.</span>
+      <span>🌱 Every dollar multiplies opportunities for impact.</span>
     </div>
-    <form class="donate-form" id="donationForm" autocomplete="off">
-      <div class="donate-amount-row">
-        <button type="button" class="amount-btn" data-amount="10">$10</button>
-        <button type="button" class="amount-btn" data-amount="25">$25</button>
-        <button type="button" class="amount-btn" data-amount="50">$50</button>
-        <input type="number" min="1" placeholder="Other" name="donationAmount" id="donationAmount" required>
-      </div>
+    <form class="donation-form" id="donationForm">
       <input type="text" placeholder="Your Name" name="donorName" required>
+      <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
       <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
-      <button class="donate-submit" type="submit">Donate Now</button>
+      <button type="submit">Donate Now</button>
     </form>
-    <div class="donate-thankyou" id="donationMessage" style="display:none;"></div>
-    <div class="donate-progress">
-      <div class="donate-progress-bar-bg">
-        <div class="donate-progress-bar" id="donateProgressBar" style="width: 70%;"></div>
-      </div>
-      <span class="donate-progress-label"><strong>$700</strong> raised of $1,000 goal</span>
-    </div>
+    <div class="donation-message" id="donationMessage" style="display:none;"></div>
     <div class="recent-donors">
       <h3>Recent Donors</h3>
       <ul id="donorsList">
         <!-- Real donors will appear here! -->
       </ul>
     </div>
-    <div class="donate-guarantee">
-      <img src="https://cdn.charitywater.org/assets/guarantee-lock.svg" alt="Guarantee" />
-      <span>BotWeb Promise: 100% of your gift funds projects for those who need it most.</span>
-    </div>
+    <p class="donate-trust">
+      BotWeb is committed to transparency.<br>
+      <span class="donate-100">100% of your donation</span> goes directly to web empowerment projects.
+    </p>
   </div>
-</section>
-  <script>
-  // Donation amount quick select buttons
-document.querySelectorAll('.amount-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    document.getElementById('donationAmount').value = btn.getAttribute('data-amount');
-  });
-});
-
-// Donation form logic
-const donationForm = document.getElementById('donationForm');
-const donorsList = document.getElementById('donorsList');
-const progressBar = document.getElementById('donateProgressBar');
-const progressLabel = document.querySelector('.donate-progress-label');
-let totalRaised = 700, goal = 1000; // Adjust as needed
-
-donationForm.addEventListener('submit', function(e) {
+    <script>
+      document.getElementById('donationForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const name = this.donorName.value.trim();
-  const amount = parseInt(this.donationAmount.value.trim() || 0, 10);
-  const message = this.donorMessage.value.trim();
-  if (name && amount && amount > 0) {
-    // Add to donors list
-    const li = document.createElement('li');
-    const safeName = name.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const safeMsg = message ? ` <em>“${message.replace(/</g,'&lt;').replace(/>/g,'&gt;')}”</em>` : '';
-    li.innerHTML = `<span>${safeName}</span> gave <strong>$${amount}</strong>${safeMsg}`;
-    donorsList.insertBefore(li, donorsList.firstChild);
-    // Limit to last 5 donors
-    while (donorsList.children.length > 5) donorsList.removeChild(donorsList.lastChild);
-
-    // Thank you message
+  const nameInput = this.donorName.value.trim();
+  const amountInput = this.donationAmount.value.trim();
+  const messageInput = this.donorMessage.value.trim();
+  if (nameInput && amountInput) {
+    const donorsList = document.getElementById('donorsList');
+    const newItem = document.createElement('li');
+    let msg = messageInput ? ` — <em>“${messageInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}”</em>` : '';
+    newItem.innerHTML = `<span>${nameInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span> gave <strong>$${amountInput}</strong>${msg}`;
+    donorsList.insertBefore(newItem, donorsList.firstChild);
+    while (donorsList.children.length > 5) {
+      donorsList.removeChild(donorsList.lastChild);
+    }
+    // Show a thank you message
     const thx = document.getElementById('donationMessage');
-    thx.textContent = `Thank you, ${safeName}, for helping us change lives! 🎉`;
+    thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
     thx.style.display = 'block';
     setTimeout(() => { thx.style.display = 'none'; }, 4000);
-
-    // Update progress bar
-    totalRaised += amount;
-    let percent = Math.min(100, Math.round((totalRaised/goal)*100));
-    progressBar.style.width = percent + '%';
-    progressLabel.innerHTML = `<strong>$${totalRaised.toLocaleString()}</strong> raised of $${goal.toLocaleString()} goal`;
-
     this.reset();
-    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
   }
 });
     </script>
+</section>
+
 </body>
 </html>
