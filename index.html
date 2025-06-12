@@ -232,23 +232,32 @@
       });
     });
   </script>
-    <section class="donations" id="donations">
+   <section class="donations" id="donations">
   <div class="donations-container">
-    <h2>Support Our Mission</h2>
-    <p class="donation-description">
-      Every contribution helps us build smarter web tools for small businesses and charities. Thank you for your support!
+    <h2 class="donate-headline">Give the Gift of Growth</h2>
+    <p class="donate-lead">
+      Your support helps us empower small businesses and charities with world-class web and AI tools. <strong>100% of your donation</strong> fuels projects that change lives.
     </p>
+    <div class="donate-impact">
+      <span>✨ Just <strong>$10</strong> can help launch a chatbot for a local charity.</span>
+      <span>🌱 Every dollar multiplies opportunities for impact.</span>
+    </div>
     <form class="donation-form" id="donationForm">
       <input type="text" placeholder="Your Name" name="donorName" required>
       <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
-      <button type="submit">Donate</button>
+      <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
+      <button type="submit">Donate Now</button>
     </form>
+    <div class="donation-message" id="donationMessage" style="display:none;"></div>
     <div class="recent-donors">
       <h3>Recent Donors</h3>
       <ul id="donorsList">
-        <!-- Recent donors will appear here -->
+        <li><span>Priya</span> gave <strong>$25</strong> — <em>“Keep up the great work!”</em></li>
+        <li><span>Samir</span> gave <strong>$10</strong> — <em>“Happy to support!”</em></li>
+        <li><span>Ana</span> gave <strong>$50</strong> — <em>“For a better web for all.”</em></li>
       </ul>
     </div>
+    <p class="donate-trust">BotWeb is committed to transparency. <br><span class="donate-100">100% of your donation</span> goes directly to web empowerment projects.</p>
   </div>
 </section>
   <script>
@@ -256,15 +265,21 @@ document.getElementById('donationForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const nameInput = this.donorName.value.trim();
   const amountInput = this.donationAmount.value.trim();
+  const messageInput = this.donorMessage.value.trim();
   if (nameInput && amountInput) {
     const donorsList = document.getElementById('donorsList');
     const newItem = document.createElement('li');
-    newItem.textContent = `${nameInput} donated $${amountInput}`;
+    let msg = messageInput ? ` — <em>“${messageInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}”</em>` : '';
+    newItem.innerHTML = `<span>${nameInput.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span> gave <strong>$${amountInput}</strong>${msg}`;
     donorsList.insertBefore(newItem, donorsList.firstChild);
-    // Optionally limit to last 5 donors
     while (donorsList.children.length > 5) {
       donorsList.removeChild(donorsList.lastChild);
     }
+    // Show a thank you message
+    const thx = document.getElementById('donationMessage');
+    thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
+    thx.style.display = 'block';
+    setTimeout(() => { thx.style.display = 'none'; }, 4000);
     this.reset();
   }
 });
