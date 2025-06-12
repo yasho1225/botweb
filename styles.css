@@ -1,6 +1,5 @@
-
 /* Reset and global styles */
-{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -69,21 +68,24 @@ body {
   color: #0061FF;
 }
 
-.get-started {
+/* NAVBAR Donate Now button only */
+.nav-links .get-started {
   background-color: #0061FF;
   color: #FFFFFF;
   border: none;
   padding: 10px 24px;
   border-radius: 50px;
-  cursor: pointer;
-  margin-left: 30px;
   font-size: 16px;
   font-weight: 600;
-  transition: background-color 0.3s ease, font-size 0.3s ease;
+  cursor: pointer;
+  margin-left: 30px;
+  transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
 }
 
-.get-started:hover {
+.nav-links .get-started:hover {
   background-color: #004ECC;
+  box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
 /* Hero Section */
@@ -92,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 20px; /* Increased padding-top to clear nav bar */
+  padding: 100px 20px 20px;
 }
 
 .hero-content {
@@ -121,7 +123,7 @@ body {
 h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1; /* Tightened line height to eliminate gap */
+  line-height: 1;
   margin-bottom: 1rem;
   color: #FFFFFF;
   display: flex;
@@ -130,7 +132,7 @@ h1 {
 }
 
 h1 span {
-  display: block; /* Ensure each line stacks naturally */
+  display: block;
 }
 
 @media (min-width: 640px) {
@@ -158,50 +160,61 @@ p {
 .buttons {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
 }
 
-.get-started, .learn-more {
+/* Hero Donate Now button -- ONLY in .hero section */
+.hero .get-started {
+  background-color: #0061FF;
+  color: #FFFFFF;
+  border: none;
   padding: 14px 32px;
   border-radius: 50px;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-.get-started, .learn-more {
+  transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
   outline: none;
-  box-shadow: none;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  box-shadow: none;
 }
 
-.get-started {
-  background-color: #0061FF;
-  color: #FFFFFF;
-  border: none;
-}
-
-.get-started:hover {
+.hero .get-started:hover {
   background-color: #004ECC;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
+/* Hero Learn More button */
 .learn-more {
-  background-color: transparent;
+  background: #000;
   border: 2px solid #0061FF;
   color: #0061FF;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+  margin-left: 0;
 }
 
-.learn-more:hover {
-  background-color: #0061FF;
-  color: #FFFFFF;
+.learn-more:hover,
+.learn-more:focus {
+  background: #111827;
+  color: #0061FF;
+  border: 2px solid #0061FF;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 97, 255, 0.3);
 }
 
+/* Video Section */
 .video-content {
   flex: 1;
   display: flex;
@@ -250,7 +263,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 40px; /* Adjusted to clear nav bar */
+  padding: 120px 20px 40px;
   background-color: #000000;
 }
 
@@ -389,4 +402,38 @@ p {
   font-size: 1rem;
   color: #D1D5DB;
   line-height: 1.6;
+}
+.why-us-scroll {
+  width: 100%;
+  overflow: hidden;
+  background: #101010;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.scroll-content {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+  /* Will be paused/played via JS */
+}
+
+.why-us-item {
+  color: #fff;
+  background: #0061FF;
+  margin: 0 1rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
