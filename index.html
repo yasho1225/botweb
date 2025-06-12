@@ -189,5 +189,48 @@
       </div>
     </div>
   </section>
+  <script>Add commentMore actions
+    document.addEventListener("DOMContentLoaded", function () {
+      const track = document.querySelector(".carousel-track");
+      const btnLeft = document.querySelector(".carousel-btn.left");
+      const btnRight = document.querySelector(".carousel-btn.right");
+      const items = document.querySelectorAll(".catalog-item");
+
+      const itemWidth = 330; // Width + margin
+      const totalItems = items.length;
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        const offset = currentIndex * itemWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+      }
+
+      btnRight?.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      });
+
+      btnLeft?.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
+      });
+
+      // Auto-scroll every 5 seconds
+      let autoScroll = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      }, 5000);
+
+      // Pause auto-scroll on hover
+      const wrapper = document.querySelector(".carousel-wrapper");
+      wrapper.addEventListener("mouseenter", () => clearInterval(autoScroll));
+      wrapper.addEventListener("mouseleave", () => {
+        autoScroll = setInterval(() => {
+          currentIndex = (currentIndex + 1) % totalItems;
+          updateCarousel();
+        }, 5000);
+      });
+    });
+  </script>
 </body>
 </html>
