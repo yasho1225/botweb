@@ -192,44 +192,59 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      let lastScroll = 0;
+      let navbar = document.querySelector(".navbar");
+      let container = document.querySelector(".container");
+      const video = document.querySelector(".placeholder-video");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        if (currentScroll > lastScroll) {
+          navbar.style.height = "70px";
+          container.style.height = "70px";
+          container.querySelector(".logo").style.fontSize = "20px";
+          container.querySelectorAll(".nav-links a").forEach((a) => (a.style.fontSize = "14px"));
+          container.querySelectorAll(".get-started, .learn-more").forEach((btn) => {
+            btn.style.fontSize = "14px";
+            btn.style.padding = "8px 20px";
+          });
+        } else {
+          navbar.style.height = "90px";
+          container.style.height = "90px";
+          container.querySelector(".logo").style.fontSize = "24px";
+          container.querySelectorAll(".nav-links a").forEach((a) => (a.style.fontSize = "16px"));
+          container.querySelectorAll(".get-started, .learn-more").forEach((btn) => {
+            btn.style.fontSize = "16px";
+            btn.style.padding = "10px 24px";
+          });
+        }
+
+        if (video) {
+          const scrollFactor = currentScroll * 0.3;
+          video.style.transform = `translateY(-${scrollFactor}px)`;
+        }
+
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+      }, { passive: true });
+
+      // Carousel logic
       const track = document.querySelector(".carousel-track");
       const btnLeft = document.querySelector(".carousel-btn.left");
       const btnRight = document.querySelector(".carousel-btn.right");
-      const items = document.querySelectorAll(".catalog-item");
+      const viewport = document.querySelector(".carousel-viewport");
 
-      const itemWidth = 330; // Width + margin
-      const totalItems = items.length;
-      let currentIndex = 0;
-
-      function updateCarousel() {
-        const offset = currentIndex * itemWidth;
-        track.style.transform = `translateX(-${offset}px)`;
-      }
-
-      btnRight?.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateCarousel();
-      });
+      let scrollAmount = 0;
+      const scrollStep = 330;
 
       btnLeft?.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        updateCarousel();
+        scrollAmount = Math.max(scrollAmount - scrollStep, 0);
+        track.style.transform = `translateX(-${scrollAmount}px)`;
       });
 
-      // Auto-scroll every 5 seconds
-      let autoScroll = setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateCarousel();
-      }, 5000);
-
-      // Pause auto-scroll on hover
-      const wrapper = document.querySelector(".carousel-wrapper");
-      wrapper.addEventListener("mouseenter", () => clearInterval(autoScroll));
-      wrapper.addEventListener("mouseleave", () => {
-        autoScroll = setInterval(() => {
-          currentIndex = (currentIndex + 1) % totalItems;
-          updateCarousel();
-        }, 5000);
+      btnRight?.addEventListener("click", () => {
+        const maxScroll = track.scrollWidth - viewport.offsetWidth;
+        scrollAmount = Math.min(scrollAmount + scrollStep, maxScroll);
+        track.style.transform = `translateX(-${scrollAmount}px)`;
       });
     });
   </script>
