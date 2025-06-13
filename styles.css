@@ -164,7 +164,7 @@ p {
   gap: 1.5rem;
 }
 
-/* Hero Donate Now button */
+/* Hero Donate Now button -- ONLY in .hero section */
 .hero .get-started {
   background-color: #0061FF;
   color: #FFFFFF;
@@ -220,6 +220,13 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .video-content {
+    margin-top: 0;
+  }
 }
 
 .placeholder-video {
@@ -396,8 +403,6 @@ p {
   color: #D1D5DB;
   line-height: 1.6;
 }
-
-/* Scrolling "Why Us" Section */
 .why-us-scroll {
   width: 100%;
   overflow: hidden;
@@ -410,6 +415,7 @@ p {
   display: flex;
   width: max-content;
   animation: scroll-left 20s linear infinite;
+  /* Will be paused/played via JS */
 }
 
 .why-us-item {
