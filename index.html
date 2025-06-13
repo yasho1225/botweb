@@ -6,11 +6,29 @@
   <title>BotWeb - We Build Websites. You Build Impact.</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
     .navbar {
-      position: fixed !important;
-      top: 0 !important;
+      position: fixed;
+      top: 0;
       z-index: 50;
       width: 100%;
+    }
+
+    .hero {
+      padding-top: 120px;
+    }
+
+    .get-started,
+    .learn-more {
+      outline: none;
+      box-shadow: none;
+      appearance: none;
     }
 
     .why-us {
@@ -64,7 +82,6 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background: transparent;
     }
 
     .carousel-viewport {
@@ -92,24 +109,6 @@
     .carousel-btn:hover {
       background: rgba(0, 97, 255, 0.1);
     }
-
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .hero {
-      padding-top: 120px;
-    }
-
-    .get-started,
-    .learn-more {
-      outline: none;
-      box-shadow: none;
-      appearance: none;
-    }
   </style>
 </head>
 <body>
@@ -127,7 +126,8 @@
       </div>
     </div>
   </nav>
- <!-- Hero Section -->
+
+  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
@@ -139,7 +139,7 @@
           <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
           <div class="buttons">
             <button class="get-started">Donate Now</button>
-            <button class="learn-more" onclick="window.location.href='about.html'"> <button> Learn More</button>
+            <button class="learn-more" onclick="window.location.href='about.html'">Learn More</button>
           </div>
         </div>
         <div class="video-content">
@@ -152,7 +152,7 @@
       </div>
     </div>
   </section>
-More actions
+
   <!-- Why Us Section -->
   <section class="why-us">
     <h2>Why Choose Us?</h2>
@@ -181,7 +181,7 @@ More actions
             <div class="catalog-item">
               <h3>Limited Clientele for Deeper Focus</h3>
               <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
-            </div>Add commentMore actions
+            </div>
           </div>
         </div>
         <button class="carousel-btn right">&#8594;</button>
@@ -189,6 +189,7 @@ More actions
     </div>
   </section>
 
+  <!-- Carousel Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const track = document.querySelector(".carousel-track");
@@ -196,7 +197,7 @@ More actions
       const btnRight = document.querySelector(".carousel-btn.right");
       const items = document.querySelectorAll(".catalog-item");
 
-      const itemWidth = 330; // Width + margin
+      const itemWidth = 330;
       const totalItems = items.length;
       let currentIndex = 0;
 
@@ -215,13 +216,11 @@ More actions
         updateCarousel();
       });
 
-      // Auto-scroll every 5 seconds
       let autoScroll = setInterval(() => {
         currentIndex = (currentIndex + 1) % totalItems;
         updateCarousel();
       }, 5000);
 
-      // Pause auto-scroll on hover
       const wrapper = document.querySelector(".carousel-wrapper");
       wrapper.addEventListener("mouseenter", () => clearInterval(autoScroll));
       wrapper.addEventListener("mouseleave", () => {
@@ -232,5 +231,106 @@ More actions
       });
     });
   </script>
+
+  <!-- Donations Section -->
+  <section class="donations" id="donations">
+    <div class="donations-container">
+      <h2 class="donate-headline">Give the Gift of Growth</h2>
+      <p class="donate-lead">
+        Your support empowers small businesses and charities with world-class web and AI tools.<br>
+        <strong>100% of your donation</strong> fuels projects that change lives.
+      </p>
+      <div class="donate-impact">
+        <div>✨ <strong>$10</strong> helps launch a chatbot for a local charity.</div>
+        <div>🌱 Every dollar multiplies opportunities for impact.</div>
+        <div class="donate-cost-track"><strong>$80/month</strong> keeps us supporting these businesses.<br>
+          <span id="progress-label" class="progress-label">0 / $80 raised</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      <form class="donation-form" id="donationForm" autocomplete="off">
+        <input type="text" placeholder="Your Name" name="donorName" required>
+        <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
+        <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
+        <button type="submit">Donate Now</button>
+      </form>
+      <div class="donation-message" id="donationMessage" style="display:none;"></div>
+      <div class="recent-donors">
+        <h3>Recent Donors</h3>
+        <ul id="donorsList"></ul>
+      </div>
+      <p class="donate-trust">
+        <span class="donate-100">100% Model:</span> Every cent goes directly to web empowerment projects.
+      </p>
+    </div>
+
+    <!-- Donation Script -->
+    <script>
+      const GOAL = 63;
+
+      function sanitize(str) {
+        return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function loadDonors() {
+        try {
+          let donors = JSON.parse(localStorage.getItem('recentDonors')) || [];
+          return donors.filter(d => d.name.trim().toLowerCase() !== "yash");
+        } catch {
+          return [];
+        }
+      }
+
+      function saveDonors(donors) {
+        localStorage.setItem('recentDonors', JSON.stringify(donors));
+      }
+
+      function totalRaised(donors) {
+        return donors.reduce((sum, d) => sum + Number(d.amount || 0), 0);
+      }
+
+      function renderDonorsAndProgress() {
+        const donors = loadDonors();
+        const donorsList = document.getElementById('donorsList');
+        donorsList.innerHTML = '';
+        donors.forEach(({ name, amount, message }) => {
+          const li = document.createElement('li');
+          let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
+          li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
+          donorsList.appendChild(li);
+        });
+
+        const raised = totalRaised(donors);
+        document.getElementById('progress-label').textContent = `${raised} / $${GOAL} raised`;
+        document.getElementById('progress-bar-fill').style.width = Math.min(raised / GOAL, 1) * 100 + "%";
+      }
+
+      document.addEventListener('DOMContentLoaded', renderDonorsAndProgress);
+
+      document.getElementById('donationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nameInput = this.donorName.value.trim();
+        const amountInput = this.donationAmount.value.trim();
+        const messageInput = this.donorMessage.value.trim();
+
+        if (nameInput && amountInput) {
+          let donors = loadDonors();
+          donors.unshift({ name: nameInput, amount: amountInput, message: messageInput });
+          donors = donors.slice(0, 5);
+          saveDonors(donors);
+          renderDonorsAndProgress();
+
+          const thx = document.getElementById('donationMessage');
+          thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
+          thx.style.display = 'block';
+          setTimeout(() => { thx.style.display = 'none'; }, 4000);
+
+          this.reset();
+        }
+      });
+    </script>
+  </section>
 </body>
 </html>
