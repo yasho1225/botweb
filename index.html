@@ -269,113 +269,98 @@
       });
     });
   </script>
-  <section class="donations-section" id="donations">
-  <div class="donations-flex">
-    <!-- Left: Info & Goal -->
-    <div class="donations-info">
-      <h2>Support the Mission</h2>
-      <p class="donations-lead">
-        Your support empowers small businesses and charities with world-class web and AI tools.<br>
-        <strong>100% of your donation</strong> fuels projects that change lives.
-      </p>
-      <div class="donations-impact">
-        <div>✨ <strong>$21</strong> sponsors 1 website for a business.</div>
-        <div>🌱 Every dollar multiplies opportunities for impact.</div>
-        <div class="donations-goal-wrap">
-          <span class="donations-goal-title"><strong>$63/month</strong> keeps us supporting these businesses.</span>
-          <span id="progress-label" class="progress-label">0 / $63 raised</span>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
-          </div>
-        </div>
+  <section class="donations-vertical" id="donations">
+  <div class="donations-vertical-container">
+    <h2 class="donate-headline">Give the Gift of Growth</h2>
+    <p class="donate-lead">
+      Your support empowers small businesses and charities with world-class web and AI tools.<br>
+      <strong>100% of your donation</strong> fuels projects that change lives.
+    </p>
+    <div class="donate-impact">
+      <div>✨ <strong>$21</strong> sponsors 1 website for a business.</div>
+      <div>🌱 Every dollar multiplies opportunities for impact.</div>
+      <div class="donate-cost-track">
+        <strong>$63/month</strong> keeps us supporting these businesses.<br>
+        <span id="progress-label" class="progress-label">0 / $63 raised</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
       </div>
     </div>
-    <!-- Center: Form -->
-    <div class="donations-form-wrap">
-      <form class="donation-form" id="donationForm" autocomplete="off">
-        <input type="text" placeholder="Your Name" name="donorName" required>
-        <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
-        <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
-        <button type="submit">Donate Now</button>
-      </form>
-      <div class="donation-message" id="donationMessage" style="display:none;"></div>
-      <div class="donate-100">100% Model: Every cent supports web empowerment projects.</div>
-    </div>
-    <!-- Right: Recent Donors -->
-    <div class="donations-recent">
+    <form class="donation-form" id="donationForm" autocomplete="off">
+      <input type="text" placeholder="Your Name" name="donorName" required>
+      <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
+      <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
+      <button type="submit">Donate Now</button>
+    </form>
+    <div class="donation-message" id="donationMessage" style="display:none;"></div>
+    <div class="recent-donors">
       <h3>Recent Donors</h3>
-      <ul id="donorsList">
-        <!-- JS will populate -->
-      </ul>
+      <ul id="donorsList"></ul>
     </div>
+    <p class="donate-trust">
+      <span class="donate-100">100% Model:</span> Every cent goes directly to web empowerment projects.
+    </p>
   </div>
-    <script>
-    // Donations Section JS for landing page
-const GOAL = 63;
+  <script>
+    // Donations logic
+    const GOAL = 63;
+    function sanitize(str) {
+      return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function loadDonors() {
+      try {
+        let donors = JSON.parse(localStorage.getItem('recentDonors')) || [];
+        // Filter out "yash" (case insensitive)
+        return donors.filter(d => d.name.trim().toLowerCase() !== "yash");
+      } catch {
+        return [];
+      }
+    }
+    function saveDonors(donors) {
+      localStorage.setItem('recentDonors', JSON.stringify(donors));
+    }
+    function totalRaised(donors) {
+      return donors.reduce((sum, d) => sum + Number(d.amount || 0), 0);
+    }
+    function renderDonorsAndProgress() {
+      const donors = loadDonors();
+      const donorsList = document.getElementById('donorsList');
+      donorsList.innerHTML = '';
+      donors.forEach(({ name, amount, message }) => {
+        const li = document.createElement('li');
+        let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
+        li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
+        donorsList.appendChild(li);
+      });
 
-function sanitize(str) {
-  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+      const raised = totalRaised(donors);
+      document.getElementById('progress-label').textContent = `${raised} / $${GOAL} raised`;
+      document.getElementById('progress-bar-fill').style.width = Math.min(raised / GOAL, 1) * 100 + "%";
+    }
+    document.addEventListener('DOMContentLoaded', renderDonorsAndProgress);
+    document.getElementById('donationForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nameInput = this.donorName.value.trim();
+      const amountInput = this.donationAmount.value.trim();
+      const messageInput = this.donorMessage.value.trim();
 
-function loadDonors() {
-  try {
-    let donors = JSON.parse(localStorage.getItem('recentDonors')) || [];
-    // Filter out "yash" (case insensitive)
-    return donors.filter(d => d.name.trim().toLowerCase() !== "yash");
-  } catch {
-    return [];
-  }
-}
+      if (nameInput && amountInput) {
+        let donors = loadDonors();
+        donors.unshift({ name: nameInput, amount: amountInput, message: messageInput });
+        donors = donors.slice(0, 5);
+        saveDonors(donors);
+        renderDonorsAndProgress();
 
-function saveDonors(donors) {
-  localStorage.setItem('recentDonors', JSON.stringify(donors));
-}
+        const thx = document.getElementById('donationMessage');
+        thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
+        thx.style.display = 'block';
+        setTimeout(() => { thx.style.display = 'none'; }, 4000);
 
-function totalRaised(donors) {
-  return donors.reduce((sum, d) => sum + Number(d.amount || 0), 0);
-}
-
-function renderDonorsAndProgress() {
-  const donors = loadDonors();
-  const donorsList = document.getElementById('donorsList');
-  donorsList.innerHTML = '';
-  donors.forEach(({ name, amount, message }) => {
-    const li = document.createElement('li');
-    let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
-    li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
-    donorsList.appendChild(li);
-  });
-
-  const raised = totalRaised(donors);
-  document.getElementById('progress-label').textContent = `${raised} / $${GOAL} raised`;
-  document.getElementById('progress-bar-fill').style.width = Math.min(raised / GOAL, 1) * 100 + "%";
-}
-
-document.addEventListener('DOMContentLoaded', renderDonorsAndProgress);
-
-document.getElementById('donationForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const nameInput = this.donorName.value.trim();
-  const amountInput = this.donationAmount.value.trim();
-  const messageInput = this.donorMessage.value.trim();
-
-  if (nameInput && amountInput) {
-    let donors = loadDonors();
-    donors.unshift({ name: nameInput, amount: amountInput, message: messageInput });
-    donors = donors.slice(0, 5);
-    saveDonors(donors);
-    renderDonorsAndProgress();
-
-    const thx = document.getElementById('donationMessage');
-    thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
-    thx.style.display = 'block';
-    setTimeout(() => { thx.style.display = 'none'; }, 4000);
-
-    this.reset();
-  }
-});
+        this.reset();
+      }
+    });
   </script>
 </section>
-<script src="donation.js"></script>
 </body>
 </html>
