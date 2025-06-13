@@ -426,7 +426,7 @@ p {
   align-items: flex-start;
 }
 .donations-container {
-  background: #fff;
+  background: #000;
   border-radius: 2rem;
   box-shadow: 0 8px 32px #0061FF22, 0 2px 14px #0061FF11;
   padding: 44px 32px 32px 32px;
