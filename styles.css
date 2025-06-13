@@ -417,16 +417,16 @@ p {
   animation: scroll-left 20s linear infinite;
   /* Will be paused/played via JS */
 }
-/* Vertical Donations Section - Main blue #0061FF + white */
+/* Professional Black & Blue Donations Section */
 .donations {
-  background: #f6faff;
+  background: #0a0c12;
   padding: 64px 0 64px 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 .donations-container {
-  background: #000;
+  background: #050914;
   border-radius: 2rem;
   box-shadow: 0 8px 32px #0061FF22, 0 2px 14px #0061FF11;
   padding: 44px 32px 32px 32px;
@@ -446,23 +446,25 @@ p {
   text-align: center;
 }
 .donate-lead {
-  color: #0061FF;
+  color: #e0e6f8;
   font-size: 1.13rem;
   margin-bottom: 20px;
   font-weight: 500;
   text-align: center;
 }
 .donate-impact {
-  background: #e9f3ff;
-  color: #0061FF;
+  background: #061226;
+  color: #63aaff;
   font-size: 1.07rem;
   border-radius: 0.8rem;
-  padding: 13px 18px 13px 18px;
+  padding: 18px 18px 18px 18px;
   margin-bottom: 30px;
   font-weight: 600;
   border-left: 4px solid #0061FF;
   width: 100%;
   text-align: left;
+  box-shadow: 0 2px 16px #0061FF11;
+  position: relative;
 }
 .donate-impact strong {
   color: #fff;
@@ -470,6 +472,34 @@ p {
   border-radius: 0.4em;
   padding: 0 7px;
   font-weight: 700;
+}
+.donate-cost-track {
+  color: #b7ccff;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 1.03rem;
+}
+.progress-label {
+  color: #0061FF;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-left: 0;
+}
+.progress-bar-bg {
+  background: #22293e;
+  border-radius: 9px;
+  width: 100%;
+  height: 14px;
+  margin: 10px 0 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #0061FF11;
+}
+.progress-bar-fill {
+  background: linear-gradient(90deg, #009cff, #0061FF 90%);
+  height: 100%;
+  transition: width 0.4s cubic-bezier(.53,.13,.32,1.01);
+  border-radius: 9px 0 0 9px;
+  width: 0%;
 }
 .donation-form {
   display: flex;
@@ -482,8 +512,8 @@ p {
 .donation-form input[type="number"] {
   padding: 13px 15px;
   border-radius: 8px;
-  border: 1.5px solid #b4d6ff;
-  background: #f7fbff;
+  border: 1.5px solid #354a68;
+  background: #0a1220;
   color: #0061FF;
   font-size: 1.07rem;
   font-weight: 500;
@@ -513,8 +543,8 @@ p {
   outline: none;
 }
 .donation-message {
-  background: #e4f2ff;
-  color: #0061FF;
+  background: #003877;
+  color: #fff;
   padding: 0.9em 1.2em;
   border-radius: 9px;
   margin-bottom: 18px;
@@ -526,7 +556,7 @@ p {
 }
 .recent-donors {
   width: 100%;
-  background: #f2f8ff;
+  background: #0b152c;
   border-radius: 1.1rem;
   padding: 1.1rem 1rem 1.2rem 1rem;
   margin-bottom: 1.2rem;
@@ -549,8 +579,8 @@ p {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: #0061FF;
-  background: #e9f3ff;
+  color: #63aaff;
+  background: #061226;
   font-size: 1.01rem;
   padding: 9px 12px;
   border-radius: 0.6rem;
@@ -573,13 +603,13 @@ p {
   margin-left: 3px;
 }
 #donorsList em {
-  color: #1c77c3;
+  color: #b7ccff;
   font-style: italic;
   font-size: 0.98em;
   margin-left: 2px;
 }
 .donate-trust {
-  color: #0061FF;
+  color: #63aaff;
   font-size: 1.04rem;
   margin-top: 10px;
   margin-bottom: 0;
