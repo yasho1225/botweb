@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>More actions
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -120,40 +120,39 @@
       <a href="index.html" class="logo">BotWeb</a>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="about.html">About</a>Add commentMore actions
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
-        <button class="get-started">Donate Now</button>
+        <button class="get-started">Donate Now</button>Add commentMore actions
       </div>
     </div>
   </nav>
-
-  <!-- Hero Section -->
+ <!-- Hero Section -->Add commentMore actions
   <section class="hero">
     <div class="container">
       <div class="hero-content">
         <div class="text-content">
           <h1>
-            <span>We Build Websites</span>
+            <span>We Build Websites</span>Add commentMore actions
             <span>You Build Impact</span>
           </h1>
           <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
           <div class="buttons">
             <button class="get-started">Donate Now</button>
-            <button class="learn-more" onclick="window.location.href='about.html'">Learn More</button>
+            <button class="learn-more" onclick="window.location.href='about.html'"> <button> More</button>
           </div>
         </div>
-        <div class="video-content">
-          <video class="placeholder-video" controls>
+        <div class="video-content">Add commentMore actions
+          <video class="placeholder-video" controls>Add commentMore actions
             <source src="placeholder-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <p class="video-caption">BotWeb promotional video</p>
         </div>
       </div>
-    </div>
+    </div>Add commentMore actions
   </section>
-
+More actions
   <!-- Why Us Section -->
   <section class="why-us">
     <h2>Why Choose Us?</h2>
@@ -182,14 +181,15 @@
             <div class="catalog-item">
               <h3>Limited Clientele for Deeper Focus</h3>
               <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
-            </div>
+            </div>Add commentMore actions
           </div>
         </div>
         <button class="carousel-btn right">&#8594;</button>
       </div>
     </div>
-  </section>
-  <script>Add commentMore actions
+  </section>Add commentMore actions
+
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const track = document.querySelector(".carousel-track");
       const btnLeft = document.querySelector(".carousel-btn.left");
@@ -231,114 +231,6 @@
         }, 5000);
       });
     });
-    
-  </script>
-<section class="donations" id="donations">
-  <div class="donations-container">
-    <h2 class="donate-headline">Give the Gift of Growth</h2>
-    <p class="donate-lead">
-      Your support empowers small businesses and charities with world-class web and AI tools.<br>
-      <strong>100% of your donation</strong> fuels projects that change lives.
-    </p>
-    <div class="donate-impact">
-      <div>✨ <strong>$10</strong> helps launch a chatbot for a local charity.</div>
-      <div>🌱 Every dollar multiplies opportunities for impact.</div>
-      <div class="donate-cost-track"><strong>$80/month</strong> keeps us supporting these businesses.<br>
-        <span id="progress-label" class="progress-label">0 / $80 raised</span>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
-      </div>
-    </div>
-    <form class="donation-form" id="donationForm" autocomplete="off">
-      <input type="text" placeholder="Your Name" name="donorName" required>
-      <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
-      <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
-      <button type="submit">Donate Now</button>
-    </form>
-    <div class="donation-message" id="donationMessage" style="display:none;"></div>
-    <div class="recent-donors">
-      <h3>Recent Donors</h3>
-      <ul id="donorsList">
-        <!-- Real donors will appear here! -->
-      </ul>
-    </div>
-    <p class="donate-trust">
-      <span class="donate-100">100% Model:</span> Every cent goes directly to web empowerment projects.
-    </p>
-  </div>
-    <script>
-// Persistent recent donors with localStorage, Yash filter, and progress tracking
-const GOAL = 63;
-
-function sanitize(str) {
-  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-function loadDonors() {
-  try {
-    let donors = JSON.parse(localStorage.getItem('recentDonors')) || [];
-    // Filter out "yash" (case insensitive)
-    donors = donors.filter(
-      d => d.name.trim().toLowerCase() !== "yash"
-    );
-    return donors;
-  } catch {
-    return [];
-  }
-}
-function saveDonors(donors) {
-  localStorage.setItem('recentDonors', JSON.stringify(donors));
-}
-function totalRaised(donors) {
-  return donors.reduce((sum, d) => sum + Number(d.amount || 0), 0);
-}
-function renderDonorsAndProgress() {
-  const donors = loadDonors();
-  // Render Donors
-  const donorsList = document.getElementById('donorsList');
-  donorsList.innerHTML = '';
-  donors.forEach(({name, amount, message}) => {
-    const li = document.createElement('li');
-    let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
-    li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
-    donorsList.appendChild(li);
-  });
-  // Render Progress
-  const raised = totalRaised(donors);
-  document.getElementById('progress-label').textContent = `${raised} / $${GOAL} raised`;
-  let pct = Math.min(raised / GOAL, 1) * 100;
-  document.getElementById('progress-bar-fill').style.width = pct + "%";
-}
-
-document.addEventListener('DOMContentLoaded', renderDonorsAndProgress);
-
-document.getElementById('donationForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const nameInput = this.donorName.value.trim();
-  const amountInput = this.donationAmount.value.trim();
-  const messageInput = this.donorMessage.value.trim();
-  if (nameInput && amountInput) {
-    let donors = loadDonors();
-    donors.unshift({
-      name: nameInput,
-      amount: amountInput,
-      message: messageInput
-    });
-    donors = donors.slice(0, 5); // Only latest 5 donors
-    saveDonors(donors);
-    renderDonorsAndProgress();
-
-    // Show thank you message
-    const thx = document.getElementById('donationMessage');
-    thx.textContent = `Thank you, ${nameInput}, for helping us change lives! 🎉`;
-    thx.style.display = 'block';
-    setTimeout(() => { thx.style.display = 'none'; }, 4000);
-
-    this.reset();
-  }
-});
-    </script>
-</section>
-
+  </script>Add commentMore actions
 </body>
 </html>
