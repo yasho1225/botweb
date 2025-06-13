@@ -139,19 +139,30 @@
           </h1>
           <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
           <div class="buttons">
-            <button class="get-started">Donate Now</button>
+            <a href="#donations" class="get-started">Donate Now</a>
             <button class="learn-more" onclick="window.location.href='about.html'">Learn More</button>
           </div>
         </div>
         <div class="video-content">
-          <video class="placeholder-video" controls>
-            <source src="placeholder-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p class="video-caption">BotWeb promotional video</p>
-        </div>
-      </div>
-    </div>
+  <video 
+    class="placeholder-video"
+    src="placeholder-video.mp4"
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    id="heroVideo"
+    style="max-width:800px; width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.4); object-fit:cover;"
+  ></video>
+</div>
+<script>
+  // Make video unpausable
+  const video = document.getElementById('heroVideo');
+  if (video) {
+    video.controls = false;
+    video.addEventListener('pause', () => video.play());
+  }
+</script>
   </section>
 
   <!-- Why Us Section -->
