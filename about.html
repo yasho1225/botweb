@@ -5,72 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BotWeb - About Us</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
     .navbar {
       position: fixed !important;
       top: 0 !important;
       z-index: 50;
       width: 100%;
     }
-    .contact {
-      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
+    .about-section {
+      padding-top: 400px; /* Ensures content is visible below navbar */
     }
   </style>
 </head>
 <body>
-  <!-- Include Navigation with Fallback Fixed Positioning -->
+   <div class="about-section">
+  <!-- Include Navigation with Enhanced Fallback -->
   <div w3-include-html="nav.html" id="nav-placeholder"></div>
-
   <!-- About Section -->
-  <section class="contact">
-    <div class="container">
-      <div class="contact-content">
-        <h1>About Us</h1>
-        <p>At BotWeb, we’re passionate about helping small businesses and charities succeed online.</p>
-
-        <div class="form-section">
-          <p class="callback-note">
-            Our team combines creativity and technology to deliver custom websites and AI-powered chatbot solutions that help organizations grow and engage meaningfully.
-          </p>
-          <p class="callback-note">
-            Whether you're starting from scratch or looking to upgrade, we’ll help you make an impact — with ease, clarity, and support every step of the way.
-          </p>
-          <p class="callback-note">
-            Founded with a mission to democratize powerful web tools, BotWeb proudly serves changemakers with purpose-driven solutions.
-          </p>
-        </div>
-
-        <!-- Team Section -->
-        <div class="team-section">
-          <h2>Meet Our Team</h2>
-          <div class="team-members">
-            <div class="team-member">
-              <h3>Aarush</h3>
-              <p class="team-role">Co-founder & AI Specialist</p>
-              <p class="team-bio">Aarush is the visionary behind BotWeb, with a passion for coding and building impactful web solutions. With over 2 years of experience, Aarush ensures every project runs smoothly.</p>
-            </div>
-            <div class="team-member">
-              <h3>Anish</h3>
-              <p class="team-role">Creative Director</p>
-              <p class="team-bio">Anish brings creativity to life, designing stunning visuals and user experiences that make BotWeb’s projects stand out. Anish loves turning ideas into reality.</p>
-            </div>
-            <div class="team-member">
-              <h3>Yashovardhan</h3>
-              <p class="team-role">Co-founder & Lead Developer</p>
-              <p class="team-bio">Yashovardhan is the lead developer, crafting intelligent solutions that enhance user engagement. Yashovardhan’s innovative ideas keep BotWeb at the forefront of technology.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div w3-include-html="aboutus.html"></div>
+     </div>
 
   <script>
     function includeHTML(callback) {
@@ -93,7 +46,7 @@
                 console.log("Successfully loaded", file, "with content length:", this.responseText.length);
                 elmnt.innerHTML = this.responseText;
                 elmnt.removeAttribute("w3-include-html");
-                // Enforce fixed positioning after loading nav.html
+                // Enforce fixed positioning and styles after loading nav.html
                 if (file === "nav.html") {
                   const navbar = elmnt.querySelector('.navbar');
                   if (navbar) {
@@ -101,6 +54,47 @@
                     navbar.style.top = '0';
                     navbar.style.zIndex = '50';
                     navbar.style.width = '100%';
+                    navbar.style.height = '70px';
+                    navbar.style.background = 'linear-gradient(to bottom, #1a1a1a, #000000)';
+                    navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+                    const container = navbar.querySelector('.container');
+                    if (container) {
+                      container.style.maxWidth = '1280px';
+                      container.style.padding = '0 30px';
+                      container.style.height = '70px';
+                      container.style.display = 'flex';
+                      container.style.justifyContent = 'space-between';
+                      container.style.alignItems = 'center';
+                      const logo = container.querySelector('.logo');
+                      if (logo) {
+                        logo.style.color = '#0061FF';
+                        logo.style.fontSize = '24px';
+                        logo.style.fontWeight = '700';
+                        logo.style.textDecoration = 'none';
+                      }
+                      const navLinks = container.querySelector('.nav-links');
+                      if (navLinks) {
+                        navLinks.querySelectorAll('a').forEach(a => {
+                          a.style.color = '#E5E7EB';
+                          a.style.textDecoration = 'none';
+                          a.style.marginLeft = '30px';
+                          a.style.fontSize = '16px';
+                          a.style.fontWeight = '500';
+                        });
+                      }
+                      const getStarted = container.querySelector('.get-started');
+                      if (getStarted) {
+                        getStarted.style.backgroundColor = '#0061FF';
+                        getStarted.style.color = '#FFFFFF';
+                        getStarted.style.border = 'none';
+                        getStarted.style.padding = '10px 24px';
+                        getStarted.style.borderRadius = '50px';
+                        getStarted.style.cursor = 'pointer';
+                        getStarted.style.marginLeft = '30px';
+                        getStarted.style.fontSize = '16px';
+                        getStarted.style.fontWeight = '600';
+                      }
+                    }
                   }
                 }
                 includesProcessed++;
@@ -110,18 +104,18 @@
                 }
               } else {
                 console.error("Failed to load", file, ": Status:", this.status, this.statusText, "URL attempted:", this.responseURL);
-                // Fallback navbar with fixed behavior
+                // Enhanced fallback navbar with full styling
                 if (file === "nav.html") {
                   elmnt.innerHTML = `
                     <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
-                      <div class="container">
-                        <a href="index.html" class="logo">BotWeb</a>
+                      <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 30px; height: 70px; display: flex; justify-content: space-between; align-items: center;">
+                        <a href="index.html" class="logo" style="color: #0061FF; font-size: 24px; font-weight: 700; text-decoration: none;">BotWeb</a>
                         <div class="nav-links">
-                          <a href="index.html">Home</a>
-                          <a href="about.html">About</a>
-                          <a href="services.html">Services</a>
-                          <a href="contact.html">Contact</a>
-                          <button class="get-started">Donate Now</button>
+                          <a href="index.html" style="color: #E5E7EB; text-decoration: none; margin-left: 30px; font-size: 16px; font-weight: 500;">Home</a>
+                          <a href="about.html" style="color: #E5E7EB; text-decoration: none; margin-left: 30px; font-size: 16px; font-weight: 500;">About</a>
+                          <a href="services.html" style="color: #E5E7EB; text-decoration: none; margin-left: 30px; font-size: 16px; font-weight: 500;">Services</a>
+                          <a href="contact.html" style="color: #E5E7EB; text-decoration: none; margin-left: 30px; font-size: 16px; font-weight: 500;">Contact</a>
+                          <button class="get-started" style="background-color: #0061FF; color: #FFFFFF; border: none; padding: 10px 24px; border-radius: 50px; cursor: pointer; margin-left: 30px; font-size: 16px; font-weight: 600;">Donate Now</button>
                         </div>
                       </div>
                     </nav>
@@ -129,7 +123,7 @@
                 }
                 includesProcessed++;
                 if (includesProcessed === totalIncludes && callback) {
-                  console.log("All", totalIncludes, "includes processed at", new Date().toLocaleTimeString());
+                  console.log("All", totalIncludes, "includes processed with fallback at", new Date().toLocaleTimeString());
                   callback();
                 }
               }
@@ -145,6 +139,45 @@
       if (totalIncludes === 0 && callback) callback();
     }
 
+    function setupNavbarScroll() {
+      let lastScroll = 0;
+      const navbar = document.querySelector('.navbar');
+      const container = document.querySelector('.container');
+
+      if (navbar && container) {
+        console.log("Navbar and container found, attaching scroll listener");
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
+
+          if (currentScroll > lastScroll && currentScroll > 70) {
+            console.log("Shrinking nav bar at", currentScroll, "px");
+            navbar.style.height = '70px';
+            container.style.height = '70px';
+            container.querySelector('.logo').style.fontSize = '20px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
+            container.querySelectorAll('.get-started, .learn-more').forEach(btn => {
+              btn.style.fontSize = '14px';
+              btn.style.padding = '8px 20px';
+            });
+          } else if (currentScroll < lastScroll) {
+            console.log("Expanding nav bar at", currentScroll, "px");
+            navbar.style.height = '90px';
+            container.style.height = '90px';
+            container.querySelector('.logo').style.fontSize = '24px';
+            container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
+            container.querySelector('.get-started').style.fontSize = '16px';
+            container.querySelector('.get-started').style.padding = '10px 24px';
+          }
+
+          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        }, { passive: true });
+      } else {
+        console.warn("Navbar or container not found, retrying in 500ms");
+        setTimeout(setupNavbarScroll, 500); // Retry every 500ms
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
       console.log("DOM fully loaded at", new Date().toLocaleTimeString(), "starting includeHTML");
       includeHTML(function() {
@@ -156,39 +189,8 @@
           console.error("Heading 'About Us' not found in .contact-content");
         }
 
-        // Scroll behavior for navbar (expanded from index.html)
-        let lastScroll = 0;
-        const navbar = document.querySelector('.navbar');
-        const container = document.querySelector('.container');
-
-        if (navbar && container) {
-          window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
-
-            if (currentScroll > lastScroll && currentScroll > 70) {
-              console.log("Shrinking nav bar at", currentScroll, "px");
-              navbar.style.height = '70px';
-              container.style.height = '70px';
-              container.querySelector('.logo').style.fontSize = '20px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-              container.querySelector('.get-started').style.fontSize = '14px';
-              container.querySelector('.get-started').style.padding = '8px 20px';
-            } else if (currentScroll < lastScroll) {
-              console.log("Expanding nav bar at", currentScroll, "px");
-              navbar.style.height = '90px';
-              container.style.height = '90px';
-              container.querySelector('.logo').style.fontSize = '24px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
-              container.querySelector('.get-started').style.fontSize = '16px';
-              container.querySelector('.get-started').style.padding = '10px 24px';
-            }
-
-            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-          }, { passive: true });
-        } else {
-          console.error("Navbar or container not found after includes loaded");
-        }
+        // Initialize navbar scroll behavior with retry
+        setupNavbarScroll();
       });
     });
   </script>
