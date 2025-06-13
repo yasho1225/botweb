@@ -13,11 +13,68 @@
       overflow-x: hidden;
     }
 
-    .navbar {
+    /* --- Floating Nav --- */
+    .floating-nav {
       position: fixed;
-      top: 0;
-      z-index: 50;
-      width: 100%;
+      top: 0; left: 0; width: 100vw;
+      background: #080c15;
+      z-index: 1000;
+      transition: padding 0.2s, box-shadow 0.2s, background 0.2s;
+      padding: 26px 0;
+      box-shadow: 0 2px 12px #0061FF15;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .floating-nav.shrink {
+      padding: 10px 0;
+      box-shadow: 0 1px 8px #0061FF22;
+      background: #070c16;
+    }
+    .nav-logo {
+      color: #0061FF;
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
+      margin-left: 2rem;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      margin-right: 2.2rem;
+    }
+    .nav-links a, .nav-links button {
+      color: #d5e7ff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.09rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.16s;
+      padding: 0;
+      margin: 0;
+      outline: none;
+    }
+    .nav-links a:hover, .nav-links button:hover {
+      color: #0061FF;
+    }
+    .nav-links .get-started {
+      background: linear-gradient(90deg, #0099ff, #0061FF 90%);
+      color: #fff;
+      border-radius: 7px;
+      font-weight: 700;
+      padding: 8px 22px;
+      font-size: 1.05rem;
+      margin-left: 1rem;
+      border: none;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 12px #0061FF12;
+    }
+    .nav-links .get-started:hover, .nav-links .get-started:focus {
+      background: linear-gradient(90deg, #007ce7 20%, #0061FF 90%);
+      color: #fff;
     }
 
     .hero {
@@ -109,23 +166,41 @@
     .carousel-btn:hover {
       background: rgba(0, 97, 255, 0.1);
     }
+
+    /* --- Sticky Video --- */
+    .sticky-video {
+      position: fixed;
+      top: 68px;
+      right: 20px;
+      width: 340px;
+      max-width: 32vw;
+      z-index: 999;
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 18px #0061FF22;
+      pointer-events: none;
+      background: #000;
+    }
+    @media (max-width: 900px) {
+      .sticky-video { display: none; }
+      .nav-logo, .nav-links { margin: 0 1rem; }
+    }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <div w3-include-html="nav.html" id="nav-placeholder"></div>
-  <nav class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo">BotWeb</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-        <button class="get-started">Donate Now</button>
-      </div>
+  <!-- Floating Navigation -->
+  <nav class="floating-nav" id="mainNav">
+    <a href="index.html" class="nav-logo">BotWeb</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <button class="get-started" onclick="document.getElementById('donations').scrollIntoView({behavior:'smooth'})">Donate Now</button>
     </div>
   </nav>
+
+  <!-- Sticky, unpausable, infinite video (no overlay text) -->
+  <video id="missionVideo" class="sticky-video" src="placeholder-video.mp4" autoplay muted loop playsinline></video>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -138,16 +213,17 @@
           </h1>
           <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
           <div class="buttons">
-            <button class="get-started">Donate Now</button>
+            <button class="get-started" onclick="document.getElementById('donations').scrollIntoView({behavior:'smooth'})">Donate Now</button>
             <button class="learn-more" onclick="window.location.href='about.html'">Learn More</button>
           </div>
         </div>
-        <div class="video-content">
-          <video class="placeholder-video" controls>
+        <div class="video-content" style="display:none;">
+          <!-- Hidden as sticky video now floats -->
+          <video class="placeholder-video" controls style="display:none;">
             <source src="placeholder-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <p class="video-caption">BotWeb promotional video</p>
+          <!-- <p class="video-caption">BotWeb promotional video</p> -->
         </div>
       </div>
     </div>
@@ -241,10 +317,10 @@
         <strong>100% of your donation</strong> fuels projects that change lives.
       </p>
       <div class="donate-impact">
-        <div>✨ <strong>$10</strong> helps launch a chatbot for a local charity.</div>
+        <div>✨ <strong>$21</strong> sponsors 1 website for a business.</div>
         <div>🌱 Every dollar multiplies opportunities for impact.</div>
-        <div class="donate-cost-track"><strong>$80/month</strong> keeps us supporting these businesses.<br>
-          <span id="progress-label" class="progress-label">0 / $80 raised</span>
+        <div class="donate-cost-track"><strong>$63/month</strong> keeps us supporting these businesses.<br>
+          <span id="progress-label" class="progress-label">0 / $63 raised</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
@@ -330,6 +406,25 @@
           this.reset();
         }
       });
+
+      // Floating nav shrink on scroll
+      window.addEventListener('scroll', function () {
+        var nav = document.querySelector('.floating-nav');
+        if (!nav) return;
+        if (window.scrollY > 60) {
+          nav.classList.add('shrink');
+        } else {
+          nav.classList.remove('shrink');
+        }
+      });
+
+      // Unpausable, infinitely looping video
+      const vid = document.getElementById('missionVideo');
+      if (vid) {
+        vid.addEventListener('pause', () => vid.play());
+        vid.controls = false;
+        vid.setAttribute('controls', false);
+      }
     </script>
   </section>
 </body>
