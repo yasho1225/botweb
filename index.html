@@ -1,236 +1,143 @@
-<!DOCTYPE html>More actions
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BotWeb - We Build Websites. You Build Impact.</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .navbar {
-      position: fixed !important;
-      top: 0 !important;
-      z-index: 50;
-      width: 100%;
-    }
-
-    .why-us {
-      padding: 60px 20px;
-      background-color: #111827;
-      color: #FFFFFF;
-      text-align: center;
-    }
-
-    .why-us h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-    }
-
-    .catalog-item {
-      background-color: #1F2937;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      min-width: 300px;
-      flex-shrink: 0;
-      margin-right: 30px;
-    }
-
-    .catalog-item h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #0061FF;
-    }
-
-    .catalog-item p,
-    .catalog-item ul {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #D1D5DB;
-    }
-
-    .catalog-item ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .catalog-item ul li {
-      margin-bottom: 10px;
-    }
-
-    .carousel-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: transparent;
-    }
-
-    .carousel-viewport {
-      overflow: hidden;
-      max-width: 100%;
-      width: 1000px;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-btn {
-      background: transparent;
-      border: 2px solid #0061FF;
-      color: #0061FF;
-      font-size: 2rem;
-      padding: 6px 12px;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: background 0.3s ease;
-    }
-
-    .carousel-btn:hover {
-      background: rgba(0, 97, 255, 0.1);
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .hero {
-      padding-top: 120px;
-    }
-
-    .get-started,
-    .learn-more {
-      outline: none;
-      box-shadow: none;
-      appearance: none;
-    }
-  </style>
 </head>
 <body>
   <!-- Navigation Bar -->
-  <div w3-include-html="nav.html" id="nav-placeholder"></div>
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo">BotWeb</a>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>Add commentMore actions
+        <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
-        <button class="get-started">Donate Now</button>Add commentMore actions
+        <button class="get-started" onclick="window.location.href=\'contact.html\'">Get Started</button>
       </div>
     </div>
   </nav>
- <!-- Hero Section -->Add commentMore actions
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="text-content">
-          <h1>
-            <span>We Build Websites</span>Add commentMore actions
-            <span>You Build Impact</span>
-          </h1>
-          <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
-          <div class="buttons">
-            <button class="get-started">Donate Now</button>
-            <button class="learn-more" onclick="window.location.href='about.html'"> <button> More</button>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="text-content">
+            <h1>
+              <span>We Build Websites</span>
+              <span>You Build Impact</span>
+            </h1>
+            <p>Professional websites and AI chatbots for small businesses and charities, designed to amplify your mission with ease.</p>
+            <div class="buttons">
+              <button class="get-started" onclick="window.location.href=\'contact.html\'">Get Started</button>
+              <button class="learn-more" onclick="window.location.href=\'about.html\'">Learn More</button>
+            </div>
           </div>
-        </div>
-        <div class="video-content">Add commentMore actions
-          <video class="placeholder-video" controls>Add commentMore actions
-            <source src="placeholder-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p class="video-caption">BotWeb promotional video</p>
+          <div class="video-content">
+            <video class="placeholder-video" controls>
+              <source src="placeholder-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="video-caption">BotWeb promotional video</p>
+          </div>
         </div>
       </div>
-    </div>Add commentMore actions
-  </section>
-More actions
-  <!-- Why Us Section -->
-  <section class="why-us">
-    <h2>Why Choose Us?</h2>
-    <div class="catalog">
-      <div class="carousel-wrapper">
-        <button class="carousel-btn left">&#8592;</button>
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="catalog-item">
-              <h3>Affordable Professional Solutions</h3>
-              <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we’re mission-driven, not profit-driven.</p>
-              <ul>
-                <li>Modern, responsive websites</li>
-                <li>Custom AI chatbots</li>
-                <li>Personalized support</li>
-              </ul>
-            </div>
-            <div class="catalog-item">
-              <h3>AI-Ready Digital Platforms</h3>
-              <p>We don’t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, and more).</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Personalized Attention</h3>
-              <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
-            </div>
-            <div class="catalog-item">
-              <h3>Limited Clientele for Deeper Focus</h3>
-              <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
-            </div>Add commentMore actions
+    </section>
+
+    <!-- Scrolling Banner -->
+    <section class="why-us-scroll">
+      <div class="scroll-content">
+        <div class="scroll-item">Fast Delivery</div>
+        <div class="scroll-item">Affordable Pricing</div>
+        <div class="scroll-item">24/7 Support</div>
+        <div class="scroll-item">Custom Solutions</div>
+        <!-- Duplicated for seamless loop -->
+        <div class="scroll-item">Fast Delivery</div>
+        <div class="scroll-item">Affordable Pricing</div>
+        <div class="scroll-item">24/7 Support</div>
+        <div class="scroll-item">Custom Solutions</div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us-section">
+      <div class="why-us-content">
+        <h2>Why Choose Us?</h2>
+        <div class="why-us-grid">
+          <div class="why-us-item">
+            <h3>Affordable Professional Solutions</h3>
+            <p>We offer professional-quality websites and AI chatbots at a fraction of the cost — not because we cut corners, but because we\'re mission-driven, not profit-driven.</p>
+            <ul>
+              <li>Modern, responsive websites</li>
+              <li>Custom AI chatbots</li>
+              <li>Personalized support</li>
+            </ul>
+          </div>
+          <div class="why-us-item">
+            <h3>AI-Ready Digital Platforms</h3>
+            <p>We don\'t just build websites — we build AI-ready digital platforms. That means your site is structured to seamlessly integrate with AI tools (chatbots, analytics, personalization, and more).</p>
+          </div>
+          <div class="why-us-item">
+            <h3>Personalized Attention</h3>
+            <p>Most agencies hand you off to a junior, or worse — a help desk. With us, you get one-on-one collaboration, clear, honest communication, and a dedicated team at your disposal.</p>
+          </div>
+          <div class="why-us-item">
+            <h3>Limited Clientele for Deeper Focus</h3>
+            <p>Unlike agencies that chase volume, we intentionally limit the number of clients we take on so we can give each business our full attention. That means more personalized strategy, faster responses, and superior results.</p>
           </div>
         </div>
-        <button class="carousel-btn right">&#8594;</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>BotWeb</h3>
+          <p>We Build Websites. You Build Impact.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Website Design</a></li>
+            <li><a href="services.html">AI Chatbots</a></li>
+            <li><a href="services.html">Hosting & Maintenance</a></li>
+            <li><a href="services.html">Digital Strategy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>📧 hello@botweb.com</p>
+          <p>📞 +1 (555) 123-4567</p>
+          <p>📍 San Francisco, CA</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BotWeb. All rights reserved.</p>
       </div>
     </div>
-  </section>Add commentMore actions
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const track = document.querySelector(".carousel-track");
-      const btnLeft = document.querySelector(".carousel-btn.left");
-      const btnRight = document.querySelector(".carousel-btn.right");
-      const items = document.querySelectorAll(".catalog-item");
-
-      const itemWidth = 330; // Width + margin
-      const totalItems = items.length;
-      let currentIndex = 0;
-
-      function updateCarousel() {
-        const offset = currentIndex * itemWidth;
-        track.style.transform = `translateX(-${offset}px)`;
-      }
-
-      btnRight?.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateCarousel();
-      });
-
-      btnLeft?.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        updateCarousel();
-      });
-
-      // Auto-scroll every 5 seconds
-      let autoScroll = setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateCarousel();
-      }, 5000);
-
-      // Pause auto-scroll on hover
-      const wrapper = document.querySelector(".carousel-wrapper");
-      wrapper.addEventListener("mouseenter", () => clearInterval(autoScroll));
-      wrapper.addEventListener("mouseleave", () => {
-        autoScroll = setInterval(() => {
-          currentIndex = (currentIndex + 1) % totalItems;
-          updateCarousel();
-        }, 5000);
-      });
-    });
-  </script>Add commentMore actions
+  </footer>
 </body>
 </html>
