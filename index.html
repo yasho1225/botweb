@@ -233,46 +233,39 @@
     });
     
   </script>
-  <section class="donations" id="donations">
+ <section class="donations" id="donations">
   <div class="donations-container">
-    <div class="donate-info">
-      <h2 class="donate-headline">Give the Gift of Growth</h2>
-      <p class="donate-lead">
-        Your support helps us empower small businesses and charities with world-class web and AI tools.<br>
-        <strong>100% of your donation</strong> fuels projects that change lives.
-      </p>
-      <div class="donate-impact">
-        ✨ Just <strong>$10</strong> can help launch a chatbot for a local charity.<br>
-        🌱 Every dollar multiplies opportunities for impact.
-      </div>
-      <p class="donate-trust">
-        BotWeb is committed to transparency.<br>
-        <span class="donate-100">100% of your donation</span> goes directly to web empowerment projects.
-      </p>
+    <h2 class="donate-headline">Give the Gift of Growth</h2>
+    <p class="donate-lead">
+      Your support empowers small businesses and charities with world-class web and AI tools.<br>
+      <strong>100% of your donation</strong> fuels projects that change lives.
+    </p>
+    <div class="donate-impact">
+      ✨ Just <strong>$10</strong> helps launch a chatbot for a local charity.<br>
+      🌱 Every dollar multiplies opportunities for impact.
     </div>
-    <div class="donations-main">
-      <form class="donation-form" id="donationForm">
-        <input type="text" placeholder="Your Name" name="donorName" required>
-        <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
-        <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
-        <button type="submit">Donate Now</button>
-      </form>
-      <div class="donation-message" id="donationMessage" style="display:none;"></div>
-      <div class="recent-donors">
-        <h3>Recent Donors</h3>
-        <ul id="donorsList">
-          <!-- Real donors will appear here! -->
-        </ul>
-      </div>
+    <form class="donation-form" id="donationForm" autocomplete="off">
+      <input type="text" placeholder="Your Name" name="donorName" required>
+      <input type="number" placeholder="Amount (USD)" name="donationAmount" min="1" required>
+      <input type="text" placeholder="Message (optional)" name="donorMessage" maxlength="80">
+      <button type="submit">Donate Now</button>
+    </form>
+    <div class="donation-message" id="donationMessage" style="display:none;"></div>
+    <div class="recent-donors">
+      <h3>Recent Donors</h3>
+      <ul id="donorsList">
+        <!-- Real donors will appear here! -->
+      </ul>
     </div>
+    <p class="donate-trust">
+      <span class="donate-100">100% Model:</span> Every cent goes directly to web empowerment projects.
+    </p>
   </div>
     <script>
-// Utility to sanitize user input (prevent XSS)
+// Persistent recent donors with localStorage and XSS protection
 function sanitize(str) {
   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
-
-// Load donors from localStorage (or empty array)
 function loadDonors() {
   try {
     return JSON.parse(localStorage.getItem('recentDonors')) || [];
@@ -280,13 +273,9 @@ function loadDonors() {
     return [];
   }
 }
-
-// Save donors to localStorage
 function saveDonors(donors) {
   localStorage.setItem('recentDonors', JSON.stringify(donors));
 }
-
-// Render donors in the UI
 function renderDonors() {
   const donorsList = document.getElementById('donorsList');
   donorsList.innerHTML = '';
@@ -298,11 +287,8 @@ function renderDonors() {
     donorsList.appendChild(li);
   });
 }
-
-// On page load, render donors
 document.addEventListener('DOMContentLoaded', renderDonors);
 
-// On donation form submit
 document.getElementById('donationForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const nameInput = this.donorName.value.trim();
@@ -315,7 +301,7 @@ document.getElementById('donationForm').addEventListener('submit', function(e) {
       amount: amountInput,
       message: messageInput
     });
-    donors = donors.slice(0, 5); // Keep only 5 most recent
+    donors = donors.slice(0, 5); // Only latest 5 donors
     saveDonors(donors);
     renderDonors();
 
