@@ -233,7 +233,7 @@
     });
     
   </script>
- <section class="donations" id="donations">
+<section class="donations" id="donations">
   <div class="donations-container">
     <h2 class="donate-headline">Give the Gift of Growth</h2>
     <p class="donate-lead">
@@ -241,8 +241,14 @@
       <strong>100% of your donation</strong> fuels projects that change lives.
     </p>
     <div class="donate-impact">
-      ✨ Just <strong>$10</strong> helps launch a chatbot for a local charity.<br>
-      🌱 Every dollar multiplies opportunities for impact.
+      <div>✨ <strong>$10</strong> helps launch a chatbot for a local charity.</div>
+      <div>🌱 Every dollar multiplies opportunities for impact.</div>
+      <div class="donate-cost-track"><strong>$80/month</strong> keeps us supporting these businesses.<br>
+        <span id="progress-label" class="progress-label">0 / $80 raised</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+      </div>
     </div>
     <form class="donation-form" id="donationForm" autocomplete="off">
       <input type="text" placeholder="Your Name" name="donorName" required>
@@ -262,13 +268,20 @@
     </p>
   </div>
     <script>
-// Persistent recent donors with localStorage and XSS protection
+// Persistent recent donors with localStorage, Yash filter, and progress tracking
+const GOAL = 63;
+
 function sanitize(str) {
   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 function loadDonors() {
   try {
-    return JSON.parse(localStorage.getItem('recentDonors')) || [];
+    let donors = JSON.parse(localStorage.getItem('recentDonors')) || [];
+    // Filter out "yash" (case insensitive)
+    donors = donors.filter(
+      d => d.name.trim().toLowerCase() !== "yash"
+    );
+    return donors;
   } catch {
     return [];
   }
@@ -276,18 +289,28 @@ function loadDonors() {
 function saveDonors(donors) {
   localStorage.setItem('recentDonors', JSON.stringify(donors));
 }
-function renderDonors() {
+function totalRaised(donors) {
+  return donors.reduce((sum, d) => sum + Number(d.amount || 0), 0);
+}
+function renderDonorsAndProgress() {
+  const donors = loadDonors();
+  // Render Donors
   const donorsList = document.getElementById('donorsList');
   donorsList.innerHTML = '';
-  const donors = loadDonors();
   donors.forEach(({name, amount, message}) => {
     const li = document.createElement('li');
     let msg = message ? ` — <em>“${sanitize(message)}”</em>` : '';
     li.innerHTML = `<span>${sanitize(name)}</span> gave <strong>$${sanitize(amount)}</strong>${msg}`;
     donorsList.appendChild(li);
   });
+  // Render Progress
+  const raised = totalRaised(donors);
+  document.getElementById('progress-label').textContent = `${raised} / $${GOAL} raised`;
+  let pct = Math.min(raised / GOAL, 1) * 100;
+  document.getElementById('progress-bar-fill').style.width = pct + "%";
 }
-document.addEventListener('DOMContentLoaded', renderDonors);
+
+document.addEventListener('DOMContentLoaded', renderDonorsAndProgress);
 
 document.getElementById('donationForm').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -303,7 +326,7 @@ document.getElementById('donationForm').addEventListener('submit', function(e) {
     });
     donors = donors.slice(0, 5); // Only latest 5 donors
     saveDonors(donors);
-    renderDonors();
+    renderDonorsAndProgress();
 
     // Show thank you message
     const thx = document.getElementById('donationMessage');
