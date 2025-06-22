@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate to BotWeb</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .donate-section {
+      min-height: 100vh;
+      padding: 120px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .donate-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #FFFFFF;
+    }
+
+    .donate-section p {
+      font-size: 1.25rem;
+      color: #D1D5DB;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .donate-section button {
+      background-color: #0061FF;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .donate-section button:hover {
+      background-color: #004ECC;
+    }
+  </style>
+</head>
+<body>
+  <!-- Include nav bar -->
+  <div w3-include-html="nav.html" id="nav-placeholder"></div>
+
+  <section class="donate-section">
+    <h1>Support Our Mission</h1>
+    <p>Your donation helps us build more websites for changemakers and expand access to powerful digital tools.</p>
+    <button id="donateButton">Donate with Stripe</button>
+  </section>
+
+  <!-- Stripe JS -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // Replace with your actual public key
+    const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+
+    document.getElementById('donateButton').addEventListener('click', function () {
+      stripe.redirectToCheckout({
+        // Replace with your actual Checkout session ID from backend
+        sessionId: 'YOUR_CHECKOUT_SESSION_ID'
+      }).then(function (result) {
+        if (result.error) {
+          alert(result.error.message);
+        }
+      });
+    });
+
+    // Load nav.html
+    function includeHTML() {
+      const includeElements = document.querySelectorAll('[w3-include-html]');
+      includeElements.forEach(elmnt => {
+        const file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          fetch(file)
+            .then(response => {
+              if (response.ok) return response.text();
+              else throw new Error('Page not found');
+            })
+            .then(data => {
+              elmnt.innerHTML = data;
+              elmnt.removeAttribute("w3-include-html");
+            })
+            .catch(error => console.error("Include error:", error));
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", includeHTML);
+  </script>
+</body>
+</html>
