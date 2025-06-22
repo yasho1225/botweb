@@ -672,17 +672,20 @@ p {
   width: 100%;
   max-width: 1450px;
   margin: 0 auto;
-  padding: 60px 0 0 0;
+  /* Increased top padding for more space above */
+  padding: 100px 0 0 0;
   min-height: 100vh;
 }
 .services-info {
   flex: 1 1 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   padding-left: 6vw;
   min-width: 270px;
+  /* Move the info up by negative margin to bring "Our Services" text higher */
+  margin-top: -40px;
 }
 .services-info h1 {
   font-size: 4rem;
@@ -784,12 +787,14 @@ p {
     flex-direction: column;
     align-items: center;
     padding-left: 0;
+    padding-top: 70px;
   }
   .services-info {
     padding-left: 0;
     align-items: center;
     text-align: center;
     margin-bottom: 36px;
+    margin-top: -20px;
   }
   .services-cards {
     padding-left: 0;
@@ -815,6 +820,7 @@ p {
   }
   .services-info {
     min-width: 0;
+    margin-top: -5px;
   }
   .services-info h1 {
     font-size: 2.2rem;
