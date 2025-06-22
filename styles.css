@@ -672,33 +672,48 @@ p {
   width: 100%;
   max-width: 1450px;
   margin: 0 auto;
-  /* Increased top padding for more space above */
-  padding: 100px 0 0 0;
+  /* Reduce top padding for less space at the top */
+  padding: 60px 0 0 0;
   min-height: 100vh;
 }
+
 .services-info {
   flex: 1 1 400px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;    /* Vertically center content */
   align-items: flex-start;
   padding-left: 6vw;
   min-width: 270px;
-  /* Move the info up by negative margin to bring "Our Services" text higher */
-  margin-top: -40px;
+  margin-top: 0;              /* Remove negative margin */
+  height: 100%;               /* Ensure takes full height to help centering */
 }
-.services-info h1 {
-  font-size: 4rem;
-  font-weight: 900;
-  margin-bottom: 24px;
-  line-height: 1.05;
-  color: #fff;
+@media (max-width: 1100px) {
+  .services-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    padding-top: 60px;
+  }
+  .services-info {
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 36px;
+    margin-top: 0;
+    justify-content: flex-start;
+    height: auto;
+  }
 }
-.services-info p {
-  font-size: 1.5rem;
-  color: #d1d5db;
-  font-weight: 400;
-  margin-bottom: 32px;
+@media (max-width: 600px) {
+  .services-wrapper {
+    padding-top: 24px;
+    min-height: unset;
+  }
+  .services-info {
+    min-width: 0;
+    margin-top: 0;
+  }
 }
 .book-now-btn {
   background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
