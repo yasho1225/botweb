@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="services.css">
   <style>
     body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin:0; }
+    /* Modern NavBar Styling */
     .navbar {
       width: 100%;
-      background: linear-gradient(180deg, #10141d 90%, #000 100%);
-      padding: 0 0 0 0;
+      background: linear-gradient(180deg, #0b0e13 90%, #000 100%);
       position: fixed;
       top: 0;
       left: 0;
@@ -18,39 +18,43 @@
       box-shadow: 0 7px 32px -10px #0061ff19;
     }
     .nav-content {
-      max-width: 1400px;
+      max-width: 1500px;
       margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
-      height: 74px;
+      padding: 0 38px;
+      height: 76px;
     }
     .nav-logo {
       font-size: 2rem;
       font-weight: 900;
       color: #0099ff;
       text-decoration: none;
-      letter-spacing: -1.5px;
+      letter-spacing: -1.2px;
+      transition: color .15s;
     }
+    .nav-logo:hover { color: #00c3ff; }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 34px;
-      font-size: 1.13rem;
+      gap: 38px;
+      font-size: 1.15rem;
     }
     .nav-link {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
       letter-spacing: 0.01em;
-      padding: 8px 0;
+      padding: 7px 0 7px 0;
       border-bottom: 2px solid transparent;
       transition: color 0.15s, border-bottom 0.15s;
+      border-radius: 2px 2px 0 0;
     }
     .nav-link:hover, .nav-link.active {
       color: #00baff;
-      border-bottom: 2px solid #0099ff;
+      border-bottom: 2.5px solid #0099ff;
+      background: transparent;
     }
     .nav-btn {
       background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
@@ -65,12 +69,24 @@
       cursor: pointer;
       text-decoration: none;
       transition: background 0.15s, transform 0.15s;
+      border-bottom: none;
     }
     .nav-btn:hover, .nav-btn:focus {
       background: linear-gradient(90deg, #007ce7 20%, #004ecc 90%);
       transform: translateY(-2px) scale(1.03);
       outline: none;
     }
+    @media (max-width:1100px) {
+      .nav-content { padding: 0 12px; }
+      .nav-links { gap: 18px; font-size: 1.07rem; }
+      .nav-logo { font-size: 1.43rem; }
+    }
+    @media (max-width:730px) {
+      .nav-content { flex-direction: column; padding: 0 2vw; height: auto; }
+      .nav-links { flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+      .nav-logo { margin-top: 12px; }
+    }
+    /* Book Page Styles */
     .book-section {
       min-height: 100vh;
       display: flex;
@@ -227,7 +243,9 @@
       display: none;
     }
     @media (max-width:900px) {
-      .nav-content { padding: 0 12px; }
+      .nav-content { padding: 0 8px; }
+      .nav-links { gap: 9px; font-size: 1rem; }
+      .nav-logo { font-size: 1.15rem; }
     }
     @media (max-width:600px) {
       .book-section { padding-top: 90px; }
