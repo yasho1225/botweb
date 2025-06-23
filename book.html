@@ -64,6 +64,58 @@
       font-weight: 600;
       margin-bottom: 3px;
     }
+    /* Custom selector styles */
+    .type-selector-group {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .type-selector {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .type-radio {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid #00b8ff;
+      border-radius: 50%;
+      background: #0a1220;
+      margin-right: 8px;
+      transition: border-color 0.2s;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+    .type-radio:checked {
+      background: linear-gradient(90deg, #0099ff 30%, #0061ff 100%);
+      border-color: #0099ff;
+    }
+    .type-radio:checked::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
+    .type-label {
+      font-size: 1.08rem;
+      color: #00b8ff;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 0.01em;
+      margin-right: 8px;
+    }
+    /* Hide default select */
+    .book-form select {
+      display: none;
+    }
     .book-form input,
     .book-form textarea {
       padding: 12px 13px;
@@ -115,6 +167,9 @@
       .book-container { padding: 20px 6vw 22px 6vw; }
       .book-title { font-size: 1.35rem; }
       .spots-counter { font-size: 1.08rem; }
+      .type-label { font-size: 1rem; }
+      .type-radio { width: 18px; height: 18px; }
+      .type-radio:checked::after { width: 8px; height: 8px; top: 4px; left: 4px; }
     }
   </style>
 </head>
@@ -126,8 +181,19 @@
         Spots Left: <span id="spotsLeft">3</span> / 3
       </div>
       <form class="book-form" id="bookForm" autocomplete="off">
-        <label for="orgType">Type</label>
-        <select id="orgType" name="orgType" required>
+        <label>Type</label>
+        <div class="type-selector-group">
+          <div class="type-selector">
+            <input type="radio" name="orgType" id="type-business" value="Business" class="type-radio" required>
+            <label for="type-business" class="type-label">Business</label>
+          </div>
+          <div class="type-selector">
+            <input type="radio" name="orgType" id="type-charity" value="Charity" class="type-radio" required>
+            <label for="type-charity" class="type-label">Charity</label>
+          </div>
+        </div>
+        <!-- fallback for accessibility, but hidden -->
+        <select id="orgType" name="orgType" tabindex="-1" aria-hidden="true">
           <option value="">Select...</option>
           <option value="Business">Business</option>
           <option value="Charity">Charity</option>
@@ -179,8 +245,14 @@
       const spotsLeft = getSpotsLeft();
       if (spotsLeft <= 0) return;
 
+      // Determine selected type via radio
+      let orgType = '';
+      const radios = document.getElementsByName('orgType');
+      radios.forEach = Array.prototype.forEach;
+      radios.forEach(r => { if (r.checked) orgType = r.value; });
+
       const data = {
-        orgType: this.orgType.value,
+        orgType: orgType,
         orgName: this.orgName.value,
         yourName: this.yourName.value,
         email: this.email.value,
@@ -190,10 +262,6 @@
 
       // --- Email sending logic ---
       // For production use, connect to Formspree, EmailJS, or your own backend.
-      // Example: EmailJS (client-side) or a simple POST to an endpoint.
-      // The below is a placeholder only. For live, use serverless function or a service.
-      // EmailJS Example:
-      // emailjs.send('service_id','template_id',data,'user_id').then(...)
 
       // Simulate async send with setTimeout
       document.getElementById('submitBtn').disabled = true;
