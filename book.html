@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserve Your Spot | BotWeb</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="services.css">
+  <style>
+    body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin:0; }
+    .book-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 100px;
+    }
+    .book-container {
+      background: #181f2a;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0061ff18;
+      padding: 40px 32px 32px 32px;
+      max-width: 420px;
+      width: 100%;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .spots-counter {
+      background: #000;
+      color: #00d9ff;
+      border-radius: 9px;
+      padding: 9px 0 9px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1.16rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+      box-shadow: 0 2px 14px #0061ff22;
+    }
+    .spot-full {
+      color: #ff4343;
+      font-weight: 900;
+    }
+    .book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+    .book-form label {
+      font-size: 1.07rem;
+      color: #c3d0e8;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .book-form input,
+    .book-form textarea {
+      padding: 12px 13px;
+      border-radius: 9px;
+      border: 1.7px solid #354a68;
+      background: #0a1220;
+      color: #00c3ff;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: border 0.2s;
+      resize: none;
+    }
+    .book-form input:focus,
+    .book-form textarea:focus {
+      outline: none;
+      border: 1.7px solid #0061FF;
+    }
+    .book-form button {
+      background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 3px 12px 0 #0061FF13;
+      cursor: pointer;
+      margin-top: 7px;
+      letter-spacing: 0.01em;
+    }
+    .book-form button:disabled {
+      background: #444b5a;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .book-success {
+      margin-top: 14px;
+      color: #00ffad;
+      background: #002d24;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+    @media (max-width:600px) {
+      .book-section { padding-top: 50px; }
+      .book-container { padding: 20px 6vw 22px 6vw; }
+      .book-title { font-size: 1.35rem; }
+      .spots-counter { font-size: 1.08rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="book-section">
+    <div class="book-container">
+      <div class="book-title">Reserve Your Spot</div>
+      <div class="spots-counter" id="spotsCounter">
+        Spots Left: <span id="spotsLeft">3</span> / 3
+      </div>
+      <form class="book-form" id="bookForm" autocomplete="off">
+        <label for="orgType">Type</label>
+        <select id="orgType" name="orgType" required>
+          <option value="">Select...</option>
+          <option value="Business">Business</option>
+          <option value="Charity">Charity</option>
+        </select>
+        <label for="orgName">Business/Charity Name</label>
+        <input type="text" id="orgName" name="orgName" placeholder="e.g. Helping Hands" required>
+        <label for="yourName">Your Name</label>
+        <input type="text" id="yourName" name="yourName" placeholder="Your name" required>
+        <label for="email">Contact Email</label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        <label for="website">Current Website (optional)</label>
+        <input type="text" id="website" name="website" placeholder="https://yourdomain.com">
+        <label for="info">Tell us about your mission</label>
+        <textarea id="info" name="info" rows="3" placeholder="Describe your business/charity and what you hope to achieve..." required></textarea>
+        <button type="submit" id="submitBtn">Reserve Spot</button>
+      </form>
+      <div class="book-success" id="bookSuccess"></div>
+    </div>
+  </div>
+  <script>
+    // --- Counter logic ---
+    const MAX_SPOTS = 3;
+    function getSpotsLeft() {
+      let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
+      if (taken > MAX_SPOTS) taken = MAX_SPOTS;
+      return MAX_SPOTS - taken;
+    }
+    function setSpotsLeft(taken) {
+      localStorage.setItem('spotsTaken', taken);
+    }
+    function updateCounter() {
+      const left = getSpotsLeft();
+      document.getElementById('spotsLeft').textContent = left;
+      const form = document.getElementById('bookForm');
+      const btn = document.getElementById('submitBtn');
+      if (left <= 0) {
+        document.getElementById('spotsCounter').innerHTML = 'All spots are <span class="spot-full">FULL!</span>';
+        form.querySelectorAll('input, textarea, select, button').forEach(e => e.disabled = true);
+      } else {
+        document.getElementById('spotsCounter').innerHTML = `Spots Left: <span id="spotsLeft">${left}</span> / ${MAX_SPOTS}`;
+        form.querySelectorAll('input, textarea, select, button').forEach(e => e.disabled = false);
+      }
+    }
+    updateCounter();
+
+    // --- Form submission logic ---
+    document.getElementById('bookForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const spotsLeft = getSpotsLeft();
+      if (spotsLeft <= 0) return;
+
+      const data = {
+        orgType: this.orgType.value,
+        orgName: this.orgName.value,
+        yourName: this.yourName.value,
+        email: this.email.value,
+        website: this.website.value,
+        info: this.info.value
+      };
+
+      // --- Email sending logic ---
+      // For production use, connect to Formspree, EmailJS, or your own backend.
+      // Example: EmailJS (client-side) or a simple POST to an endpoint.
+      // The below is a placeholder only. For live, use serverless function or a service.
+      // EmailJS Example:
+      // emailjs.send('service_id','template_id',data,'user_id').then(...)
+
+      // Simulate async send with setTimeout
+      document.getElementById('submitBtn').disabled = true;
+      setTimeout(() => {
+        // Mark spot as taken in localStorage
+        let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
+        taken = Math.min(MAX_SPOTS, taken + 1);
+        setSpotsLeft(taken);
+        updateCounter();
+
+        document.getElementById('bookSuccess').textContent =
+          "Thank you! Your reservation is received. You'll be contacted soon.";
+        document.getElementById('bookSuccess').style.display = 'block';
+        this.reset();
+      }, 1000);
+
+      // --- For demo: also print to console ---
+      console.log("Send this info to yashoin1225@gmail.com:\n", data);
+    });
+  </script>
+</body>
+</html>
