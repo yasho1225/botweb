@@ -673,7 +673,7 @@ p {
   max-width: 1450px;
   margin: 0 auto;
   /* Reduce top padding for less space at the top */
-  padding: 60px 0 0 0;
+  padding: 100px 0 0 0;
   min-height: 100vh;
 }
 
