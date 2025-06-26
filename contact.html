@@ -2,172 +2,384 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotWeb - Contact Us</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Fallback style to ensure fixed positioning if styles.css fails -->
+  <title>Reserve Your Spot | BotWeb</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="services.css">
   <style>
-  .navbar {
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 50;
-    width: 100%;
-  }
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin:0; }
+    /* Modern NavBar Styling */
     .navbar {
-      position: fixed !important;
-      top: 0 !important;
-      z-index: 50;
+      width: 100%;
+      background: linear-gradient(180deg, #0b0e13 90%, #000 100%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 7px 32px -10px #0061ff19;
+    }
+    .nav-content {
+      max-width: 1500px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 38px;
+      height: 76px;
+    }
+    .nav-logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #0099ff;
+      text-decoration: none;
+      letter-spacing: -1.2px;
+      transition: color .15s;
+    }
+    .nav-logo:hover { color: #00c3ff; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      font-size: 1.15rem;
+    }
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 7px 0 7px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-bottom 0.15s;
+      border-radius: 2px 2px 0 0;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #00baff;
+      border-bottom: 2.5px solid #0099ff;
+      background: transparent;
+    }
+    .nav-btn {
+      background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 10px 28px;
+      font-size: 1.13rem;
+      font-weight: 700;
+      margin-left: 12px;
+      box-shadow: 0 2px 12px 0 #0061ff13;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+      border-bottom: none;
+    }
+    .nav-btn:hover, .nav-btn:focus {
+      background: linear-gradient(90deg, #007ce7 20%, #004ecc 90%);
+      transform: translateY(-2px) scale(1.03);
+      outline: none;
+    }
+    @media (max-width:1100px) {
+      .nav-content { padding: 0 12px; }
+      .nav-links { gap: 18px; font-size: 1.07rem; }
+      .nav-logo { font-size: 1.43rem; }
+    }
+    @media (max-width:730px) {
+      .nav-content { flex-direction: column; padding: 0 2vw; height: auto; }
+      .nav-links { flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+      .nav-logo { margin-top: 12px; }
+    }
+    /* Book Page Styles */
+    .book-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 120px;
+    }
+    .book-container {
+      background: #181f2a;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0061ff18;
+      padding: 40px 32px 32px 32px;
+      max-width: 420px;
+      width: 100%;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .spots-counter {
+      background: #000;
+      color: #00d9ff;
+      border-radius: 9px;
+      padding: 9px 0 9px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1.16rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+      box-shadow: 0 2px 14px #0061ff22;
+    }
+    .spot-full {
+      color: #ff4343;
+      font-weight: 900;
+    }
+    .book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
       width: 100%;
     }
-    .contact {
-      padding-top: 120px; /* Increased to clear the fixed navbar (90px max height + buffer) */
+    .book-form label {
+      font-size: 1.07rem;
+      color: #c3d0e8;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    /* Custom selector styles */
+    .type-selector-group {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .type-selector {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .type-radio {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid #00b8ff;
+      border-radius: 50%;
+      background: #0a1220;
+      margin-right: 8px;
+      transition: border-color 0.2s;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+    .type-radio:checked {
+      background: linear-gradient(90deg, #0099ff 30%, #0061ff 100%);
+      border-color: #0099ff;
+    }
+    .type-radio:checked::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
+    .type-label {
+      font-size: 1.08rem;
+      color: #00b8ff;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 0.01em;
+      margin-right: 8px;
+    }
+    /* Hide default select */
+    .book-form select {
+      display: none;
+    }
+    .book-form input,
+    .book-form textarea {
+      padding: 12px 13px;
+      border-radius: 9px;
+      border: 1.7px solid #354a68;
+      background: #0a1220;
+      color: #00c3ff;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: border 0.2s;
+      resize: none;
+    }
+    .book-form input:focus,
+    .book-form textarea:focus {
+      outline: none;
+      border: 1.7px solid #0061FF;
+    }
+    .book-form button {
+      background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 3px 12px 0 #0061FF13;
+      cursor: pointer;
+      margin-top: 7px;
+      letter-spacing: 0.01em;
+    }
+    .book-form button:disabled {
+      background: #444b5a;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .book-success {
+      margin-top: 14px;
+      color: #00ffad;
+      background: #002d24;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+    @media (max-width:900px) {
+      .nav-content { padding: 0 8px; }
+      .nav-links { gap: 9px; font-size: 1rem; }
+      .nav-logo { font-size: 1.15rem; }
+    }
+    @media (max-width:600px) {
+      .book-section { padding-top: 90px; }
+      .book-container { padding: 20px 6vw 22px 6vw; }
+      .book-title { font-size: 1.35rem; }
+      .spots-counter { font-size: 1.08rem; }
+      .type-label { font-size: 1rem; }
+      .type-radio { width: 18px; height: 18px; }
+      .type-radio:checked::after { width: 8px; height: 8px; top: 4px; left: 4px; }
+      .nav-content { height: 58px; }
     }
   </style>
 </head>
 <body>
-  <!-- Include Navigation with Fallback Fixed Positioning -->
-  <div w3-include-html="nav.html" id="nav-placeholder"></div>
-  <section class="contact">
-    <div class="container">
-      <div class="contact-content">
-        <h1>Contact Us</h1>
-        <p>We’re here to help you amplify your mission. Let’s connect!</p>
-
-        <div class="form-section">
-          <p class="callback-note">Leave your details, and we’ll get back to you ASAP!</p>
-          <form action="https://formspree.io/f/meokqqro" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="callback-name">Name</label>
-              <input type="text" id="callback-name" name="callback-name" required>
-            </div>
-            <div class="form-group">
-              <label for="callback-email">Email</label>
-              <input type="email" id="callback-email" name="_replyto" required>
-            </div>
-            <div class="form-group">
-              <label for="callback-phone">Phone</label>
-              <input type="tel" id="callback-phone" name="callback-phone" required>
-            </div>
-            <button type="submit" class="get-started">Submit Details</button>
-          </form>
-        </div>
+  <!-- Nav Bar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">BotWeb</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="book.html" class="nav-link active">Book</a>
+        <a href="donate.html" class="nav-btn">Donate Now</a>
       </div>
     </div>
-  </section>
-
+  </nav>
+  <div class="book-section">
+    <div class="book-container">
+      <div class="book-title">Reserve Your Spot</div>
+      <div class="spots-counter" id="spotsCounter">
+        Spots Left: <span id="spotsLeft">3</span> / 3
+      </div>
+      <form class="book-form" id="bookForm" autocomplete="off">
+        <label>Type</label>
+        <div class="type-selector-group">
+          <div class="type-selector">
+            <input type="radio" name="orgType" id="type-business" value="Business" class="type-radio" required>
+            <label for="type-business" class="type-label">Business</label>
+          </div>
+          <div class="type-selector">
+            <input type="radio" name="orgType" id="type-charity" value="Charity" class="type-radio" required>
+            <label for="type-charity" class="type-label">Charity</label>
+          </div>
+        </div>
+        <!-- fallback for accessibility, but hidden -->
+        <select id="orgType" name="orgType" tabindex="-1" aria-hidden="true">
+          <option value="">Select...</option>
+          <option value="Business">Business</option>
+          <option value="Charity">Charity</option>
+        </select>
+        <label for="orgName">Business/Charity Name</label>
+        <input type="text" id="orgName" name="orgName" placeholder="e.g. Helping Hands" required>
+        <label for="yourName">Your Name</label>
+        <input type="text" id="yourName" name="yourName" placeholder="Your name" required>
+        <label for="email">Contact Email</label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        <label for="website">Current Website (optional)</label>
+        <input type="text" id="website" name="website" placeholder="https://yourdomain.com">
+        <label for="info">Tell us about your mission</label>
+        <textarea id="info" name="info" rows="3" placeholder="Describe your business/charity and what you hope to achieve..." required></textarea>
+        <button type="submit" id="submitBtn">Reserve Spot</button>
+      </form>
+      <div class="book-success" id="bookSuccess"></div>
+    </div>
+  </div>
   <script>
-    function includeHTML(callback) {
-      var z, i, elmnt, file, xhttp;
-      z = document.getElementsByTagName("*");
-      let includesProcessed = 0;
-      const totalIncludes = document.querySelectorAll('[w3-include-html]').length;
-
-      for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                elmnt.innerHTML = this.responseText;
-                elmnt.removeAttribute("w3-include-html");
-                // Enforce fixed positioning after loading nav.html
-                if (file === "nav.html") {
-                  const navbar = elmnt.querySelector('.navbar');
-                  if (navbar) {
-                    navbar.style.position = 'fixed';
-                    navbar.style.top = '0';
-                    navbar.style.zIndex = '50';
-                    navbar.style.width = '100%';
-                  }
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes && callback) {
-                  callback();
-                }
-              } else {
-                console.error(`Failed to load ${file}: ${this.status}`);
-                // Fallback navbar with fixed behavior
-                if (file === "nav.html") {
-                  elmnt.innerHTML = `
-                    <nav class="navbar" style="position: fixed; top: 0; z-index: 50; background: linear-gradient(to bottom, #1a1a1a, #000000); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 10px 0; height: 70px; transition: height 0.3s ease; width: 100%;">
-                      <div class="container">
-                        <a href="index.html" class="logo">BotWeb</a>
-                        <div class="nav-links">
-                          <a href="index.html">Home</a>
-                          <a href="about.html">About</a>
-                          <a href="services.html">Services</a>
-                          <a href="contact.html">Contact</a>
-                          <button class="get-started">Donate Now</button>
-                        </div>
-                      </div>
-                    </nav>
-                  `;
-                }
-                includesProcessed++;
-                if (includesProcessed === totalIncludes && callback) {
-                  callback();
-                }
-              }
-              includeHTML(callback);
-            }
-          }
-          xhttp.open("GET", file, true);
-          xhttp.send();
-          return;
-        }
-      }
-
-      if (totalIncludes === 0 && callback) callback();
+    // --- Counter logic ---
+    const MAX_SPOTS = 3;
+    function getSpotsLeft() {
+      let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
+      if (taken > MAX_SPOTS) taken = MAX_SPOTS;
+      return MAX_SPOTS - taken;
     }
+    function setSpotsLeft(taken) {
+      localStorage.setItem('spotsTaken', taken);
+    }
+    function updateCounter() {
+      const left = getSpotsLeft();
+      document.getElementById('spotsLeft').textContent = left;
+      const form = document.getElementById('bookForm');
+      const btn = document.getElementById('submitBtn');
+      if (left <= 0) {
+        document.getElementById('spotsCounter').innerHTML = 'All spots are <span class="spot-full">FULL!</span>';
+        form.querySelectorAll('input, textarea, select, button').forEach(e => e.disabled = true);
+      } else {
+        document.getElementById('spotsCounter').innerHTML = `Spots Left: <span id="spotsLeft">${left}</span> / ${MAX_SPOTS}`;
+        form.querySelectorAll('input, textarea, select, button').forEach(e => e.disabled = false);
+      }
+    }
+    updateCounter();
 
-    document.addEventListener("DOMContentLoaded", function() {
-      includeHTML(function() {
-        console.log("Navigation loaded on Contact page");
+    // --- Form submission logic ---
+    document.getElementById('bookForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const spotsLeft = getSpotsLeft();
+      if (spotsLeft <= 0) return;
 
-        // Scroll behavior for navbar (expanded from index.html)
-        let lastScroll = 0;
-        const navbar = document.querySelector('.navbar');
-        const container = document.querySelector('.container');
+      // Determine selected type via radio
+      let orgType = '';
+      const radios = document.getElementsByName('orgType');
+      radios.forEach = Array.prototype.forEach;
+      radios.forEach(r => { if (r.checked) orgType = r.value; });
 
-        if (navbar && container) {
-          window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            console.log("Scroll event triggered at", currentScroll, "px, lastScroll:", lastScroll);
+      const data = {
+        orgType: orgType,
+        orgName: this.orgName.value,
+        yourName: this.yourName.value,
+        email: this.email.value,
+        website: this.website.value,
+        info: this.info.value
+      };
 
-            if (currentScroll > lastScroll && currentScroll > 70) {
-              console.log("Shrinking nav bar at", currentScroll, "px");
-              navbar.style.height = '70px';
-              container.style.height = '70px';
-              container.querySelector('.logo').style.fontSize = '20px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '14px');
-              container.querySelectorAll('.get-started, .learn-more').forEach(btn => {
-              btn.style.fontSize = '14px';
-              btn.style.padding = '8px 20px';
-            });
-            } else if (currentScroll < lastScroll) {
-              console.log("Expanding nav bar at", currentScroll, "px");
-              navbar.style.height = '90px';
-              container.style.height = '90px';
-              container.querySelector('.logo').style.fontSize = '24px';
-              container.querySelectorAll('.nav-links a').forEach(a => a.style.fontSize = '16px');
-              container.querySelector('.get-started').style.fontSize = '16px';
-              container.querySelector('.get-started').style.padding = '10px 24px';
-            }
+      // --- Email sending logic ---
+      // For production use, connect to Formspree, EmailJS, or your own backend.
 
-            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-          }, { passive: true });
-        } else {
-          console.error("Navbar or container not found after includes loaded");
-        }
-      });
+      // Simulate async send with setTimeout
+      document.getElementById('submitBtn').disabled = true;
+      setTimeout(() => {
+        // Mark spot as taken in localStorage
+        let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
+        taken = Math.min(MAX_SPOTS, taken + 1);
+        setSpotsLeft(taken);
+        updateCounter();
+
+        document.getElementById('bookSuccess').textContent =
+          "Thank you! Your reservation is received. You'll be contacted soon.";
+        document.getElementById('bookSuccess').style.display = 'block';
+        this.reset();
+      }, 1000);
+
+      // --- For demo: also print to console ---
+      console.log("Send this info to yashoin1225@gmail.com:\n", data);
     });
   </script>
 </body>
