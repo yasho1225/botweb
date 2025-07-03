@@ -4,10 +4,114 @@
   <meta charset="UTF-8">
   <title>Reserve Your Spot | BotWeb</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Assuming services.css has all your main styles including for the navbar -->
   <link rel="stylesheet" href="services.css">
   <style>
     body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin:0; }
-    /* Modern NavBar Styling */
+    .book-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 120px;
+    }
+    .book-container {
+      background: #181f2a;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0061ff18;
+      padding: 40px 32px 32px 32px;
+      max-width: 420px;
+      width: 100%;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .spots-counter {
+      background: #000;
+      color: #00d9ff;
+      border-radius: 9px;
+      padding: 9px 0 9px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1.16rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+      box-shadow: 0 2px 14px #0061ff22;
+    }
+    .spot-full {
+      color: #ff4343;
+      font-weight: 900;
+    }
+    .book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+    .book-form label {
+      font-size: 1.07rem;
+      color: #c3d0e8;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .book-form input,
+    .book-form textarea {
+      padding: 12px 13px;
+      border-radius: 9px;
+      border: 1.7px solid #354a68;
+      background: #0a1220;
+      color: #00c3ff;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: border 0.2s;
+      resize: none;
+    }
+    .book-form input:focus,
+    .book-form textarea:focus {
+      outline: none;
+      border: 1.7px solid #0061FF;
+    }
+    .book-form button {
+      background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 3px 12px 0 #0061FF13;
+      cursor: pointer;
+      margin-top: 7px;
+      letter-spacing: 0.01em;
+    }
+    .book-form button:disabled {
+      background: #444b5a;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .book-success {
+      margin-top: 14px;
+      color: #00ffad;
+      background: #002d24;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+    /* Floating navbar styles if not already present in services.css */
     .navbar {
       width: 100%;
       background: linear-gradient(180deg, #0b0e13 90%, #000 100%);
@@ -16,6 +120,8 @@
       left: 0;
       z-index: 100;
       box-shadow: 0 7px 32px -10px #0061ff19;
+      /* Floating effect */
+      transition: background 0.3s, box-shadow 0.3s;
     }
     .nav-content {
       max-width: 1500px;
@@ -86,181 +192,17 @@
       .nav-links { flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
       .nav-logo { margin-top: 12px; }
     }
-    /* Book Page Styles */
-    .book-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 120px;
-    }
-    .book-container {
-      background: #181f2a;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #0061ff18;
-      padding: 40px 32px 32px 32px;
-      max-width: 420px;
-      width: 100%;
-      margin-top: 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .book-title {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 10px;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .spots-counter {
-      background: #000;
-      color: #00d9ff;
-      border-radius: 9px;
-      padding: 9px 0 9px 0;
-      width: 100%;
-      text-align: center;
-      font-size: 1.16rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      letter-spacing: .04em;
-      box-shadow: 0 2px 14px #0061ff22;
-    }
-    .spot-full {
-      color: #ff4343;
-      font-weight: 900;
-    }
-    .book-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      width: 100%;
-    }
-    .book-form label {
-      font-size: 1.07rem;
-      color: #c3d0e8;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-    /* Custom selector styles */
-    .type-selector-group {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 8px;
-    }
-    .type-selector {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .type-radio {
-      appearance: none;
-      width: 22px;
-      height: 22px;
-      border: 2px solid #00b8ff;
-      border-radius: 50%;
-      background: #0a1220;
-      margin-right: 8px;
-      transition: border-color 0.2s;
-      outline: none;
-      cursor: pointer;
-      position: relative;
-    }
-    .type-radio:checked {
-      background: linear-gradient(90deg, #0099ff 30%, #0061ff 100%);
-      border-color: #0099ff;
-    }
-    .type-radio:checked::after {
-      content: '';
-      display: block;
-      width: 10px;
-      height: 10px;
-      background: #fff;
-      border-radius: 50%;
-      position: absolute;
-      top: 5px;
-      left: 5px;
-    }
-    .type-label {
-      font-size: 1.08rem;
-      color: #00b8ff;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      letter-spacing: 0.01em;
-      margin-right: 8px;
-    }
-    /* Hide default select */
-    .book-form select {
-      display: none;
-    }
-    .book-form input,
-    .book-form textarea {
-      padding: 12px 13px;
-      border-radius: 9px;
-      border: 1.7px solid #354a68;
-      background: #0a1220;
-      color: #00c3ff;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: border 0.2s;
-      resize: none;
-    }
-    .book-form input:focus,
-    .book-form textarea:focus {
-      outline: none;
-      border: 1.7px solid #0061FF;
-    }
-    .book-form button {
-      background: linear-gradient(90deg, #0099ff 10%, #0061ff 90%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 0;
-      font-size: 1.15rem;
-      font-weight: 700;
-      transition: background 0.15s, transform 0.15s;
-      box-shadow: 0 3px 12px 0 #0061FF13;
-      cursor: pointer;
-      margin-top: 7px;
-      letter-spacing: 0.01em;
-    }
-    .book-form button:disabled {
-      background: #444b5a;
-      color: #888;
-      cursor: not-allowed;
-    }
-    .book-success {
-      margin-top: 14px;
-      color: #00ffad;
-      background: #002d24;
-      border-radius: 7px;
-      padding: 8px 10px;
-      font-weight: 700;
-      text-align: center;
-      display: none;
-    }
-    @media (max-width:900px) {
-      .nav-content { padding: 0 8px; }
-      .nav-links { gap: 9px; font-size: 1rem; }
-      .nav-logo { font-size: 1.15rem; }
-    }
     @media (max-width:600px) {
       .book-section { padding-top: 90px; }
       .book-container { padding: 20px 6vw 22px 6vw; }
       .book-title { font-size: 1.35rem; }
       .spots-counter { font-size: 1.08rem; }
-      .type-label { font-size: 1rem; }
-      .type-radio { width: 18px; height: 18px; }
-      .type-radio:checked::after { width: 8px; height: 8px; top: 4px; left: 4px; }
       .nav-content { height: 58px; }
     }
   </style>
 </head>
 <body>
-  <!-- Nav Bar -->
+  <!-- Floating NavBar copied from nav.html -->
   <nav class="navbar">
     <div class="nav-content">
       <a href="index.html" class="nav-logo">BotWeb</a>
@@ -268,7 +210,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="services.html" class="nav-link">Services</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <!-- Contact now goes to Book page -->
         <a href="book.html" class="nav-link active">Book</a>
         <a href="donate.html" class="nav-btn">Donate Now</a>
       </div>
@@ -280,7 +222,17 @@
       <div class="spots-counter" id="spotsCounter">
         Spots Left: <span id="spotsLeft">3</span> / 3
       </div>
-      <form class="book-form" id="bookForm" autocomplete="off">
+      <form
+        class="book-form"
+        id="bookForm"
+        action="https://formspree.io/f/movwbybe"
+        method="POST"
+        autocomplete="off"
+      >
+        <label for="email">Your email:</label>
+        <input type="email" name="email" id="email" required>
+        <label for="message">Your message:</label>
+        <textarea name="message" id="message" required></textarea>
         <label>Type</label>
         <div class="type-selector-group">
           <div class="type-selector">
@@ -302,8 +254,6 @@
         <input type="text" id="orgName" name="orgName" placeholder="e.g. Helping Hands" required>
         <label for="yourName">Your Name</label>
         <input type="text" id="yourName" name="yourName" placeholder="Your name" required>
-        <label for="email">Contact Email</label>
-        <input type="email" id="email" name="email" placeholder="you@email.com" required>
         <label for="website">Current Website (optional)</label>
         <input type="text" id="website" name="website" placeholder="https://yourdomain.com">
         <label for="info">Tell us about your mission</label>
@@ -314,7 +264,7 @@
     </div>
   </div>
   <script>
-    // --- Counter logic ---
+    // --- Spot Counter logic ---
     const MAX_SPOTS = 3;
     function getSpotsLeft() {
       let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
@@ -338,49 +288,6 @@
       }
     }
     updateCounter();
-
-    // --- Form submission logic ---
-    document.getElementById('bookForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const spotsLeft = getSpotsLeft();
-      if (spotsLeft <= 0) return;
-
-      // Determine selected type via radio
-      let orgType = '';
-      const radios = document.getElementsByName('orgType');
-      radios.forEach = Array.prototype.forEach;
-      radios.forEach(r => { if (r.checked) orgType = r.value; });
-
-      const data = {
-        orgType: orgType,
-        orgName: this.orgName.value,
-        yourName: this.yourName.value,
-        email: this.email.value,
-        website: this.website.value,
-        info: this.info.value
-      };
-
-      // --- Email sending logic ---
-      // For production use, connect to Formspree, EmailJS, or your own backend.
-
-      // Simulate async send with setTimeout
-      document.getElementById('submitBtn').disabled = true;
-      setTimeout(() => {
-        // Mark spot as taken in localStorage
-        let taken = parseInt(localStorage.getItem('spotsTaken') || '0', 10);
-        taken = Math.min(MAX_SPOTS, taken + 1);
-        setSpotsLeft(taken);
-        updateCounter();
-
-        document.getElementById('bookSuccess').textContent =
-          "Thank you! Your reservation is received. You'll be contacted soon.";
-        document.getElementById('bookSuccess').style.display = 'block';
-        this.reset();
-      }, 1000);
-
-      // --- For demo: also print to console ---
-      console.log("Send this info to yashoin1225@gmail.com:\n", data);
-    });
   </script>
 </body>
 </html>
