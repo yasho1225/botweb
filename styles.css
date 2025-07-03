@@ -179,6 +179,7 @@ p {
   outline: none;
   appearance: none;
   box-shadow: none;
+  text-decoration: none;
 }
 
 .hero .get-started:hover {
