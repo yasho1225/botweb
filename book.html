@@ -4,19 +4,126 @@
   <meta charset="UTF-8">
   <title>Reserve Your Spot | BotWeb</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .navbar {
+      position: fixed !important;
+      top: 0 !important;
+      z-index: 50;
+      width: 100%;
+    }
+
+    .why-us {
+      padding: 60px 20px;
+      background-color: #111827;
+      color: #FFFFFF;
+      text-align: center;
+    }
+
+    .why-us h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+    }
+
+    .catalog-item {
+      background-color: #1F2937;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      min-width: 300px;
+      flex-shrink: 0;
+      margin-right: 30px;
+    }
+
+    .catalog-item h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #0061FF;
+    }
+
+    .catalog-item p,
+    .catalog-item ul {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #D1D5DB;
+    }
+
+    .catalog-item ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .catalog-item ul li {
+      margin-bottom: 10px;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+    }
+
+    .carousel-viewport {
+      overflow: hidden;
+      max-width: 100%;
+      width: 1000px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-btn {
+      background: transparent;
+      border: 2px solid #0061FF;
+      color: #0061FF;
+      font-size: 2rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0, 97, 255, 0.1);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      padding-top: 120px;
+    }
+
+    .get-started,
+    .learn-more {
+      outline: none;
+      box-shadow: none;
+      appearance: none;
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR: copied exactly from index.html -->
+  <!-- Navigation Bar -->
+  <div w3-include-html="nav.html" id="nav-placeholder"></div>
   <nav class="navbar">
-    <div class="nav-content">
-      <a href="index.html" class="nav-logo">BotWeb</a>
+    <div class="container">
+      <a href="index.html" class="logo">BotWeb</a>
       <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="services.html" class="nav-link">Services</a>
-        <a href="book.html" class="nav-link active">Contact</a>
-        <a href="donate.html" class="nav-btn">Donate Now</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="book.html">Contact</a>
+        <a href="#donations" class="get-started">Donate Now</a>
       </div>
     </div>
   </nav>
