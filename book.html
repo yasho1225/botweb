@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAVBAR: copied EXACTLY from index.html, with matching classes -->
+  <!-- NAVBAR: copied exactly from index.html -->
   <nav class="navbar">
     <div class="nav-content">
       <a href="index.html" class="nav-logo">BotWeb</a>
@@ -15,11 +15,12 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="services.html" class="nav-link">Services</a>
-        <a href="book.html" class="nav-link active">Book</a>
+        <a href="book.html" class="nav-link active">Contact</a>
         <a href="donate.html" class="nav-btn">Donate Now</a>
       </div>
     </div>
   </nav>
+
   <div class="book-section">
     <div class="book-container">
       <div class="book-title">Reserve Your Spot</div>
@@ -62,12 +63,7 @@
     </div>
   </div>
   <script>
-    // --- GLOBAL SPOTS COUNTER USING A BACKEND ---
-    // For a global counter, you need a backend API endpoint (not just static HTML).
-    // Example: /api/spots returns { "spots": 3 }
-    // On submit, POST to /api/spots/decrement to reduce count.
-    // This demo code expects such endpoints. Replace URLs with your real endpoints!
-
+    // --- For a global counter you need a backend API ---
     const MAX_SPOTS = 3;
     const SPOTS_API_URL = "/api/spots";
 
@@ -97,11 +93,8 @@
     updateCounter();
 
     document.getElementById('bookForm').addEventListener('submit', async function(e) {
-      // On submission, request the backend to decrement the counter
-      // This assumes /api/spots/decrement decrements and returns new count
-      // You can adjust this for your backend
       fetch("/api/spots/decrement", {method:"POST"});
-      setTimeout(updateCounter, 1500); // Update after submit (best: after response)
+      setTimeout(updateCounter, 1500);
     });
   </script>
 </body>
